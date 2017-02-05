@@ -14,3 +14,16 @@ Install API Platform
 -----------------
 php composer.phar require api-platform/core
 
+Git Commands
+--------------
+git checkout testGit
+git branch
+git status
+git add .
+git commit
+git push --set-upstream origin testGit
+
+git clean -f
+
+
+
