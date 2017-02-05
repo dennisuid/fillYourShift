@@ -1,5 +1,6 @@
 {
     "require": {
-        "api-platform/core": "^1.1"
+        "api-platform/core": "^2.0",
+        "symfony/cache": "^3.2"
     }
 }
