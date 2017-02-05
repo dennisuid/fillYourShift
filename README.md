@@ -14,6 +14,8 @@ Install API Platform
 -----------------
 php composer.phar require api-platform/core
 
+php composer.phar update api-platform/core
+
 Git Commands
 --------------
 git checkout testGit
