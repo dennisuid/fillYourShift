@@ -1,7 +1,6 @@
 employer:
     resource: "@EmployerBundle/Resources/config/routing.yml"
     prefix:   /
-
 api:
     resource: '.'
     type:     'api_platform'

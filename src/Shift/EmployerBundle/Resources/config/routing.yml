@@ -1,3 +1,6 @@
-employer_homepage:
-    path:     /
-    defaults: { _controller: EmployerBundle:Default:index }
+employer_add:
+    path: /employer/add
+    defaults: { _controller: EmployerBundle:Employer:add }
+employer_update:
+    path: /employer/update/{id}
+    defaults: { _controller: EmployerBundle:Employer:update }
