@@ -9,45 +9,47 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EmployerController extends Controller
 {
+
     public function addAction(Request $request)
     {
-        $user = new fysUser();
-        $user->setFirstName($request->get('first_name'));
-        $user->setEmail($request->get('email'));
-        $user->setMobileNumber($request->get('mobile_number'));
-        $user->setUserId($request->get('userid'));
-        $user->setPassword($request->get('password'));
-        $user->setUserType($request->get('user_type'));
-        $user->setPostcode($request->get('postcode'));
-        $user->setCountry($request->get('country'));
-        $user->setRegistrationNumber($request->get('registration_number'));
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($user);
-        if ($em->flush()) {
-            $message = "Data Saved Successfully";
+        try {
+            $user = new fysUser();
+            $user->setFirstName($request->get('first_name'));
+            $user->setEmail($request->get('email'));
+            $user->setMobileNumber($request->get('mobile_number'));
+            $user->setUserId($request->get('userid'));
+            $user->setPassword($request->get('password'));
+            $user->setUserType($request->get('user_type'));
+            $user->setPostcode($request->get('postcode'));
+            $user->setCountry($request->get('country'));
+            $user->setRegistrationNumber($request->get('registration_number'));
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($user);
+            $em->flush();
+            return new Response("Data Saved Successfully");
+        } catch(\Exception $ex){
+            return new Response($ex->getMessage());
         }
-        return new Response("hello");
     }
 
     public function updateAction()
     {
         return $this->render('EmployerBundle:Employer:update.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
     public function deleteAction()
     {
         return $this->render('EmployerBundle:Employer:delete.html.twig', array(
-            // ...
+                        // ...
         ));
     }
-
 
     public function loginAction()
     {
         return $this->render('EmployerBundle:Employer:login.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
