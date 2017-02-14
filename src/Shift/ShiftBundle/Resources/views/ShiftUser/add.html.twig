@@ -1,7 +1,12 @@
-{% extends "::base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block title %}ShiftBundle:ShiftUser:add{% endblock %}
 
+{% block error %}
+    <p>{{ error }}</p>
+{% endblock %}
+
 {% block body %}
-<h1>Welcome to the ShiftUser:add page</h1>
+    <h1>Welcome to the add page</h1>
+    <p>{{ success }}</p>
 {% endblock %}
