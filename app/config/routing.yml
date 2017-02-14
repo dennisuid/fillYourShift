@@ -1,7 +1,8 @@
+shift:
+    resource: "@ShiftBundle/Resources/config/routing.yml"
+    prefix:   /
+
 api:
     resource: '.'
     type:     'api_platform'
 
-app:
-    resource: '@AppBundle/Action/'
-    type:     'annotation'
