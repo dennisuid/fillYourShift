@@ -4,3 +4,6 @@ employer_add:
 employer_update:
     path: /employer/update/{id}
     defaults: { _controller: EmployerBundle:Employer:update }
+employer_get:
+    path: /employer/get/{id}
+    defaults: { _controller: EmployerBundle:Employer:get }
