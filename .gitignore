@@ -7,4 +7,5 @@ bootstrap.php.cache
 # composer.lock
 /nbproject/
 /var/
-/web/
+/web/bundles/
+
