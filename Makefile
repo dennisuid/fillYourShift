@@ -1,4 +1,4 @@
-all: clear-cache clean
+all: clear-cache clean deps
 
 clear-cache:
 	php bin/console cache:clear --env=dev

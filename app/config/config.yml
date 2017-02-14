@@ -36,6 +36,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    path: "%kernel.root_dir%/../src/Shift/ShiftBundle/Resources/views"
 
 # Doctrine Configuration
 doctrine:
