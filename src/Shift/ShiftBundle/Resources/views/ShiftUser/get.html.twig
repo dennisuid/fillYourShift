@@ -1,0 +1,12 @@
+{#{% extends "base.html.twig" %}#}
+
+{% block title %}ShiftBundle:ShiftUser:get{% endblock %}
+
+{% block body %}
+    <h1>Welcome to the ShiftUser:get page</h1>
+    {% if userDetails is not empty%}
+        {{userDetails['firstName']}}
+    {%else%}
+        <p>{{error}}</p>
+    {% endif %}
+{% endblock %}
