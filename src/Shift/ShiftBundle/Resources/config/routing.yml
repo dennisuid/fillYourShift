@@ -1,0 +1,43 @@
+shift_homepage:
+    path:     /
+    defaults: { _controller: ShiftBundle:Default:index }
+
+add:
+    path:     user/add
+    defaults: { _controller: ShiftBundle:ShiftUser:add }
+
+update:
+    path:     /user/update
+    defaults: { _controller: ShiftBundle:ShiftUser:update }
+
+get:
+    path:     /user/get/{id}
+    defaults: { _controller: ShiftBundle:ShiftUser:get }
+
+get:
+    path:     /user/get
+    defaults: { _controller: ShiftBundle:ShiftUser:get }
+
+update:
+    path:     user/update
+    defaults: { _controller: ShiftBundle:ShiftUser:update }
+
+get:
+    path:     /user/get
+    defaults: { _controller: ShiftBundle:ShiftUser:get }
+
+delete:
+    path:     /user/delete
+    defaults: { _controller: ShiftBundle:ShiftUser:delete }
+
+update:
+    path:     /user/update
+    defaults: { _controller: ShiftBundle:ShiftUser:update }
+
+add:
+    path:     /user/add
+    defaults: { _controller: ShiftBundle:ShiftUser:add }
+
+login:
+    path:     /user/login
+    defaults: { _controller: ShiftBundle:ShiftUser:login }
