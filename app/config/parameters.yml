@@ -2,9 +2,9 @@
 parameters:
     database_host: localhost
     database_port: null
-    database_name: api_platform
-    database_user: api_platform
-    database_password: api_platform
+    database_name: fillyourshift
+    database_user: root
+    database_password: dennis123
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
