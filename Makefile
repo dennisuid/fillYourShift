@@ -16,3 +16,6 @@ deps: composer.phar
 clean:
 	rm -rf vendor
 	rm -f web/css/style.css
+
+database-clean:
+	php bin/console doctrine:database:drop --force
