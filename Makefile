@@ -19,3 +19,6 @@ clean:
 
 database-clean:
 	php bin/console doctrine:database:drop --force
+	
+database-create:
+	
