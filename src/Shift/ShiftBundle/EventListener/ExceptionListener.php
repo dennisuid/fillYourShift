@@ -13,23 +13,25 @@ class ExceptionListener
     {
         // You get the exception object from the received event
         $exception = $event->getException();
-        $message = json_encode(['code' => $exception->getCode(),
-                    'detail' => $exception->getMessage(),
-                    'status' => $exception->getStatusCode()]);
-        
+        $message = ['code' => $exception->getCode(),
+            'detail' => $exception->getMessage()
+        ];
+
         // Customize your response object to display the exception details
-        $response = new Response();
-        $response->setContent($message);
+        $response = new \Symfony\Component\HttpFoundation\JsonResponse();
+        
 
         // HttpExceptionInterface is a special type of exception that
         // holds status code and header details
         if ($exception instanceof HttpExceptionInterface) {
+            $message['status'] = $exception->getStatusCode();
             $response->setStatusCode($exception->getStatusCode());
             $response->headers->replace($exception->getHeaders());
         } else {
             $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
+        $response->setContent(json_encode($message));
+      
         // Send the modified response object to the event
         $event->setResponse($response);
     }
