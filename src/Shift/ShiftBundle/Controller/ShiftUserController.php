@@ -10,21 +10,22 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\Response;
-use Shift\ShiftBundle\Exceptions\UserNotFoundException;
+use Shift\ShiftBundle\Exception\UserNotFoundException;
 
 class ShiftUserController extends Controller
 {
 
     public function getAction(Request $request)
     {
-
         $user = $this->getDoctrine()
                 ->getRepository('ShiftBundle:User\fysUser')
                 ->find($request->get('id'));
         $encoders = array(new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
         if (!$user) {
-            throw new UserNotFoundException("Invalid user id " . $request->get('id'));
+            throw new UserNotFoundException("Invalid user id " . $request->get('id'),
+            JsonResponse::HTTP_NOT_FOUND
+            );
         }
         $serializer = new Serializer($normalizers, $encoders);
         $response = $serializer->serialize($user, 'json');
