@@ -1,12 +1,22 @@
 {% extends "base.html.twig" %}
 
-{% block title %}ShiftBundle:ShiftUser:add{% endblock %}
-
-{% block error %}
-    <p>{{ error }}</p>
+{% block title %}Index{% endblock %}
+{% block head %}
+{{ parent() }}
+<style type="text/css">
+    .important { color: #336699; }
+    .div_control{
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
 {% endblock %}
-
-{% block body %}
-    <h1>Welcome to the add page</h1>
-    <p>{{ success }}</p>
+{% block content %}
+<h1>Employer Details</h1>
+<p class="important">
+    Add new employer here by filling the fields.
+</p>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
 {% endblock %}
