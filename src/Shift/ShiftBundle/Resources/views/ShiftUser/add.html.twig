@@ -11,12 +11,15 @@
     }
 </style>
 {% endblock %}
-{% block content %}
-<h1>Employer Details</h1>
+{% block body %}
+    
 <p class="important">
     Add new employer here by filling the fields.
 </p>
+<br/>
+<br/>
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
+
 {% endblock %}
