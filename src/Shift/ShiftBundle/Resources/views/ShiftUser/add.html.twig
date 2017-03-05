@@ -1,12 +1,15 @@
 {% extends "base.html.twig" %}
 
-{% block title %}ShiftBundle:ShiftUser:add{% endblock %}
-
-{% block error %}
-    <p>{{ error }}</p>
+{% block title %}Registration{% endblock %}
+{% block head %}
+{{ parent() }}
 {% endblock %}
-
 {% block body %}
-    <h1>Welcome to the add page</h1>
-    <p>{{ success }}</p>
+<p class="important">
+    Please fill in your details.
+</p>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
 {% endblock %}

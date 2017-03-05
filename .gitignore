@@ -8,4 +8,5 @@ bootstrap.php.cache
 /nbproject/
 /var/
 /web/bundles/
+.idea/
 
