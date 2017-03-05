@@ -11,22 +11,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    </head>
 <body>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Fill your shift</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+    <!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Fill Your Shift</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+       <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="#about">Login</a></li>
                     <li><a href="/user/add">Register</a></li>
@@ -43,14 +44,17 @@
                         </ul>
                     </li>
                 </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
-
-
-    <div class="container">
+    </div>
+  </div>
+</nav>
+       <div class="container">
         <div class="row">
             <div class="col-sm-12">
+                {% for flash_message in app.session.flashBag.get('success') %}
+                    <div class="flash-notice alert alert-success">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
                 {% block body %}
                 {% endblock %}
             </div>
@@ -59,3 +63,4 @@
     </div><!-- /.container -->
 </body>
 </html>
+
