@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Index{% endblock %}
+{% block title %}Registration{% endblock %}
 {% block head %}
 {{ parent() }}
 <style type="text/css">
@@ -12,12 +12,12 @@
 </style>
 {% endblock %}
 {% block body %}
-    
+<br/>
+<br/>
+<br/>
 <p class="important">
-    Add new employer here by filling the fields.
+    Please fill in your details.
 </p>
-<br/>
-<br/>
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
