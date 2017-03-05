@@ -61,10 +61,12 @@ class ShiftUserController extends Controller
                 $em->persist($user);
                 $em->flush();
                 $message = 'User added successfully';
-                return new JsonResponse(['description' => $message],
-                        Response::HTTP_CREATED, 
-                        ['Content-type' => 'json']
-                );
+                // $this->addFlash() is equivalent to 
+                $this->addFlash(
+                'success',
+                'User Added, Please activate user by email verification!'
+                 );
+            return $this->redirectToRoute("shift_homepage");
             }
         } catch (Exception $ex) {
             $message = $ex->getMessage() . " " . $ex->getCode();
