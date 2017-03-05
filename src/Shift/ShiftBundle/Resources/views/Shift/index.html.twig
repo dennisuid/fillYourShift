@@ -3,6 +3,51 @@
 {% block title %}Fill your shift{% endblock %}
 {% block head %}
     {{ parent() }}
-{% endblock %}
+   {% endblock %}
 {% block body %}
+
+    <body>
+        <!-- First Container -->
+        <div class="container-fluid bg-1 text-center">
+            <h2 class="margin">Fill Your Shift</h2>
+            <img src="{{ asset('images/bird.jpg') }}" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
+            <h3>Making temp employments easier !</h3>
+        </div>
+
+        <!-- Second Container -->
+        <div class="container-fluid bg-2 text-center">
+            <h3 class="margin">Your place to match your skills with market</h3>
+            <p>We match the latest shift requirements with a wide range of UK employers with available short term skills. Once matched the employee is notified of the available opportunity and then ask to him apply. The employers quickly sort the applications and choose the match in the next 12 hours</p>
+            <a href="#" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </a>
+        </div>
+
+        <!-- Third Container (Grid) -->
+        <div class="container-fluid bg-3 text-center">    
+            <h3 class="margin">Where To Find Me?</h3><br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Employers will be able to quickly set up an account and then publish available shifts they want to fulfill. The shifts can be edited for later dates and once ready may be published for inviting employees to apply. </p>
+                    <img src="{{ asset('images/birds1.jpg') }}" class="img-responsive margin" style="width:100%" alt="Image">
+                </div>
+                <div class="col-sm-4"> 
+                    <p>Once a shift is fulfilled the employees will mark the shift complete. Employers will review the work and if found satisfactory approve into payment in the next invoice cycle</p>
+                    <img src="{{ asset('images/birds2.jpg') }}" class="img-responsive margin" style="width:100%" alt="Image">
+                </div>
+                <div class="col-sm-4"> 
+                    <p>Employees can set up resumes for quick review for potential employers, can request feedback on the work done and so on.</p>
+                    <img src="{{ asset('images/birds3.jpg') }}" class="img-responsive margin" style="width:100%" alt="Image">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="container-fluid bg-4 text-center">
+            <p>Sponsored by Fill Your Shift Enterprises @2017</p> 
+        </footer>
+
+    </body>
+</html>
+
 {% endblock %}
