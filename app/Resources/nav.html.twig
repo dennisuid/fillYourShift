@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+                <a class="navbar-brand" href="#">Fill Your Shift</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <p class="navbar-text">
+                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                        </p>
+                        <li>
+                        <a href="{{ path('fos_user_security_logout') }}">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                        </li>
+                    {% else %}
+                        <li>
+                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>

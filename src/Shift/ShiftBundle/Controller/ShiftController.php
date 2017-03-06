@@ -6,8 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ShiftController extends Controller
 {
+
     public function indexAction()
     {
-        return $this->render('ShiftBundle:Shift:index.html.twig');
+        return $this->render('@Shift/Shift/index.html.twig');
     }
+
+    public function dashboardAction()
+    {
+        return $this->render('@Shift/Shift/dashboard.html.twig');
+    }
+
 }

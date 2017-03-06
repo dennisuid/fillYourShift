@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Shift\ShiftBundle\Entity\User\fysUser;
 
 class fysUserType extends AbstractType
@@ -25,7 +24,6 @@ class fysUserType extends AbstractType
                 ->add('last_name', TextType::class)
                 ->add('email', EmailType::class)
                 ->add('mobile_number', TextType::class)
-                ->add('password', PasswordType::class)
                 ->add('user_type', TextType::class)
                 ->add('user_id', TextType::class)
                 ->add('house_number', TextType::class)
@@ -33,8 +31,7 @@ class fysUserType extends AbstractType
                 ->add('address_line2', TextType::class)
                 ->add('postcode', TextType::class)
                 ->add('country', TextType::class)
-                ->add('registration_number', TextType::class)
-                ->add('save', SubmitType::class);
+                ->add('registration_number', TextType::class);
         
     }
 
@@ -54,6 +51,16 @@ class fysUserType extends AbstractType
     public function getBlockPrefix()
     {
         return 'shift_shiftbundle_user_fysuser';
+    }
+    
+    public function getParent()
+    {
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+    }
+
+    public function getName()
+    {
+        return 'app_user_registration';
     }
 
 }

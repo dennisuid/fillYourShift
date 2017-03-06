@@ -5,4 +5,7 @@ shift:
 api:
     resource: '.'
     type:     'api_platform'
+   
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 

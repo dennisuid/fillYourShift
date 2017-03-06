@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Shift\ShiftBundle\ShiftBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

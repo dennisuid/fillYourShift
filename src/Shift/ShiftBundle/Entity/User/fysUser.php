@@ -3,6 +3,7 @@
 namespace Shift\ShiftBundle\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * fysUser
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="fys_user")
  * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\User\fysUserRepository")
  */
-class fysUser
+class fysUser extends BaseUser
 {
     /**
      * @var int
@@ -19,7 +20,7 @@ class fysUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -27,34 +28,18 @@ class fysUser
      * @ORM\Column(name="first_name", type="string", length=255)
      */
     private $firstName;
-
     /**
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $lastName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, unique=true)
-     */
-    private $email;
-
     /**
      * @var string
      *
      * @ORM\Column(name="mobile_number", type="string", length=255)
      */
     private $mobileNumber;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
 
     /**
      * @var string
@@ -111,7 +96,11 @@ class fysUser
      * @ORM\Column(name="registration_number", type="string", length=255)
      */
     private $registrationNumber;
-
+    
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Get id
@@ -133,10 +122,8 @@ class fysUser
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
-        return $this;
     }
-
+    
     /**
      * Get firstName
      *
@@ -146,7 +133,7 @@ class fysUser
     {
         return $this->firstName;
     }
-
+  
     /**
      * Set lastName
      *
@@ -228,7 +215,7 @@ class fysUser
      */
     public function setPassword($password)
     {
-        $this->password = md5($password);
+        $this->password = $password;
 
         return $this;
     }
