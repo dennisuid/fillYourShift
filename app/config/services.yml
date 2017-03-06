@@ -12,3 +12,8 @@ services:
         class: Shift\ShiftBundle\EventListener\ExceptionListener
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+    
+    app.form.registration:
+        class: Shift\ShiftBundle\Form\User\fysUserType
+        tags:
+            - { name: form.type, alias: app_user_registration }

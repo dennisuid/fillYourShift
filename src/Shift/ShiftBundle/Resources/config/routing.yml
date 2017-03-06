@@ -1,7 +1,9 @@
 shift_homepage:
     path:     /
     defaults: { _controller: ShiftBundle:Shift:index }
-
+dashboard:
+    path: /dashboard
+    defaults: {_controller: ShiftBundle:Shift:dashboard}
 add:
     path:     user/add
     defaults: { _controller: ShiftBundle:ShiftUser:add }
