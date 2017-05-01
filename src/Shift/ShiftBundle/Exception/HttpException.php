@@ -25,5 +25,4 @@ class HttpException extends \Exception implements HttpExceptionInterface
     {
         return $this->headers;
     }
-
 }

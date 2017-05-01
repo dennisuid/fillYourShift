@@ -5,12 +5,12 @@ namespace Shift\ShiftBundle\Entity\Shift;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * fysShiftAlert
+ * FysShiftAlert
  *
  * @ORM\Table(name="fys_shift_alert")
- * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\Shift\fysShiftAlertRepository")
+ * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\Shift\FysShiftAlertRepository")
  */
-class fysShiftAlert
+class FysShiftAlert
 {
     /**
      * @var int
@@ -93,7 +93,7 @@ class fysShiftAlert
      *
      * @param integer $employeeId
      *
-     * @return fysShiftAlert
+     * @return FysShiftAlert
      */
     public function setEmployeeId($employeeId)
     {
@@ -117,7 +117,7 @@ class fysShiftAlert
      *
      * @param integer $orgId
      *
-     * @return fysShiftAlert
+     * @return FysShiftAlert
      */
     public function setOrgId($orgId)
     {
@@ -141,7 +141,7 @@ class fysShiftAlert
      *
      * @param string $orgName
      *
-     * @return fysShiftAlert
+     * @return FysShiftAlert
      */
     public function setOrgName($orgName)
     {
@@ -165,7 +165,7 @@ class fysShiftAlert
      *
      * @param integer $roleId
      *
-     * @return fysShiftAlert
+     * @return FysShiftAlert
      */
     public function setRoleId($roleId)
     {
@@ -189,7 +189,7 @@ class fysShiftAlert
      *
      * @param string $roleName
      *
-     * @return fysShiftAlert
+     * @return FysShiftAlert
      */
     public function setRoleName($roleName)
     {
@@ -213,7 +213,7 @@ class fysShiftAlert
      *
      * @param string $employeeMobile
      *
-     * @return fysShiftAlert
+     * @return FysShiftAlert
      */
     public function setEmployeeMobile($employeeMobile)
     {
@@ -237,7 +237,7 @@ class fysShiftAlert
      *
      * @param string $employeeEmail
      *
-     * @return fysShiftAlert
+     * @return FysShiftAlert
      */
     public function setEmployeeEmail($employeeEmail)
     {
@@ -261,7 +261,7 @@ class fysShiftAlert
      *
      * @param string $alertStatus
      *
-     * @return fysShiftAlert
+     * @return FysShiftAlert
      */
     public function setAlertStatus($alertStatus)
     {
@@ -280,4 +280,3 @@ class fysShiftAlert
         return $this->alertStatus;
     }
 }
-

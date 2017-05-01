@@ -249,4 +249,3 @@ class Organisation
         return $this->orgContact1Email;
     }
 }
-

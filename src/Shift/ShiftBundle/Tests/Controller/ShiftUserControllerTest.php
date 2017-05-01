@@ -40,5 +40,4 @@ class ShiftUserControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/user/login');
     }
-
 }

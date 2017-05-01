@@ -4,6 +4,7 @@ namespace Shift\ShiftBundle\Form\DataClasses;
 
 /**
  * Class NewEmployerData
+ *
  * @package Shift\ShiftBundle\Form\DataClasses
  */
 class NewEmployerData

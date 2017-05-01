@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * fysUser
+ * FysUser
  *
  * @ORM\Table(name="fys_user")
- * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\User\fysUserRepository")
+ * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\User\FysUserRepository")
  */
-class fysUser extends BaseUser
+class FysUser extends BaseUser
 {
     /**
      * @var int
@@ -96,7 +96,7 @@ class fysUser extends BaseUser
      * @ORM\Column(name="registration_number", type="string", length=255)
      */
     private $registrationNumber;
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -117,13 +117,13 @@ class fysUser extends BaseUser
      *
      * @param string $firstName
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
     }
-    
+
     /**
      * Get firstName
      *
@@ -133,13 +133,13 @@ class fysUser extends BaseUser
     {
         return $this->firstName;
     }
-  
+
     /**
      * Set lastName
      *
      * @param string $lastName
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setLastName($lastName)
     {
@@ -163,7 +163,7 @@ class fysUser extends BaseUser
      *
      * @param string $email
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setEmail($email)
     {
@@ -187,7 +187,7 @@ class fysUser extends BaseUser
      *
      * @param string $mobileNumber
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setMobileNumber($mobileNumber)
     {
@@ -211,7 +211,7 @@ class fysUser extends BaseUser
      *
      * @param string $password
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setPassword($password)
     {
@@ -235,7 +235,7 @@ class fysUser extends BaseUser
      *
      * @param string $userType
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setUserType($userType)
     {
@@ -259,7 +259,7 @@ class fysUser extends BaseUser
      *
      * @param integer $userId
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setUserId($userId)
     {
@@ -283,7 +283,7 @@ class fysUser extends BaseUser
      *
      * @param string $houseNumber
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setHouseNumber($houseNumber)
     {
@@ -307,7 +307,7 @@ class fysUser extends BaseUser
      *
      * @param string $addressLine1
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setAddressLine1($addressLine1)
     {
@@ -331,7 +331,7 @@ class fysUser extends BaseUser
      *
      * @param string $addressLine2
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setAddressLine2($addressLine2)
     {
@@ -355,7 +355,7 @@ class fysUser extends BaseUser
      *
      * @param string $postcode
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setPostcode($postcode)
     {
@@ -379,7 +379,7 @@ class fysUser extends BaseUser
      *
      * @param string $country
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setCountry($country)
     {
@@ -403,7 +403,7 @@ class fysUser extends BaseUser
      *
      * @param string $registrationNumber
      *
-     * @return fysUser
+     * @return FysUser
      */
     public function setRegistrationNumber($registrationNumber)
     {
@@ -422,4 +422,3 @@ class fysUser extends BaseUser
         return $this->registrationNumber;
     }
 }
-

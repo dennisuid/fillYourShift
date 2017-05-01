@@ -404,4 +404,3 @@ class DisputeSettlement
         return $this->disputeClosedByName;
     }
 }
-

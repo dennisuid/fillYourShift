@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ExceptionListener
 {
-
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         // You get the exception object from the received event
@@ -19,7 +18,7 @@ class ExceptionListener
 
         // Customize your response object to display the exception details
         $response = new \Symfony\Component\HttpFoundation\JsonResponse();
-        
+
 
         // HttpExceptionInterface is a special type of exception that
         // holds status code and header details
@@ -31,9 +30,8 @@ class ExceptionListener
             $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         $response->setContent(json_encode($message));
-      
+
         // Send the modified response object to the event
         $event->setResponse($response);
     }
-
 }

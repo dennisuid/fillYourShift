@@ -5,12 +5,12 @@ namespace Shift\ShiftBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * fysEmployeeResume
+ * FysEmployeeResume
  *
  * @ORM\Table(name="fys_employee_resume")
- * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\User\fysEmployeeResumeRepository")
+ * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\User\FysEmployeeResumeRepository")
  */
-class fysEmployeeResume
+class FysEmployeeResume
 {
     /**
      * @var int
@@ -114,7 +114,7 @@ class fysEmployeeResume
      *
      * @param integer $employeeId
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setEmployeeId($employeeId)
     {
@@ -138,7 +138,7 @@ class fysEmployeeResume
      *
      * @param integer $userResumeId
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setUserResumeId($userResumeId)
     {
@@ -162,7 +162,7 @@ class fysEmployeeResume
      *
      * @param string $employeeResumeDesc
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setEmployeeResumeDesc($employeeResumeDesc)
     {
@@ -186,7 +186,7 @@ class fysEmployeeResume
      *
      * @param string $userExperience1
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setUserExperience1($userExperience1)
     {
@@ -210,7 +210,7 @@ class fysEmployeeResume
      *
      * @param string $userExperience2
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setUserExperience2($userExperience2)
     {
@@ -234,7 +234,7 @@ class fysEmployeeResume
      *
      * @param string $userExperience3
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setUserExperience3($userExperience3)
     {
@@ -258,7 +258,7 @@ class fysEmployeeResume
      *
      * @param string $userCertificate1
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setUserCertificate1($userCertificate1)
     {
@@ -282,7 +282,7 @@ class fysEmployeeResume
      *
      * @param string $userCertificate2
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setUserCertificate2($userCertificate2)
     {
@@ -306,7 +306,7 @@ class fysEmployeeResume
      *
      * @param string $userCertificate3
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setUserCertificate3($userCertificate3)
     {
@@ -330,7 +330,7 @@ class fysEmployeeResume
      *
      * @param integer $userExperienceYear
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setUserExperienceYear($userExperienceYear)
     {
@@ -354,7 +354,7 @@ class fysEmployeeResume
      *
      * @param string $employeeResumeDoc
      *
-     * @return fysEmployeeResume
+     * @return FysEmployeeResume
      */
     public function setEmployeeResumeDoc($employeeResumeDoc)
     {
@@ -373,4 +373,3 @@ class fysEmployeeResume
         return $this->employeeResumeDoc;
     }
 }
-

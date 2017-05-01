@@ -5,12 +5,12 @@ namespace Shift\ShiftBundle\Entity\Org;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * fysRole
+ * FysRole
  *
  * @ORM\Table(name="fys_role")
- * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\fysRoleRepository")
+ * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\FysRoleRepository")
  */
-class fysRole
+class FysRole
 {
     /**
      * @var int
@@ -65,7 +65,7 @@ class fysRole
      *
      * @param integer $roleId
      *
-     * @return fysRole
+     * @return FysRole
      */
     public function setRoleId($roleId)
     {
@@ -89,7 +89,7 @@ class fysRole
      *
      * @param string $roleName
      *
-     * @return fysRole
+     * @return FysRole
      */
     public function setRoleName($roleName)
     {
@@ -113,7 +113,7 @@ class fysRole
      *
      * @param string $roleDescription
      *
-     * @return fysRole
+     * @return FysRole
      */
     public function setRoleDescription($roleDescription)
     {
@@ -137,7 +137,7 @@ class fysRole
      *
      * @param string $orgName
      *
-     * @return fysRole
+     * @return FysRole
      */
     public function setOrgName($orgName)
     {
@@ -156,4 +156,3 @@ class fysRole
         return $this->orgName;
     }
 }
-

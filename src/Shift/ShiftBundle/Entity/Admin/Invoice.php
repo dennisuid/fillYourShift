@@ -311,4 +311,3 @@ class Invoice
         return $this->invoiceClosedDate;
     }
 }
-

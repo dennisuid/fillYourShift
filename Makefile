@@ -1,4 +1,4 @@
-all: clear-cache clean deps
+all: clear-cache clean deps phpcs
 
 clear-cache:
 	php bin/console cache:clear --env=dev
@@ -19,6 +19,14 @@ clean:
 
 database-clean:
 	php bin/console doctrine:database:drop --force
+phpcs: 
+	vendor/bin/phpcs --standard=phpcd_ruleset.xml  src/Shift/
+
+phpcs-fixed:
+	
+	vendor/bin/phpcbf src/Shift/
+phpmd:
+	vendor/bin/phpmd  src/Shift/ text codesize phpmd_ruleset.xml
 	
 database-create:
 	

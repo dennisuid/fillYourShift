@@ -5,12 +5,12 @@ namespace Shift\ShiftBundle\Entity\Shift;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * fysShiftApply
+ * FysShiftApply
  *
  * @ORM\Table(name="fys_shift_apply")
- * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\Shift\fysShiftApplyRepository")
+ * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\Shift\FysShiftApplyRepository")
  */
-class fysShiftApply
+class FysShiftApply
 {
     /**
      * @var int
@@ -86,8 +86,8 @@ class fysShiftApply
      *
      * @param integer $shiftApplyId
      *
-     * @return fysShiftApply
-     */
+     * @return FysShiftApply
+
     public function setShiftApplyId($shiftApplyId)
     {
         $this->shiftApplyId = $shiftApplyId;
@@ -110,7 +110,7 @@ class fysShiftApply
      *
      * @param integer $shiftId
      *
-     * @return fysShiftApply
+     * @return FysShiftApply
      */
     public function setShiftId($shiftId)
     {
@@ -134,7 +134,7 @@ class fysShiftApply
      *
      * @param integer $userId
      *
-     * @return fysShiftApply
+     * @return FysShiftApply
      */
     public function setUserId($userId)
     {
@@ -158,7 +158,7 @@ class fysShiftApply
      *
      * @param string $employeeFirstName
      *
-     * @return fysShiftApply
+     * @return FysShiftApply
      */
     public function setEmployeeFirstName($employeeFirstName)
     {
@@ -182,7 +182,7 @@ class fysShiftApply
      *
      * @param string $employeeLastName
      *
-     * @return fysShiftApply
+     * @return FysShiftApply
      */
     public function setEmployeeLastName($employeeLastName)
     {
@@ -206,7 +206,7 @@ class fysShiftApply
      *
      * @param integer $employeeResumeId
      *
-     * @return fysShiftApply
+     * @return FysShiftApply
      */
     public function setEmployeeResumeId($employeeResumeId)
     {
@@ -230,7 +230,7 @@ class fysShiftApply
      *
      * @param \DateTime $shiftApplyTime
      *
-     * @return fysShiftApply
+     * @return FysShiftApply
      */
     public function setShiftApplyTime($shiftApplyTime)
     {
@@ -249,4 +249,3 @@ class fysShiftApply
         return $this->shiftApplyTime;
     }
 }
-

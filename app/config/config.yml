@@ -84,10 +84,10 @@ nelmio_cors:
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
-    user_class: Shift\ShiftBundle\Entity\User\fysUser
+    user_class: Shift\ShiftBundle\Entity\User\FysUser
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
     registration:
         form:
-            type: Shift\ShiftBundle\Form\User\fysUserType
+            type: Shift\ShiftBundle\Form\User\FysUserType
