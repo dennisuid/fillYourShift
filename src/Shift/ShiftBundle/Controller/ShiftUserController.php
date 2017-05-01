@@ -4,14 +4,14 @@ namespace Shift\ShiftBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Shift\ShiftBundle\Entity\User\fysUser;
+use Shift\ShiftBundle\Entity\User\FysUser;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\Response;
 use Shift\ShiftBundle\Exception\UserNotFoundException;
-use Shift\ShiftBundle\Form\User\fysUserType;
+use Shift\ShiftBundle\Form\User\FysUserType;
 
 class ShiftUserController extends Controller
 {
@@ -19,12 +19,14 @@ class ShiftUserController extends Controller
     public function getAction(Request $request)
     {
         $user = $this->getDoctrine()
-                ->getRepository('ShiftBundle:User\fysUser')
-                ->find($request->get('id'));
+            ->getRepository('ShiftBundle:User\FysUser')
+            ->find($request->get('id'));
         $encoders = array(new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
         if (!$user) {
-            throw new UserNotFoundException("Invalid user id " . $request->get('id'), JsonResponse::HTTP_NOT_FOUND
+            throw new UserNotFoundException(
+                "Invalid user id " . $request->get('id'),
+                JsonResponse::HTTP_NOT_FOUND
             );
         }
         $serializer = new Serializer($normalizers, $encoders);
@@ -36,23 +38,25 @@ class ShiftUserController extends Controller
 
     public function deleteAction()
     {
-        return $this->render('ShiftBundle:ShiftUser:delete.html.twig', array(
-                        // ...
-        ));
+        return $this->render(
+            'ShiftBundle:ShiftUser:delete.html.twig',
+            []
+        );
     }
 
     public function updateAction()
     {
-        return $this->render('ShiftBundle:ShiftUser:update.html.twig', array(
-                        // ...
-        ));
+        return $this->render(
+            'ShiftBundle:ShiftUser:update.html.twig',
+            []
+        );
     }
 
     public function addAction(Request $request)
     {
         try {
-            $user = new fysUser();
-            $form = $this->createForm(fysUserType::class, $user);
+            $user = new FysUser();
+            $form = $this->createForm(FysUserType::class, $user);
             $form->handleRequest($request);
             $message = "";
             if ($form->isSubmitted()) {
@@ -61,26 +65,29 @@ class ShiftUserController extends Controller
                 $em->persist($user);
                 $em->flush();
                 $message = 'User added successfully';
-                // $this->addFlash() is equivalent to 
+                // $this->addFlash() is equivalent to
                 $this->addFlash(
-                'success',
-                'User Added, Please activate user by email verification!'
-                 );
-            return $this->redirectToRoute("shift_homepage");
+                    'success',
+                    'User Added, Please activate user by email verification!'
+                );
+                return $this->redirectToRoute("shift_homepage");
             }
         } catch (Exception $ex) {
             $message = $ex->getMessage() . " " . $ex->getCode();
         }
-        return $this->render("ShiftBundle:ShiftUser:add.html.twig", [
-                    'form' => $form->createView()
-        ]);
-    }
-    
-    public function loginAction()
-    {
-        return $this->render('ShiftBundle:ShiftUser:login.html.twig', array(
-                        // ...
-        ));
+        return $this->render(
+            "ShiftBundle:ShiftUser:add.html.twig",
+            [
+                'form' => $form->createView()
+            ]
+        );
     }
 
+    public function loginAction()
+    {
+        return $this->render(
+            'ShiftBundle:ShiftUser:login.html.twig',
+            []
+        );
+    }
 }

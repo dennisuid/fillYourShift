@@ -590,4 +590,3 @@ class Shift
         return $this->shiftAssignedEmail;
     }
 }
-

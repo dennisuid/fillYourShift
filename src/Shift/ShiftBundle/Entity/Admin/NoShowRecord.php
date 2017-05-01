@@ -218,4 +218,3 @@ class NoShowRecord
         return $this->shiftRoleName;
     }
 }
-

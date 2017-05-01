@@ -16,5 +16,4 @@ class ShiftController extends Controller
     {
         return $this->render('@Shift/Shift/dashboard.html.twig');
     }
-
 }
