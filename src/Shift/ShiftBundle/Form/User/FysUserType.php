@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Shift\ShiftBundle\Entity\User\FysUser;
 
-class FysUserType extends AbstractType
+class ShiftType extends AbstractType
 {
 
     /**
@@ -17,7 +17,7 @@ class FysUserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->setAction("/user/add")
+        $builder->setAction("/shift/create")
             ->setMethod('POST')
             ->add('first_name', TextType::class)
             ->add('last_name', TextType::class)
