@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Shift\ShiftBundle\Entity\User\FysUser;
 
-class ShiftType extends AbstractType
+class FysUserType extends AbstractType
 {
 
     /**
