@@ -4,6 +4,7 @@ namespace Shift\ShiftBundle\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * FysUser
@@ -44,7 +45,8 @@ class FysUser extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="user_type", type="string", length=255)
+     * @Assert\NotNull(message="Please select a User type.")
+     * @ORM\Column(name="user_type", type="string", length=255, nullable=false)
      */
     private $userType;
 

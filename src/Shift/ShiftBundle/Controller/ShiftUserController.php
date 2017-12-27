@@ -2,6 +2,7 @@
 
 namespace Shift\ShiftBundle\Controller;
 
+use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Shift\ShiftBundle\Entity\User\FysUser;
@@ -12,7 +13,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\Response;
 use Shift\ShiftBundle\Exception\UserNotFoundException;
 use Shift\ShiftBundle\Form\User\FysUserType;
-
+use Monolog\Logger as logging;
 class ShiftUserController extends Controller
 {
 
@@ -65,15 +66,19 @@ class ShiftUserController extends Controller
                 $em->persist($user);
                 $em->flush();
                 $message = 'User added successfully';
-                // $this->addFlash() is equivalent to
                 $this->addFlash(
                     'success',
                     'User Added, Please activate user by email verification!'
                 );
                 return $this->redirectToRoute("shift_homepage");
             }
-        } catch (Exception $ex) {
-            $message = $ex->getMessage() . " " . $ex->getCode();
+        } catch (\Exception $ex) {
+            $logging = new Logger();
+            $logging->addCritical(
+                "User registration failed with error message ". $ex->getMessage().
+                " and code ". $ex->getCode()
+            );
+            return false;
         }
         return $this->render(
             "ShiftBundle:ShiftUser:add.html.twig",

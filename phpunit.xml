@@ -1,0 +1,11 @@
+<phpunit bootstrap="app/autoload.php">
+    <php>
+        <server name="KERNEL_DIR" value="app/" />
+    </php>
+    <testsuites>
+        <testsuite name="unit">
+            <file>tests/Shift/ShiftBundle/Controller/DefaultControllerTest.php</file>
+            <file>tests/Shift/ShiftBundle/Controller/ShiftUserControllerTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>

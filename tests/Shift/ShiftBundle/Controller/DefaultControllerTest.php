@@ -1,6 +1,6 @@
 <?php
 
-namespace Shift\ShiftBundle\Tests\Controller;
+namespace FrontEndBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -12,6 +12,7 @@ class DefaultControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        //best to test the logo here
+        $this->assertContains('Your place to match your skills with market', $client->getResponse()->getContent());
     }
 }

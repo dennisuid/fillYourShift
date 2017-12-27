@@ -6,27 +6,28 @@ clear-cache:
 	php bin/console cache:clear --env=test
 server-run:
 	php bin/console server:run
-	
+
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php
 
 deps: composer.phar
 	php composer.phar install --no-interaction
-	
+
 clean:
 	rm -rf vendor
 	rm -f web/css/style.css
 
 database-clean:
 	php bin/console doctrine:database:drop --force
-phpcs: 
+phpcs:
 	vendor/bin/phpcs --standard=phpcd_ruleset.xml  src/Shift/
 
 phpcs-fixed:
-	
+
 	vendor/bin/phpcbf src/Shift/
 phpmd:
 	vendor/bin/phpmd  src/Shift/ text codesize phpmd_ruleset.xml
-	
-database-create:
-	
+
+phpunit:
+	vendor/bin/phpunit
+
