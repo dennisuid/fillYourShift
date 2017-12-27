@@ -3,6 +3,7 @@
 namespace Shift\ShiftBundle\Form\User;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,7 +24,12 @@ class FysUserType extends AbstractType
             ->add('last_name', TextType::class)
             ->add('email', EmailType::class)
             ->add('mobile_number', TextType::class)
-            ->add('user_type', TextType::class)
+            ->add('user_type', ChoiceType::class, array(
+                'choices'  => array(
+                    'Please select your user type' => null,
+                    'Employee' => true,
+                    'Employer' => false,
+                )))
             ->add('user_id', TextType::class)
             ->add('house_number', TextType::class)
             ->add('address_line1', TextType::class)
