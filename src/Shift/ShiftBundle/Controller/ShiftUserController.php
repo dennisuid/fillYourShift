@@ -13,7 +13,6 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\Response;
 use Shift\ShiftBundle\Exception\UserNotFoundException;
 use Shift\ShiftBundle\Form\User\FysUserType;
-use Monolog\Logger as logging;
 class ShiftUserController extends Controller
 {
 

@@ -39,7 +39,7 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0",
+        "symfony/phpunit-bridge": "^3.2.7",
         "behat/behat": "^3.1",
         "behat/symfony2-extension": "^2.1",
         "behat/mink": "^1.7",
@@ -50,7 +50,7 @@
         "hautelook/alice-bundle": "^1.2",
         "squizlabs/php_codesniffer": "2.8.1",
         "phpmd/phpmd": "2.6.0",
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^5.4.6"
     },
     "scripts": {
         "post-install-cmd": [
