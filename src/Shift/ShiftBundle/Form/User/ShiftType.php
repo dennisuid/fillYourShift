@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Shift\ShiftBundle\Entity\Shift\Shift;
 
 class ShiftType extends AbstractType
@@ -17,14 +18,14 @@ class ShiftType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->setAction("/user/add")
+        $builder->setAction("/shift/create")
             ->setMethod('POST')
             ->add('org_name', TextType::class)
             ->add('pay_leadtime', TextType::class)
-            ->add('role_id', EmailType::class)
+            ->add('role_id', TextType::class)
             ->add('role_name', TextType::class)
-            ->add('start_date_hours', TextType::class)
-            ->add('end_date_hours', TextType::class)
+            ->add('start_date_hours', DateType::class)
+            ->add('end_date_hours', DateType::class)
             ->add('shift_duration', TextType::class)
             ->add('shift_rate', TextType::class)
             ->add('shift_job_rate', TextType::class)

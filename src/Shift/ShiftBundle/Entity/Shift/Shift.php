@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="fys_shift")
  * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\Shift\ShiftRepository")
  */
-class Shift
-{
+class Shift {
+
     /**
      * @var int
      *
@@ -20,13 +20,6 @@ class Shift
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="shift_id", type="integer", unique=true)
-     */
-    private $shiftId;
 
     /**
      * @var string
@@ -147,14 +140,12 @@ class Shift
      */
     private $shiftAssignedEmail;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -165,8 +156,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftId($shiftId)
-    {
+    public function setShiftId($shiftId) {
         $this->shiftId = $shiftId;
 
         return $this;
@@ -177,8 +167,7 @@ class Shift
      *
      * @return int
      */
-    public function getShiftId()
-    {
+    public function getShiftId() {
         return $this->shiftId;
     }
 
@@ -189,8 +178,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setOrgName($orgName)
-    {
+    public function setOrgName($orgName) {
         $this->orgName = $orgName;
 
         return $this;
@@ -201,8 +189,7 @@ class Shift
      *
      * @return string
      */
-    public function getOrgName()
-    {
+    public function getOrgName() {
         return $this->orgName;
     }
 
@@ -213,8 +200,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setPayLeadtime($payLeadtime)
-    {
+    public function setPayLeadtime($payLeadtime) {
         $this->payLeadtime = $payLeadtime;
 
         return $this;
@@ -225,8 +211,7 @@ class Shift
      *
      * @return int
      */
-    public function getPayLeadtime()
-    {
+    public function getPayLeadtime() {
         return $this->payLeadtime;
     }
 
@@ -237,8 +222,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setRoleId($roleId)
-    {
+    public function setRoleId($roleId) {
         $this->roleId = $roleId;
 
         return $this;
@@ -249,8 +233,7 @@ class Shift
      *
      * @return int
      */
-    public function getRoleId()
-    {
+    public function getRoleId() {
         return $this->roleId;
     }
 
@@ -261,8 +244,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setRoleName($roleName)
-    {
+    public function setRoleName($roleName) {
         $this->roleName = $roleName;
 
         return $this;
@@ -273,8 +255,7 @@ class Shift
      *
      * @return string
      */
-    public function getRoleName()
-    {
+    public function getRoleName() {
         return $this->roleName;
     }
 
@@ -285,8 +266,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setStartDateHours($startDateHours)
-    {
+    public function setStartDateHours($startDateHours) {
         $this->startDateHours = $startDateHours;
 
         return $this;
@@ -297,8 +277,7 @@ class Shift
      *
      * @return \DateTime
      */
-    public function getStartDateHours()
-    {
+    public function getStartDateHours() {
         return $this->startDateHours;
     }
 
@@ -309,8 +288,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setEndDateHours($endDateHours)
-    {
+    public function setEndDateHours($endDateHours) {
         $this->endDateHours = $endDateHours;
 
         return $this;
@@ -321,8 +299,7 @@ class Shift
      *
      * @return \DateTime
      */
-    public function getEndDateHours()
-    {
+    public function getEndDateHours() {
         return $this->endDateHours;
     }
 
@@ -333,8 +310,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftDuration($shiftDuration)
-    {
+    public function setShiftDuration($shiftDuration) {
         $this->shiftDuration = $shiftDuration;
 
         return $this;
@@ -345,8 +321,7 @@ class Shift
      *
      * @return string
      */
-    public function getShiftDuration()
-    {
+    public function getShiftDuration() {
         return $this->shiftDuration;
     }
 
@@ -357,8 +332,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftRate($shiftRate)
-    {
+    public function setShiftRate($shiftRate) {
         $this->shiftRate = $shiftRate;
 
         return $this;
@@ -369,8 +343,7 @@ class Shift
      *
      * @return string
      */
-    public function getShiftRate()
-    {
+    public function getShiftRate() {
         return $this->shiftRate;
     }
 
@@ -381,8 +354,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftJobRate($shiftJobRate)
-    {
+    public function setShiftJobRate($shiftJobRate) {
         $this->shiftJobRate = $shiftJobRate;
 
         return $this;
@@ -393,8 +365,7 @@ class Shift
      *
      * @return string
      */
-    public function getShiftJobRate()
-    {
+    public function getShiftJobRate() {
         return $this->shiftJobRate;
     }
 
@@ -405,8 +376,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftStatus($shiftStatus)
-    {
+    public function setShiftStatus($shiftStatus) {
         $this->shiftStatus = $shiftStatus;
 
         return $this;
@@ -417,8 +387,7 @@ class Shift
      *
      * @return string
      */
-    public function getShiftStatus()
-    {
+    public function getShiftStatus() {
         return $this->shiftStatus;
     }
 
@@ -429,8 +398,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftCreatedBy($shiftCreatedBy)
-    {
+    public function setShiftCreatedBy($shiftCreatedBy) {
         $this->shiftCreatedBy = $shiftCreatedBy;
 
         return $this;
@@ -441,8 +409,7 @@ class Shift
      *
      * @return string
      */
-    public function getShiftCreatedBy()
-    {
+    public function getShiftCreatedBy() {
         return $this->shiftCreatedBy;
     }
 
@@ -453,8 +420,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftCreatedById($shiftCreatedById)
-    {
+    public function setShiftCreatedById($shiftCreatedById) {
         $this->shiftCreatedById = $shiftCreatedById;
 
         return $this;
@@ -465,8 +431,7 @@ class Shift
      *
      * @return int
      */
-    public function getShiftCreatedById()
-    {
+    public function getShiftCreatedById() {
         return $this->shiftCreatedById;
     }
 
@@ -477,8 +442,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftAssignedEmployee($shiftAssignedEmployee)
-    {
+    public function setShiftAssignedEmployee($shiftAssignedEmployee) {
         $this->shiftAssignedEmployee = $shiftAssignedEmployee;
 
         return $this;
@@ -489,8 +453,7 @@ class Shift
      *
      * @return string
      */
-    public function getShiftAssignedEmployee()
-    {
+    public function getShiftAssignedEmployee() {
         return $this->shiftAssignedEmployee;
     }
 
@@ -501,8 +464,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftAssignedEmployeeId($shiftAssignedEmployeeId)
-    {
+    public function setShiftAssignedEmployeeId($shiftAssignedEmployeeId) {
         $this->shiftAssignedEmployeeId = $shiftAssignedEmployeeId;
 
         return $this;
@@ -513,8 +475,7 @@ class Shift
      *
      * @return int
      */
-    public function getShiftAssignedEmployeeId()
-    {
+    public function getShiftAssignedEmployeeId() {
         return $this->shiftAssignedEmployeeId;
     }
 
@@ -525,8 +486,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftAssignedResumeId($shiftAssignedResumeId)
-    {
+    public function setShiftAssignedResumeId($shiftAssignedResumeId) {
         $this->shiftAssignedResumeId = $shiftAssignedResumeId;
 
         return $this;
@@ -537,8 +497,7 @@ class Shift
      *
      * @return int
      */
-    public function getShiftAssignedResumeId()
-    {
+    public function getShiftAssignedResumeId() {
         return $this->shiftAssignedResumeId;
     }
 
@@ -549,8 +508,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftAssignedPhone($shiftAssignedPhone)
-    {
+    public function setShiftAssignedPhone($shiftAssignedPhone) {
         $this->shiftAssignedPhone = $shiftAssignedPhone;
 
         return $this;
@@ -561,8 +519,7 @@ class Shift
      *
      * @return string
      */
-    public function getShiftAssignedPhone()
-    {
+    public function getShiftAssignedPhone() {
         return $this->shiftAssignedPhone;
     }
 
@@ -573,8 +530,7 @@ class Shift
      *
      * @return Shift
      */
-    public function setShiftAssignedEmail($shiftAssignedEmail)
-    {
+    public function setShiftAssignedEmail($shiftAssignedEmail) {
         $this->shiftAssignedEmail = $shiftAssignedEmail;
 
         return $this;
@@ -585,8 +541,8 @@ class Shift
      *
      * @return string
      */
-    public function getShiftAssignedEmail()
-    {
+    public function getShiftAssignedEmail() {
         return $this->shiftAssignedEmail;
     }
+
 }

@@ -27,8 +27,8 @@ class FysUserType extends AbstractType
             ->add('user_type', ChoiceType::class, array(
                 'choices'  => array(
                     'Please select your user type' => null,
-                    'Employee' => true,
-                    'Employer' => false,
+                    'Employee' => "employee",
+                    'Employer' => "employer",
                 )))
             ->add('user_id', TextType::class)
             ->add('house_number', TextType::class)

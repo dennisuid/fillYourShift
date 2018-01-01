@@ -10,4 +10,8 @@ namespace Shift\ShiftBundle\Repository\Shift;
  */
 class FysShiftApplyRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getByUserId($userid){
+        $criteria = ['userId' => $userid];
+        return $this->findBy($criteria);  
+    }
 }

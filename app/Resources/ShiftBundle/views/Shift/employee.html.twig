@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <body>
+        <div class="panel panel-default">
+            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+                {{  app.user.userType }}
+                 {% for shift in shiftIds %}
+                    <li>{{ shift }}</li>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+{% endblock %}
