@@ -18,9 +18,7 @@ class FysUserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->setAction("/shift/create")
-            ->setMethod('POST')
-            ->add('first_name', TextType::class)
+        $builder->add('first_name', TextType::class)
             ->add('last_name', TextType::class)
             ->add('email', EmailType::class)
             ->add('mobile_number', TextType::class)

@@ -35,11 +35,11 @@ delete:
 update:
     path:     /user/update
     defaults: { _controller: ShiftBundle:ShiftUser:update }
-
-add:
-    path:     /user/add
-    defaults: { _controller: ShiftBundle:ShiftUser:add }
-
+    
+register:
+    path:     /user/register
+    defaults: { _controller: ShiftBundle:ShiftUser:register }
+    
 login:
     path:     /user/login
     defaults: { _controller: ShiftBundle:ShiftUser:login }

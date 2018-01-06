@@ -13,20 +13,26 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\Response;
 use Shift\ShiftBundle\Exception\UserNotFoundException;
 use Shift\ShiftBundle\Form\User\FysUserType;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use Symfony\Component\Security\Core\Security;
+
 class ShiftUserController extends Controller
 {
 
     public function getAction(Request $request)
     {
         $user = $this->getDoctrine()
-            ->getRepository('ShiftBundle:User\FysUser')
-            ->find($request->get('id'));
+                ->getRepository('ShiftBundle:User\FysUser')
+                ->find($request->get('id'));
         $encoders = array(new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
         if (!$user) {
             throw new UserNotFoundException(
-                "Invalid user id " . $request->get('id'),
-                JsonResponse::HTTP_NOT_FOUND
+            "Invalid user id " . $request->get('id'), JsonResponse::HTTP_NOT_FOUND
             );
         }
         $serializer = new Serializer($normalizers, $encoders);
@@ -35,63 +41,43 @@ class ShiftUserController extends Controller
 
         return new Response($response, $status, ['Content-type' => 'json']);
     }
-
-    public function deleteAction()
+    public function registerAction(Request $request)
     {
-        return $this->render(
-            'ShiftBundle:ShiftUser:delete.html.twig',
-            []
-        );
-    }
+        /** @var $dispatcher EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+        $user = new FysUser();
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+        $form = $this->createForm(FysUserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-    public function updateAction()
-    {
-        return $this->render(
-            'ShiftBundle:ShiftUser:update.html.twig',
-            []
-        );
-    }
-
-    public function addAction(Request $request)
-    {
-        try {
-            $user = new FysUser();
-            $form = $this->createForm(FysUserType::class, $user);
-            $form->handleRequest($request);
-            $message = "";
-            if ($form->isSubmitted()) {
                 $user = $form->getData();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
-                $message = 'User added successfully';
-                $this->addFlash(
-                    'success',
-                    'User Added, Please activate user by email verification!'
+
+                $url = $this->generateUrl('fos_user_registration_confirmed');
+                $response = new RedirectResponse($url);
+                $dispatcher->dispatch(
+                        FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response)
                 );
-                return $this->redirectToRoute("shift_homepage");
+                return $response;
             }
-        } catch (\Exception $ex) {
-            $logging = new Logger();
-            $logging->addCritical(
-                "User registration failed with error message ". $ex->getMessage().
-                " and code ". $ex->getCode()
-            );
-            return false;
         }
-        return $this->render(
-            "ShiftBundle:ShiftUser:add.html.twig",
-            [
-                'form' => $form->createView()
-            ]
-        );
+        $event = new FormEvent($form, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
+
+        if (null !== $response = $event->getResponse()) {
+            return $response;
+        }
+
+        return $this->render('@FOSUser/Registration/register.html.twig', array(
+                    'form' => $form->createView(),
+        ));
     }
 
-    public function loginAction()
-    {
-        return $this->render(
-            'ShiftBundle:ShiftUser:login.html.twig',
-            []
-        );
-    }
 }
