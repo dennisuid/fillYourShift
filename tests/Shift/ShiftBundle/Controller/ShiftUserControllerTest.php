@@ -1,6 +1,6 @@
 <?php
 
-namespace Shift\ShiftBundle\Tests\Controller;
+namespace Tests\Shift\ShiftBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

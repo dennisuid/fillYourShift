@@ -91,3 +91,10 @@ fos_user:
     registration:
         form:
             type: Shift\ShiftBundle\Form\User\FysUserType
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/../migrations"
+    namespace: fillYourShift\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+    organize_migrations: false
