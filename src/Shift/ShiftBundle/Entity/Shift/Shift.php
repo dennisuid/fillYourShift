@@ -66,7 +66,7 @@ class Shift {
     /**
      * @var string
      *
-     * @ORM\Column(name="shift_duration", type="decimal", precision=1, scale=1)
+     * @ORM\Column(name="shift_duration", type="decimal", precision=2, scale=1)
      */
     private $shiftDuration;
 

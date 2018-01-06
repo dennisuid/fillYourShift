@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <body>
+        <div class="panel panel-default">
+            <div class="panel-heading">View Shift</div>
+            <div class="panel-body">
+                {#{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                 <div>
+                    <input type="submit" value="Save" class ='btn btn-primary'/>
+                </div>
+{#                how to dynamically generate the id below ?#}
+                <a href="{{ url('deleteShift', {'id': id })}}" class ='btn btn-danger'>Delete</a>
+                {{ form_end(form) }} 
+            </div>
+        </div>
+         
+    </body>
+{% endblock %}

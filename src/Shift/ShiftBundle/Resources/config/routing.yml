@@ -47,3 +47,19 @@ login:
 createShift:
     path: /shift/create
     defaults: { _controller: ShiftBundle:Shift:createNewShift }
+
+submitShift:
+    path: /shift/submit
+    defaults: { _controller: ShiftBundle:Shift:submitShift }
+    
+viewShift:
+    path: /shift/view/{id}
+    defaults: { _controller: ShiftBundle:Shift:viewShift }
+    
+deleteShift:
+    path: /shift/delete/{id}
+    defaults: { _controller: ShiftBundle:Shift:deleteShift }
+    
+listShifts:
+    path: /shift/list
+    defaults: { _controller: ShiftBundle:Shift:listShifts }

@@ -1,0 +1,9 @@
+
+//      Set action from FormBuilder Type Class
+//      $builder->setAction("/shift/create") //.$options['id']
+//            ->setMethod('POST')
+
+
+//create a form without validation
+
+// {#{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}

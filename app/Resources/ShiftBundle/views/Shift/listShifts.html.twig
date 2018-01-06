@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <body>
+        <div class="panel panel-default">
+            <div class="panel-heading">Create new shift</div>
+            <div class="panel-body">
+                {% for shift in shifts %}
+                <section>
+                    <h3>
+                        <a href="{{ path('viewShift', {'id': shift.id}) }}">{{ shift.org_name }}</a>
+                    </h3>
+
+                    <dl>
+                        {#<dt>where:</dt>
+                        <dd>{{ event.location }}</dd>
+
+                        <dt>when:</dt>
+                        <dd>{{ event.time | date('g:ia / l M j, Y') }}</dd>
+
+                        <dt>who:</dt>
+                        <dd>Todo # of people</dd>#}
+                    </dl>
+                </section>
+                {% endfor %}
+            </div>
+        </div>
+         
+    </body>
+{% endblock %}

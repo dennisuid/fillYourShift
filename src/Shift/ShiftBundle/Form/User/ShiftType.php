@@ -18,9 +18,7 @@ class ShiftType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->setAction("/shift/create")
-            ->setMethod('POST')
-            ->add('org_name', TextType::class)
+        $builder->add('org_name', TextType::class)
             ->add('pay_leadtime', TextType::class)
             ->add('role_id', TextType::class)
             ->add('role_name', TextType::class)
@@ -31,12 +29,15 @@ class ShiftType extends AbstractType
             ->add('shift_job_rate', TextType::class)
             ->add('shift_status', TextType::class)
             ->add('shift_created_by', TextType::class)
-            ->add('shift_created_by_id', TextType::class)
-            ->add('shift_assigned_employee', TextType::class)
-            ->add('shift_assigned_employee_id', TextType::class)
-            ->add('shift_assigned_resume_id', TextType::class)
-            ->add('shift_assigned_phone', TextType::class)
-            ->add('shift_assigned_email', TextType::class);
+            ->add('shift_created_by_id', TextType::class);
+           
+        if ($options['mode'] != 'create') {
+            $builder->add('shift_assigned_employee', TextType::class)
+                     ->add('shift_assigned_employee_id', TextType::class)
+                     ->add('shift_assigned_resume_id', TextType::class)
+                     ->add('shift_assigned_phone', TextType::class)
+                     ->add('shift_assigned_email', TextType::class);
+        }
     }
 
     /**
@@ -46,7 +47,8 @@ class ShiftType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => Shift::class
+                'data_class' => Shift::class,
+                'mode' => null,
             )
         );
     }
