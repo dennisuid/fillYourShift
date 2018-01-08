@@ -2,7 +2,6 @@
 
 namespace Shift\ShiftBundle\Controller;
 
-use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Shift\ShiftBundle\Entity\User\FysUser;
@@ -18,7 +17,6 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
-use Symfony\Component\Security\Core\Security;
 
 class ShiftUserController extends Controller
 {
