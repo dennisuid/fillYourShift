@@ -23,11 +23,7 @@ class FysUserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('mobile_number', TextType::class)
             ->add('user_type', ChoiceType::class, array(
-                'choices'  => array(
-                    'Please select your user type' => null,
-                    'Employee' => "employee",
-                    'Employer' => "employer",
-                )))
+                'choices'  => $options['user_types']))
             ->add('user_id', TextType::class)
             ->add('house_number', TextType::class)
             ->add('address_line1', TextType::class)
@@ -44,7 +40,8 @@ class FysUserType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => FysUser::class
+                'data_class' => FysUser::class,
+                'user_types' => null,
             )
         );
     }

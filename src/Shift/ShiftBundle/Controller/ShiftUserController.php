@@ -39,14 +39,21 @@ class ShiftUserController extends Controller
 
         return new Response($response, $status, ['Content-type' => 'json']);
     }
+
     public function registerAction(Request $request)
     {
         /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
         $user = new FysUser();
         $event = new GetResponseUserEvent($user, $request);
+        $roles = $this->getDoctrine()
+                ->getRepository('ShiftBundle:Org\FysRole')
+                ->getAllRoles();
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
-        $form = $this->createForm(FysUserType::class, $user);
+        $form = $this->createForm(
+                FysUserType::class, 
+                $user, ['user_types' => $roles]
+        );
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
