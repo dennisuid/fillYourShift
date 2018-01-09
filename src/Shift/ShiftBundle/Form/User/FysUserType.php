@@ -24,7 +24,6 @@ class FysUserType extends AbstractType
             ->add('mobile_number', TextType::class)
             ->add('user_type', ChoiceType::class, array(
                 'choices'  => $options['user_types']))
-            ->add('user_id', TextType::class)
             ->add('house_number', TextType::class)
             ->add('address_line1', TextType::class)
             ->add('address_line2', TextType::class)

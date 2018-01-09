@@ -11,7 +11,7 @@ class Version20171230160922 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function up()
+    public function up(Schema $schema)
     {
         $roles = [
             [1, 'employee', 'some body who does the work', 'test org'],
@@ -28,7 +28,7 @@ class Version20171230160922 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function down()
+    public function down(Schema $schema)
     {
         $sql = "TRUNCATE table fillyourshift.fys_role";
 

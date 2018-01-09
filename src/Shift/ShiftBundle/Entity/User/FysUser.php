@@ -51,13 +51,6 @@ class FysUser extends BaseUser
     private $userType;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer", unique=true)
-     */
-    private $userId;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="house_number", type="string", length=255, nullable=true)
@@ -255,31 +248,6 @@ class FysUser extends BaseUser
     {
         return $this->userType;
     }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return FysUser
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
     /**
      * Set houseNumber
      *

@@ -12,7 +12,7 @@ class FysRoleRepository extends \Doctrine\ORM\EntityRepository
         $roles = [];
         /* @var $role FysRole */
         foreach ($this->findAll() as $role) {
-            $roles[ucwords($role->getRoleName())] = $role->getId();
+            $roles[ucwords($role->getRoleName())] = $role->getRoleName();
         }
         return $roles;
     }
