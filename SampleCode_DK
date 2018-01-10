@@ -7,3 +7,31 @@
 //create a form without validation
 
 // {#{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+
+/**
+     * Displays a form to edit an existing product entity.
+     *
+     * @Route("/{id}/edit", name="product_edit")
+     * @Method({"GET", "POST"})
+     */
+
+CODE for updating the EDIT Action
+
+/**
+    public function editAction(Request $request, Product $product)
+    {
+        $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('product_edit', array('id' => $product->getId()));
+        }
+        return $this->render('product/edit.html.twig', array(
+            'product' => $product,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+/**
+
+{#{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+

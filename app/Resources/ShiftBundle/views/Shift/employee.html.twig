@@ -3,21 +3,23 @@
 {% block body %}
     <body>
         <div class="panel panel-default">
-            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-heading">Subscribed Shifts</div>
             <div class="panel-body">
-                Panel content
+            {% for subscribedShiftId in subscribedShiftIds %}
+                     <li><a href="{{ url('viewShift', {'id': subscribedShiftId })}}">{{ subscribedShiftId }}</a></li>
+            {% endfor %}    
             </div>
         </div>
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Panel title</h3>
+                <h3 class="panel-title">Published Shifts</h3>
             </div>
             <div class="panel-body">
-                Panel content
-                {{  app.user.userType }}
-                 {% for shift in shiftIds %}
-                    <li>{{ shift }}</li>
+               
+                {#{{  app.user.userType }}#}
+                 {% for forSubscriptionshiftId in forSubscriptionshiftIds %}
+                     <li><a href="{{ url('viewShift', {'id': forSubscriptionshiftId })}}">{{ forSubscriptionshiftId }}</a></li>
                 {% endfor %}
             </div>
         </div>

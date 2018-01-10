@@ -21,12 +21,6 @@ class FysShiftApply
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="shift_apply_id", type="integer", unique=true)
-     */
-    private $shiftApplyId;
 
     /**
      * @var int
@@ -79,30 +73,6 @@ class FysShiftApply
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set shiftApplyId
-     *
-     * @param integer $shiftApplyId
-     *
-     * @return FysShiftApply
-
-    public function setShiftApplyId($shiftApplyId)
-    {
-        $this->shiftApplyId = $shiftApplyId;
-
-        return $this;
-    }
-
-    /**
-     * Get shiftApplyId
-     *
-     * @return int
-     */
-    public function getShiftApplyId()
-    {
-        return $this->shiftApplyId;
     }
 
     /**
@@ -232,9 +202,9 @@ class FysShiftApply
      *
      * @return FysShiftApply
      */
-    public function setShiftApplyTime($shiftApplyTime)
+    public function setShiftApplyTime()
     {
-        $this->shiftApplyTime = $shiftApplyTime;
+        $this->shiftApplyTime  = new \DateTime();
 
         return $this;
     }
