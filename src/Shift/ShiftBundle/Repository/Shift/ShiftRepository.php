@@ -10,5 +10,13 @@ namespace Shift\ShiftBundle\Repository\Shift;
  */
 class ShiftRepository extends \Doctrine\ORM\EntityRepository
 {
-    
+    public function getNot($status)
+    {
+        $qb = $this->createQueryBuilder('s')
+        ->where('s.shiftStatus != :status')
+        ->setParameter('status', $status)
+        ->orderBy('s.id', 'desc')
+        ->getQuery();
+        return $qb->getResult();
+    }
 }

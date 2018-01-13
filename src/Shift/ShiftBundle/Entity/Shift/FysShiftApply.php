@@ -64,7 +64,13 @@ class FysShiftApply
      */
     private $shiftApplyTime;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apply_status", type="string", length=20)
+     */
+    private $applyStatus;
+    
     /**
      * Get id
      *
@@ -218,4 +224,29 @@ class FysShiftApply
     {
         return $this->shiftApplyTime;
     }
+    
+    /**
+     * Set applyStatus
+     *
+     * @param string $applyStatus
+     *
+     * @return FysShiftApply
+     */
+    public function setApplyStatus($applyStatus)
+    {
+        $this->applyStatus = $applyStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get applyStatus
+     *
+     * @return string
+     */
+    public function getApplyStatus()
+    {
+        return $this->applyStatus;
+    }
+
 }

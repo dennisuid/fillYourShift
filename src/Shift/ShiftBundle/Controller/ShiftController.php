@@ -13,6 +13,7 @@ use Shift\ShiftBundle\Form\User\ShiftType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use \Shift\ShiftBundle\Entity\Shift\FysShiftApply;
+use \Shift\ShiftBundle\Entity\User\FysUser;
 
 class ShiftController extends Controller {
 
@@ -24,25 +25,47 @@ class ShiftController extends Controller {
         $usertype = $this->getUser()->getUserType();
         $forSubscriptionShiftIds = [];
         $subscribedShiftIds = [];
+        $assignedShiftIds = [];
+        $notAssignedShiftIds = []; //how to declare an array of Shift Class
+        
         if ($usertype == "employee") {
             $shifts = $this->getDoctrine()
-                    ->getRepository(Shift::class) // //'Shift\ShiftBundle\Entity\Shift\FysShiftApply'
-                    ->findByShiftStatus('PUBLISHED');
+                    ->getRepository(Shift::class) 
+                    ->getNot('CREATED');
             if (!empty($shifts)) {
                 foreach ($shifts as $shift) {
-
                     $shiftApplied = $this->getDoctrine()
-                            ->getRepository('Shift\ShiftBundle\Entity\Shift\FysShiftApply')
-                            ->findBy(['userId' => $this->getUser()->getId(), 'shiftId' => $shift->getId()]);
-
-                    if (empty($shiftApplied)) {
-                        $forSubscriptionShiftIds[] = $shift->getId();
-                    } else {
-                        $subscribedShiftIds[] = $shift->getId();
+                            ->getRepository(FysShiftApply::class)
+                            ->findOneBy(['userId' => $this->getUser()->getId(),'shiftId' => $shift->getId()]);
+                    
+                    if ($shift->getShiftStatus() == "PUBLISHED") {
+       
+                        if (empty($shiftApplied)){
+                            $forSubscriptionShiftIds[] = $shift->getId();
+                        } 
+                        else {
+                            $subscribedShiftIds[] = $shift->getId();
+                        }
+                    } 
+                    else {
+                        
+                        if($shiftApplied->getApplyStatus() == 'SELECTED'){
+                            $assignedShiftIds[] = $shift->getId();
+                        } 
+                        else {
+                            $notAssignedShiftIds[] = $shift->getId();
+                        }
                     }
+                    
                 }
             }
-            return $this->render('@Shift/Shift/employee.html.twig', ['forSubscriptionshiftIds' => $forSubscriptionShiftIds, 'subscribedShiftIds' => $subscribedShiftIds]);
+            echo "just before render";
+            return $this->render('@Shift/Shift/employee.html.twig', [
+                'forSubscriptionShiftIds' => $forSubscriptionShiftIds, 
+                'subscribedShiftIds' => $subscribedShiftIds,
+                'assignedShiftIds' => $assignedShiftIds,
+                'notAssignedShiftIds' => $notAssignedShiftIds
+                ]);
         }
 
         if ($usertype == "employer") {
@@ -113,7 +136,7 @@ class ShiftController extends Controller {
             'shift_status' => $shift->getShiftStatus(),
             'shift_created_by' => $shift->getShiftCreatedBy()
         ];
-        if ($shift->getShiftStatus() == 'PUBLISHED') {
+        if ($shift->getShiftStatus() != 'CREATED') {
             $appliedShifts = $this->getDoctrine()
                     ->getRepository(FysShiftApply::class)
                     ->findBy(['shiftId' => $shiftId]);
@@ -122,10 +145,12 @@ class ShiftController extends Controller {
                     $subscriberData[] = [
                         'applyId' => $appliedShift->getId(),
                         'shiftId' => $appliedShift->getShiftId(),
+                        'subscriberId' => $appliedShift->getUserId(),
                         'subscriber_first_name' => $appliedShift->getEmployeeFirstName(),
                         'subscriber_last_name' => $appliedShift->getEmployeeLastName(),
                         'subscriber_resume_id' => $appliedShift->getEmployeeResumeId(),
-                        'applied_time' => date_format($appliedShift->getShiftApplyTime(), "Y/m/d H:i:s")
+                        'applied_time' => date_format($appliedShift->getShiftApplyTime(), "Y/m/d H:i:s"),
+                        'apply_status' => $appliedShift->getApplyStatus()
                     ];
                 }
             }
@@ -232,6 +257,7 @@ class ShiftController extends Controller {
         $fysShiftApply->setEmployeeLastName($this->getUser()->getLastName());
         $fysShiftApply->setEmployeeResumeId(200);
         $fysShiftApply->setShiftApplyTime();
+        $fysShiftApply->setApplyStatus('SUBSCRIBED');
         $em->persist($fysShiftApply);
         $em->flush();
 
@@ -258,4 +284,59 @@ class ShiftController extends Controller {
 //        return $this->redirectToRoute('dashboard');
     }
 
+    public function approveShiftAction(Request $request) {
+
+        $shiftId = $request->get('id');
+        $subscriberId = $request->get('subscriberId');
+        $em = $this->getDoctrine()->getManager();
+        
+        $shift = $em->getRepository(Shift::class)->findOneBy(['id' => $shiftId]);
+        $subscriber = $em->getRepository(FysUser::class)
+                ->findOneBy(['id' => $subscriberId]);
+        $appliedShifts = $em->getRepository(FysShiftApply::class)
+                    ->findBy(['shiftId' => $shiftId]);
+        
+        // Add employee details to the Shift and Change status to APPROVED
+        
+        if (!empty($subscriber)) {
+        
+        $status = 'APPROVED';
+        $shift->setShiftStatus($status);
+        $shift->setShiftAssignedEmployee($subscriber->getFirstName());
+        $shift->setShiftAssignedEmployeeId($subscriber->getId());
+        $shift->setShiftAssignedResumeId(200);
+        $shift->setShiftAssignedPhone($subscriber->getMobileNumber());
+        $shift->setShiftAssignedEmail($subscriber->getEmail());
+        echo $shift->getShiftStatus();
+        $em->persist($shift);
+        $em->flush();    
+        echo "done the saving";
+        }
+        
+        // Update all the applicants about the status of the Shift in SHiftApply table
+        
+        if (!empty($appliedShifts)) {
+                foreach ($appliedShifts as $appliedShift) {
+                    
+                    if($appliedShift->getUserId() == $subscriberId){
+                       $appliedShift->setApplyStatus('SELECTED'); 
+                    }
+                    else{
+                        $appliedShift->setApplyStatus('NOTSELECTED');
+                    }
+                    
+                    $em->persist($appliedShift);
+                    $em->flush();
+                }
+              
+        }
+        
+        // Send the list of all Shifts created by this user
+        
+        $shiftsForThisUser = $this->getDoctrine()
+                ->getRepository(Shift::class)
+                ->findBy(['shiftCreatedById' => $this->getUser()->getId()]);
+
+        return $this->render('@Shift/Shift/listShifts.html.twig', ['shifts' => $shiftsForThisUser]);
+    }
 }

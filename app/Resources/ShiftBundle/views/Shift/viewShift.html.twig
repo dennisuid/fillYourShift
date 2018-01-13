@@ -74,27 +74,37 @@
             <div class="panel-body">
                 <table style="width:100%">
                     <tr>
-                      {#<th>EMP ID</th>#}
+                      <th>EMP ID</th>
                       <th>First Name</th>
                       <th>Last Name</th> 
                       <th>Resume ID</th>
                       <th>Apply Time</th>
+                      <th>Status</th>
+                      {% if shift.shift_status == "CREATED" %}
                       <th>Action</th>
+                      {% endif %}
                     </tr>
                     
-                    {% if subscribers != null %}
-                        {% for subscriber in subscribers %}
-                            
-                        <tr>
-                          {#<td>{{subscriber.subscriberId}}</td>#}
-                          <td>{{ subscriber.subscriber_first_name }}</td> 
-                          <td>{{subscriber.subscriber_last_name}}</td>
-                          <td>{{subscriber.subscriber_resume_id}}</td>
-                          <td>{{subscriber.applied_time}}</td> 
-                          <a href="{{ url('approveShift', {'id': subscriber.shiftId })}}" class ='btn bg-success'>Approve</a>
-                        </tr>
-                    {% endfor %}
+                    {% if app.user.userType is defined and app.user.userType == "employer" %}
+                        
+                        {% if subscribers != null %}
+                            {% for subscriber in subscribers %}
+
+                            <tr>
+                              <td>{{subscriber.subscriberId}}</td>
+                              <td>{{ subscriber.subscriber_first_name }}</td> 
+                              <td>{{subscriber.subscriber_last_name}}</td>
+                              <td>{{subscriber.subscriber_resume_id}}</td>
+                              <td>{{subscriber.applied_time}}</td>
+                              <td>{{subscriber.apply_status}}</td>
+                              {% if shift.shift_status == "CREATED" %}
+                              <td><a href="{{ url('approveShift', {'id': subscriber.shiftId, 'subscriberId':subscriber.subscriberId })}}" class ='btn bg-success'>Approve</a></td>
+                              {% endif %}
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     {% endif %}
+                    
                 </table>
             </div>
         </div>

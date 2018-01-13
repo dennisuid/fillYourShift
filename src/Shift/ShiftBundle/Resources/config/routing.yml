@@ -80,5 +80,5 @@ unsubscribeShift:
     path: /shift/unsubscribe/{id}
     defaults: { _controller: ShiftBundle:Shift:unsubscribeShift }
 approveShift:
-    path: /shift/approve/{id}
+    path: /shift/approve/{id}/{subscriberId}
     defaults: { _controller: ShiftBundle:Shift:approveShift }
