@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <body>
+        <div class="panel panel-default">
+            <div class="panel-heading">View Shift</div>
+            <div class="panel-body">
+                <table style="width:80%">
+                    <tr>
+                        <td>Shift ID</td>
+                        <td>{{shift.getId()}}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Org Name</td>
+                        <td>{{ shift.getOrgName() }}</td> 
+                        
+                    </tr>
+                 
+                    <tr>
+                        <td>Role Name</td>
+                        <td>{{ shift.getRoleName() }}</td> 
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td>Start Date</td>
+                        <td>{{ shift.getStartDateHours()|date('Y-m-d H') }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>End Date</td>
+                        <td>{{ shift.getEndDateHours()|date('Y-m-d H') }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Rate</td>
+                        <td>{{ shift.getShiftRate() }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Status</td>
+                        <td>{{ shift.getShiftStatus() }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Created By</td>
+                        <td>{{ shift.getShiftCreatedBy() }}</td> 
+                        
+                    </tr>
+                   
+                </table>
+                  
+                <a href="{{ url('subscribeShift', {'id': shift.getId() })}}" class ='btn bg-success'>Accept</a>
+                <a href="{{ url('subscribeShift', {'id': shift.getId() })}}" class ='btn bg-success'>CheckIn</a>
+                <a href="{{ url('subscribeShift', {'id': shift.getId() })}}" class ='btn bg-success'>Complete</a>
+                <a href="{{ url('subscribeShift', {'id': shift.getId() })}}" class ='btn bg-success'>Reject</a>
+            </div>
+            
+         
+    </body>
+{% endblock %}{# empty Twig template #}

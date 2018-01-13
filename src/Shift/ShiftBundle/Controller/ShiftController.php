@@ -23,11 +23,11 @@ class ShiftController extends Controller {
 
     public function dashboardAction() {
         $usertype = $this->getUser()->getUserType();
-        $forSubscriptionShiftIds = [];
-        $subscribedShiftIds = [];
-        $assignedShiftIds = [];
-        $notAssignedShiftIds = []; //how to declare an array of Shift Class
-        
+        $forSubscriptionShifts = []; 
+        $subscribedShifts = [];
+        $assignedShifts = [];
+        $notAssignedShifts = [];
+       
         if ($usertype == "employee") {
             $shifts = $this->getDoctrine()
                     ->getRepository(Shift::class) 
@@ -41,30 +41,30 @@ class ShiftController extends Controller {
                     if ($shift->getShiftStatus() == "PUBLISHED") {
        
                         if (empty($shiftApplied)){
-                            $forSubscriptionShiftIds[] = $shift->getId();
+                            $forSubscriptionShifts[] = $shift;
                         } 
                         else {
-                            $subscribedShiftIds[] = $shift->getId();
+                            $subscribedShifts[] = $shift;
                         }
                     } 
                     else {
                         
                         if($shiftApplied->getApplyStatus() == 'SELECTED'){
-                            $assignedShiftIds[] = $shift->getId();
+                            $assignedShifts[] = $shift;
                         } 
                         else {
-                            $notAssignedShiftIds[] = $shift->getId();
+                            $notAssignedShifts[] = $shift;
                         }
                     }
                     
                 }
             }
-            echo "just before render";
+            
             return $this->render('@Shift/Shift/employee.html.twig', [
-                'forSubscriptionShiftIds' => $forSubscriptionShiftIds, 
-                'subscribedShiftIds' => $subscribedShiftIds,
-                'assignedShiftIds' => $assignedShiftIds,
-                'notAssignedShiftIds' => $notAssignedShiftIds
+                'forSubscriptionShifts' => $forSubscriptionShifts, 
+                'subscribedShifts' => $subscribedShifts,
+                'assignedShifts' => $assignedShifts,
+                'notAssignedShifts' => $notAssignedShifts
                 ]);
         }
 
@@ -155,6 +155,7 @@ class ShiftController extends Controller {
                 }
             }
         }
+        
         return $this->render('@Shift/Shift/viewShift.html.twig', ['shift' => $data, 'subscribers' => $subscriberData]);
     }
 
@@ -338,5 +339,27 @@ class ShiftController extends Controller {
                 ->findBy(['shiftCreatedById' => $this->getUser()->getId()]);
 
         return $this->render('@Shift/Shift/listShifts.html.twig', ['shifts' => $shiftsForThisUser]);
+    }
+    
+        public function employeeViewShiftAction (Request $request) {
+
+        //getting ID from the request
+        $shiftId = $request->get('id');
+        
+        $shift = $this->getDoctrine()
+                ->getRepository(Shift::class)
+                ->find($shiftId);
+        if (empty($shift)) {
+            $this->addFlash(
+                    'failure', 'Shift you tried to access dont exist'
+            );
+        }
+        
+        return $this->render('@Shift/Shift/eViewShift.html.twig', ['shift' => $shift]);
+    }
+    
+    
+    private function employeeShiftStatus (Request $request){
+        
     }
 }

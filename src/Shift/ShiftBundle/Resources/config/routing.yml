@@ -82,3 +82,6 @@ unsubscribeShift:
 approveShift:
     path: /shift/approve/{id}/{subscriberId}
     defaults: { _controller: ShiftBundle:Shift:approveShift }
+employeeViewShift:
+    path: /shift/eview/{id}
+    defaults: { _controller: ShiftBundle:Shift:employeeViewShift }
