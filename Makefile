@@ -18,7 +18,7 @@ clean:
 	rm -f web/css/style.css
 	rm -rf var/cache/*
 	rm -rf var/logs/*
-	rm app/bootstrap.php.cache
+	rm var/bootstrap.php.cache
 
 database-clean:
 	php bin/console doctrine:database:drop --force
