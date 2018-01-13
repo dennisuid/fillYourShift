@@ -63,3 +63,22 @@ deleteShift:
 listShifts:
     path: /shift/list
     defaults: { _controller: ShiftBundle:Shift:listShifts }
+    
+publishShift:
+    path: /shift/publish/{id}
+    defaults: { _controller: ShiftBundle:Shift:publishShift } 
+updateShift:
+    path: /shift/update/{id}
+    defaults: { _controller: ShiftBundle:Shift:updateShift }
+saveShift:
+    path: /shift/save/{id}
+    defaults: { _controller: ShiftBundle:Shift:saveShift }
+subscribeShift:
+    path: /shift/subscribe/{id}
+    defaults: { _controller: ShiftBundle:Shift:subscribeShift }
+unsubscribeShift:
+    path: /shift/unsubscribe/{id}
+    defaults: { _controller: ShiftBundle:Shift:unsubscribeShift }
+approveShift:
+    path: /shift/approve/{id}/{subscriberId}
+    defaults: { _controller: ShiftBundle:Shift:approveShift }

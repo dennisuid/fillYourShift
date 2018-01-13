@@ -21,12 +21,6 @@ class FysShiftApply
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="shift_apply_id", type="integer", unique=true)
-     */
-    private $shiftApplyId;
 
     /**
      * @var int
@@ -70,7 +64,13 @@ class FysShiftApply
      */
     private $shiftApplyTime;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apply_status", type="string", length=20)
+     */
+    private $applyStatus;
+    
     /**
      * Get id
      *
@@ -79,30 +79,6 @@ class FysShiftApply
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set shiftApplyId
-     *
-     * @param integer $shiftApplyId
-     *
-     * @return FysShiftApply
-
-    public function setShiftApplyId($shiftApplyId)
-    {
-        $this->shiftApplyId = $shiftApplyId;
-
-        return $this;
-    }
-
-    /**
-     * Get shiftApplyId
-     *
-     * @return int
-     */
-    public function getShiftApplyId()
-    {
-        return $this->shiftApplyId;
     }
 
     /**
@@ -232,9 +208,9 @@ class FysShiftApply
      *
      * @return FysShiftApply
      */
-    public function setShiftApplyTime($shiftApplyTime)
+    public function setShiftApplyTime()
     {
-        $this->shiftApplyTime = $shiftApplyTime;
+        $this->shiftApplyTime  = new \DateTime();
 
         return $this;
     }
@@ -248,4 +224,29 @@ class FysShiftApply
     {
         return $this->shiftApplyTime;
     }
+    
+    /**
+     * Set applyStatus
+     *
+     * @param string $applyStatus
+     *
+     * @return FysShiftApply
+     */
+    public function setApplyStatus($applyStatus)
+    {
+        $this->applyStatus = $applyStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get applyStatus
+     *
+     * @return string
+     */
+    public function getApplyStatus()
+    {
+        return $this->applyStatus;
+    }
+
 }

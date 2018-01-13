@@ -21,12 +21,12 @@
                         {% if app.user.userType is defined and app.user.userType == "employer" %}
                         <ul class="dropdown-menu">
                             <li><a href="/shift/create">Create new Shifts</a></li>
-                            <li><a href="#">Change an existing shift</a></li>
-                            <li><a href="#">See all the shifts</a></li>
-                            <li role="separator" class="divider"></li>
+                            
+                            <li><a href="shift/list">See all the shifts</a></li>
+                            {#<li role="separator" class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
                             <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>#}
                         </ul>
                         {% endif %}
                         {% if app.user.userType is defined and app.user.userType == "employee" %}
@@ -34,10 +34,10 @@
                             <li><a href="/shift/create">Manage Profile</a></li>
                             <li><a href="#">Subscribe to Shift</a></li>
                             <li><a href="#">`check Invoice</a></li>
-                            <li role="separator" class="divider"></li>
+                            {#<li role="separator" class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
                             <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>#}
                         </ul>
                         {% endif %}
                     

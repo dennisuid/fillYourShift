@@ -108,35 +108,35 @@ class Shift {
     /**
      * @var string
      *
-     * @ORM\Column(name="shift_assigned_employee", type="string", length=255)
+     * @ORM\Column(name="shift_assigned_employee", type="string", length=255, nullable=true)
      */
     private $shiftAssignedEmployee;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="shift_assigned_employee_id", type="integer")
+     * @ORM\Column(name="shift_assigned_employee_id", type="integer", nullable=true)
      */
     private $shiftAssignedEmployeeId;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="shift_assigned_resume_id", type="integer")
+     * @ORM\Column(name="shift_assigned_resume_id", type="integer", nullable=true)
      */
     private $shiftAssignedResumeId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="shift_assigned_phone", type="string", length=255)
+     * @ORM\Column(name="shift_assigned_phone", type="string", length=255 , nullable=true)
      */
     private $shiftAssignedPhone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="shift_assigned_email", type="string", length=255)
+     * @ORM\Column(name="shift_assigned_email", type="string", length=255, nullable=true)
      */
     private $shiftAssignedEmail;
 

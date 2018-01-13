@@ -3,23 +3,62 @@
 {% block body %}
     <body>
         <div class="panel panel-default">
-            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-heading">Subscribed Shifts</div>
             <div class="panel-body">
-                Panel content
+            {% for subscribedShiftId in subscribedShiftIds %}
+                     <li><a href="{{ url('viewShift', {'id': subscribedShiftId })}}">{{ subscribedShiftId }}</a></li>
+            {% endfor %}    
             </div>
         </div>
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Panel title</h3>
+                <h3 class="panel-title">Published Shifts</h3>
             </div>
             <div class="panel-body">
-                Panel content
-                {{  app.user.userType }}
-                 {% for shift in shiftIds %}
-                    <li>{{ shift }}</li>
+               
+                {#{{  app.user.userType }}#}
+                 {% for forSubscriptionShiftId in forSubscriptionShiftIds %}
+                 <tr>
+                     <td> <a href="{{ url('viewShift', {'id': forSubscriptionShiftId })}}">{{ forSubscriptionShiftId }}</a> </td>
+                     {#<td> {{forSubscriptionshift->getRole()}} </td>
+                     <td> {{forSubscriptionshift->getShiftRate()}} </td>
+                     <td> {{forSubscriptionshift->getOrgName()}} </td>#}
+                 </tr>
                 {% endfor %}
             </div>
         </div>
+            
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Assigned Shifts</h3>
+            </div>
+            <div class="panel-body">
+               
+                {#{{  app.user.userType }}#}
+                 {% for assignedShiftId in assignedShiftIds %}
+                 <tr>
+                     <td> <a href="{{ url('viewShift', {'id': assignedShiftId })}}">{{ assignedShiftId }}</a> </td>
+                 </tr>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Not Assigned Shifts</h3>
+            </div>
+            <div class="panel-body">
+               
+                {#{{  app.user.userType }}#}
+                 {% for notAssignedShiftId in notAssignedShiftIds %}
+                 <tr>
+                     <td> <a href="{{ url('viewShift', {'id': notAssignedShiftId })}}">{{ notAssignedShiftId }}</a> </td>
+                     
+                 </tr>
+                {% endfor %}
+            </div>
+        </div>
+            
     </body>
 {% endblock %}

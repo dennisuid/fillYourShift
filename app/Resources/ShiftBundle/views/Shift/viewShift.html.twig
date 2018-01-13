@@ -5,15 +5,107 @@
         <div class="panel panel-default">
             <div class="panel-heading">View Shift</div>
             <div class="panel-body">
-                {#{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                 <div>
-                    <input type="submit" value="Save" class ='btn btn-primary'/>
-                </div>
-{#                how to dynamically generate the id below ?#}
-                <a href="{{ url('deleteShift', {'id': id })}}" class ='btn btn-danger'>Delete</a>
-                {{ form_end(form) }} 
+                <table style="width:80%">
+                    <tr>
+                        <td>Shift ID</td>
+                        <td>{{shift.id}}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Org Name</td>
+                        <td>{{ shift.shift_org_name }}</td> 
+                        
+                    </tr>
+                 
+                    <tr>
+                        <td>Role Name</td>
+                        <td>{{ shift.role_name }}</td> 
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td>Start Date</td>
+                        <td>{{ shift.start_date_hours }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>End Date</td>
+                        <td>{{ shift.end_date_hours }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Rate</td>
+                        <td>{{ shift.shift_rate }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Status</td>
+                        <td>{{ shift.shift_status }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Created By</td>
+                        <td>{{ shift.shift_created_by }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Pay Lead time</td>
+                        <td>{{ shift.pay_lead_time }}</td> 
+                </table>
+                
+                {% if app.user.userType is defined and app.user.userType == "employer" %}
+                    
+                <a href="{{ url('updateShift', {'id': shift.id })}}" class ='btn bg-success'>Edit</a>
+ 
+                <a href="{{ url('publishShift', {'id': shift.id })}}" class ='btn bg-success'>Publish</a>
+                <a href="{{ url('deleteShift', {'id': shift.id })}}" class ='btn btn-danger'>Delete</a>
+                {% endif %}
+                
+                {% if app.user.userType is defined and app.user.userType == "employee" %}
+                  
+                <a href="{{ url('subscribeShift', {'id': shift.id })}}" class ='btn bg-success'>Subscribe</a>
+                <a href="{{ url('unsubscribeShift', {'id': shift.id })}}" class ='btn bg-success'>Unsubscribe</a>
+                
+                {% endif %}
+                
+            </div>
+            
+            <div class="panel-heading">Subscribers</div>
+            <div class="panel-body">
+                <table style="width:100%">
+                    <tr>
+                      <th>EMP ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th> 
+                      <th>Resume ID</th>
+                      <th>Apply Time</th>
+                      <th>Status</th>
+                      {% if shift.shift_status == "CREATED" %}
+                      <th>Action</th>
+                      {% endif %}
+                    </tr>
+                    
+                    {% if app.user.userType is defined and app.user.userType == "employer" %}
+                        
+                        {% if subscribers != null %}
+                            {% for subscriber in subscribers %}
+
+                            <tr>
+                              <td>{{subscriber.subscriberId}}</td>
+                              <td>{{ subscriber.subscriber_first_name }}</td> 
+                              <td>{{subscriber.subscriber_last_name}}</td>
+                              <td>{{subscriber.subscriber_resume_id}}</td>
+                              <td>{{subscriber.applied_time}}</td>
+                              <td>{{subscriber.apply_status}}</td>
+                              {% if shift.shift_status == "CREATED" %}
+                              <td><a href="{{ url('approveShift', {'id': subscriber.shiftId, 'subscriberId':subscriber.subscriberId })}}" class ='btn bg-success'>Approve</a></td>
+                              {% endif %}
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                    
+                </table>
             </div>
         </div>
          
