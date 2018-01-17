@@ -16,6 +16,8 @@ security:
         main:
             pattern: ^/
             form_login:
+                check_path: /user/login_check
+                login_path: /user/login
                 csrf_parameter:       _csrf_token
                 csrf_token_id:        authenticate
                 csrf_token_generator: security.csrf.token_manager
@@ -28,7 +30,21 @@ security:
             remember_me:
                 secret:   '%secret%'
                 lifetime: 604800 # 1 week in seconds
-
+            oauth:
+                            # Declare the OAuth Callback URLs for every resource owner
+                            # They will be added in the routing.yml file too later
+              resource_owners:
+#               github: "/connect/check-github"
+                facebook: "/connect/check-facebook"
+                googleplus: "/connect/check-googleplus"
+#               stackexchange: "/connect/check-stackexchange"
+                ## Provide the original login path of your application (fosuserroute)
+                ## and the failure route when the authentication fails.
+              login_path:     /user/login
+              failure_path:   /user/login
+                            # Inject a service that will be created in the step #6
+              oauth_user_provider:
+                service: app.fos_user.oauth_provider
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

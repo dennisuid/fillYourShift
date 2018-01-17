@@ -26,7 +26,7 @@ class FysUser extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255,  nullable=true)
      */
     private $firstName;
     /**
@@ -38,7 +38,7 @@ class FysUser extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="mobile_number", type="string", length=255)
+     * @ORM\Column(name="mobile_number", type="string", length=255,  nullable=true)
      */
     private $mobileNumber;
 
@@ -46,7 +46,7 @@ class FysUser extends BaseUser
      * @var string
      *
      * @Assert\NotNull(message="Please select a User type.")
-     * @ORM\Column(name="user_type", type="string", length=255, nullable=false)
+     * @ORM\Column(name="user_type", type="string", length=255, nullable=true)
      */
     private $userType;
 
@@ -74,23 +74,35 @@ class FysUser extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="postcode", type="string", length=255)
+     * @ORM\Column(name="postcode", type="string", length=255,  nullable=true)
      */
     private $postcode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255,  nullable=true)
      */
     private $country;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="registration_number", type="string", length=255)
+     * @ORM\Column(name="registration_number", type="string", length=255,  nullable=true)
      */
     private $registrationNumber;
+
+    /** @ORM\Column(name="facebook_id", type="string", length=255, nullable=true) */
+    protected $facebook_id;
+
+    /** @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) */
+    protected $facebook_access_token;
+
+    /** @ORM\Column(name="googleplus_id", type="string", length=255, nullable=true) */
+    protected $googleplus_id;
+
+    /** @ORM\Column(name="googleplus_access_token", type="string", length=255, nullable=true) */
+    protected $googleplus_access_token;
 
     public function __construct()
     {
@@ -390,5 +402,69 @@ class FysUser extends BaseUser
     public function getRegistrationNumber()
     {
         return $this->registrationNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * @param mixed $facebook_id
+     */
+    public function setFacebookId($facebook_id)
+    {
+        $this->facebook_id = $facebook_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * @param mixed $facebook_access_token
+     */
+    public function setFacebookAccessToken($facebook_access_token)
+    {
+        $this->facebook_access_token = $facebook_access_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGoogleplusId()
+    {
+        return $this->googleplus_id;
+    }
+
+    /**
+     * @param mixed $googleplus_id
+     */
+    public function setGoogleplusId($googleplus_id)
+    {
+        $this->googleplus_id = $googleplus_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGoogleplusAccessToken()
+    {
+        return $this->googleplus_access_token;
+    }
+
+    /**
+     * @param mixed $googleplus_access_token
+     */
+    public function setGoogleplusAccessToken($googleplus_access_token)
+    {
+        $this->googleplus_access_token = $googleplus_access_token;
     }
 }

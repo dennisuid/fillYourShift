@@ -4,10 +4,14 @@ parameters:
     database_port: null
     database_name: fillyourshift
     database_user: root
-    database_password: password
+    database_password: null
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: admin@fillyourshift.com
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
     cors_allow_origin: 'http://localhost'
+    facebook_client_id: 354250021713951
+    facebook_secret: c9a0b88ec1b4e7ca9f756a8835db42f5
+    googleplus_client_id: 163768292944-qdje480orehaokbi37mf7hddks2fs3e0.apps.googleusercontent.com
+    googleplus_secret: Fg9QfqeZrT-kS-d0kWoBn4Kv
