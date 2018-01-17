@@ -17,3 +17,17 @@ services:
         class: Shift\ShiftBundle\Form\User\FysUserType
         tags:
             - { name: form.type, alias: app_user_registration }
+    # app/config/services.yml
+
+    app.fos_user.oauth_provider:
+        # Change the class according to the location of the FOSUBUserProvider class
+        class: Shift\ShiftBundle\Entity\FOSUBUserProvider
+        arguments:
+                # Inject as first argument the user_manager of FOSUserBundle
+          user_manager: "@fos_user.user_manager"
+          # An object/array with the registered Social Media from config.yml
+          user_response:
+#            github: github_id
+            facebook: facebook_id
+            googleplus: googleplus_id
+#            stackexchange: stackexchange_id
