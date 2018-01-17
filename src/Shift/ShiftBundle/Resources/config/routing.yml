@@ -21,7 +21,7 @@ get:
     defaults: { _controller: ShiftBundle:ShiftUser:get }
 
 update:
-    path:     user/update
+    path:    /user/update
     defaults: { _controller: ShiftBundle:ShiftUser:update }
 
 get:
@@ -39,10 +39,6 @@ update:
 register:
     path:     /user/register
     defaults: { _controller: ShiftBundle:ShiftUser:register }
-    
-login:
-    path:     /user/login
-    defaults: { _controller: ShiftBundle:ShiftUser:login }
 
 createShift:
     path: /shift/create
