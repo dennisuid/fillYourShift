@@ -82,3 +82,18 @@ unsubscribeShift:
 approveShift:
     path: /shift/approve/{id}/{subscriberId}
     defaults: { _controller: ShiftBundle:Shift:approveShift }
+employeeViewShift:
+    path: /shift/eview/{id}
+    defaults: { _controller: ShiftBundle:Shift:employeeViewShift }
+acceptShift:
+    path: /shift/accept/{id}
+    defaults: { _controller: ShiftBundle:Shift:acceptShift }
+checkInShift:
+    path: /shift/checkin/{id}
+    defaults: { _controller: ShiftBundle:Shift:checkInShift }
+completeShift:
+    path: /shift/complete/{id}
+    defaults: { _controller: ShiftBundle:Shift:completeShift }
+rejectShift:
+    path: /shift/reject/{id}
+    defaults: { _controller: ShiftBundle:Shift:rejectShift }

@@ -2,61 +2,151 @@
 
 {% block body %}
     <body>
-        <div class="panel panel-default">
-            <div class="panel-heading">Subscribed Shifts</div>
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+            <h3 class="panel-title">Subscribed Shifts</h3>
+            </div>
             <div class="panel-body">
-            {% for subscribedShiftId in subscribedShiftIds %}
-                     <li><a href="{{ url('viewShift', {'id': subscribedShiftId })}}">{{ subscribedShiftId }}</a></li>
-            {% endfor %}    
+                <table class="table table-striped"> 
+                    
+                      <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">OrgName</th>
+                      <th scope="col">RoleName</th>
+                      <th scope="col">StartDate</th> 
+                      <th scope="col">EndDate</th>
+                      <th scope="col">Rate</th>
+                      <th scope="col">CreatedBy</th>
+                      <th scope="col">STATUS</th>
+                    </tr>
+                    {% for subscribedShift in subscribedShifts %}
+                    
+                    <tr>
+                     <td> <a href="{{ url('viewShift', {'id': subscribedShift.getId() })}}">{{ subscribedShift.getID() }}</a> </td>
+                     <td> {{subscribedShift.getOrgName()}} </td>
+                     <td> {{subscribedShift.getRoleName()}} </td>
+                     <td> {{subscribedShift.getStartDateHours()|date('Y-m-d H')}} </td>
+                     <td> {{subscribedShift.getEndDateHours()|date('Y-m-d H')}} </td>
+                     <td> {{subscribedShift.getShiftRate()}} </td>
+                     <td> {{subscribedShift.getShiftCreatedBy()}} </td>
+                     <td> {{subscribedShift.getShiftStatus()}} </td>
+                     
+                    </tr>
+                    
+                    {% endfor %}
+                    
+                </table>
             </div>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Published Shifts</h3>
+        <div class="panel panel-info">
+            <div class="panel-heading ">
+                <h3 class="panel-title ">Published Shifts</h3>
             </div>
             <div class="panel-body">
-               
-                {#{{  app.user.userType }}#}
-                 {% for forSubscriptionShiftId in forSubscriptionShiftIds %}
-                 <tr>
-                     <td> <a href="{{ url('viewShift', {'id': forSubscriptionShiftId })}}">{{ forSubscriptionShiftId }}</a> </td>
-                     {#<td> {{forSubscriptionshift->getRole()}} </td>
-                     <td> {{forSubscriptionshift->getShiftRate()}} </td>
-                     <td> {{forSubscriptionshift->getOrgName()}} </td>#}
-                 </tr>
+                <table class="table table-striped"> 
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">OrgName</th>
+                      <th scope="col">RoleName</th>
+                      <th scope="col">StartDate</th> 
+                      <th scope="col">EndDate</th>
+                      <th scope="col">Rate</th>
+                      <th scope="col">CreatedBy</th>
+                      <th scope="col">STATUS</th>
+                    </tr>
+                    
+                 {% for forSubscriptionShift in forSubscriptionShifts %}
+                    
+                    <tr>
+                     <td> <a href="{{ url('viewShift', {'id': forSubscriptionShift.getId() })}}">{{ forSubscriptionShift.getID() }}</a> </td>
+                     <td> {{forSubscriptionShift.getOrgName()}} </td>
+                     <td> {{forSubscriptionShift.getRoleName()}} </td>
+                     <td> {{forSubscriptionShift.getStartDateHours()|date('Y-m-d H')}} </td>
+                     <td> {{forSubscriptionShift.getEndDateHours()|date('Y-m-d H')}} </td>
+                     <td> {{forSubscriptionShift.getShiftRate()}} </td>
+                     <td> {{forSubscriptionShift.getShiftCreatedBy()}} </td>
+                     <td> {{forSubscriptionShift.getShiftStatus()}} </td>
+                     
+                    </tr>
+                    
                 {% endfor %}
+                    
+                </table>
             </div>
         </div>
             
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="panel panel-success">
+            <div class="panel-heading ">
                 <h3 class="panel-title">Assigned Shifts</h3>
             </div>
             <div class="panel-body">
-               
-                {#{{  app.user.userType }}#}
-                 {% for assignedShiftId in assignedShiftIds %}
+               <table class="table table-striped"> 
+                    <thead class="thead-dark">
+                      <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">OrgName</th>
+                      <th scope="col">RoleName</th>
+                      <th scope="col">StartDate</th> 
+                      <th scope="col">EndDate</th>
+                      <th scope="col">Rate</th>
+                      <th scope="col">CreatedBy</th>
+                      <th scope="col">STATUS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                {% for assignedShift in assignedShifts %}
                  <tr>
-                     <td> <a href="{{ url('viewShift', {'id': assignedShiftId })}}">{{ assignedShiftId }}</a> </td>
-                 </tr>
+                     <td> <a href="{{ url('employeeViewShift', {'id': assignedShift.getId() })}}">{{ assignedShift.getID() }}</a> </td>
+                     <td> {{assignedShift.getOrgName()}} </td>
+                     <td> {{assignedShift.getRoleName()}} </td>
+                     <td> {{assignedShift.getStartDateHours()|date('Y-m-d H')}} </td>
+                     <td> {{assignedShift.getEndDateHours()|date('Y-m-d H')}} </td>
+                     <td> {{assignedShift.getShiftRate()}} </td>
+                     <td> {{assignedShift.getShiftCreatedBy()}} </td>
+                     <td> {{assignedShift.getShiftStatus()}} </td>
+                     
+                    </tr>
+                    
                 {% endfor %}
+                    </tbody>
+               </table>
             </div>
         </div>
         
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="panel panel-danger">
+            <div class="panel-heading ">
                 <h3 class="panel-title">Not Assigned Shifts</h3>
             </div>
             <div class="panel-body">
-               
-                {#{{  app.user.userType }}#}
-                 {% for notAssignedShiftId in notAssignedShiftIds %}
-                 <tr>
-                     <td> <a href="{{ url('viewShift', {'id': notAssignedShiftId })}}">{{ notAssignedShiftId }}</a> </td>
+               <table class="table table-striped"> 
+                    <thead class="thead-dark">
+                      <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">OrgName</th>
+                      <th scope="col">RoleName</th>
+                      <th scope="col">StartDate</th> 
+                      <th scope="col">EndDate</th>
+                      <th scope="col">Rate</th>
+                      <th scope="col">CreatedBy</th>
+                      <th scope="col">STATUS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                 {% for notAssignedShift in notAssignedShifts %}
+                     <td> <a href="{{ url('viewShift', {'id': notAssignedShift.getId() })}}">{{ notAssignedShift.getID() }}</a> </td>
+                     <td> {{notAssignedShift.getOrgName()}} </td>
+                     <td> {{notAssignedShift.getRoleName()}} </td>
+                     <td> {{notAssignedShift.getStartDateHours()|date('Y-m-d H')}} </td>
+                     <td> {{notAssignedShift.getEndDateHours()|date('Y-m-d H')}} </td>
+                     <td> {{notAssignedShift.getShiftRate()}} </td>
+                     <td> {{notAssignedShift.getShiftCreatedBy()}} </td>
+                     <td> {{notAssignedShift.getShiftStatus()}} </td>
                      
-                 </tr>
+                    </tr>
+                    
                 {% endfor %}
+                    </tbody>
             </div>
         </div>
             
