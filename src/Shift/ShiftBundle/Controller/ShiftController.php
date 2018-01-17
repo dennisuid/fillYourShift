@@ -14,6 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use \Shift\ShiftBundle\Entity\Shift\FysShiftApply;
 use \Shift\ShiftBundle\Entity\User\FysUser;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\Date;
 
 class ShiftController extends Controller {
 
@@ -341,7 +343,7 @@ class ShiftController extends Controller {
         return $this->render('@Shift/Shift/listShifts.html.twig', ['shifts' => $shiftsForThisUser]);
     }
     
-        public function employeeViewShiftAction (Request $request) {
+    public function employeeViewShiftAction (Request $request) {
 
         //getting ID from the request
         $shiftId = $request->get('id');
@@ -359,7 +361,102 @@ class ShiftController extends Controller {
     }
     
     
-    private function employeeShiftStatus (Request $request){
+    public function acceptShiftAction (Request $request) {
+
+        $shiftId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $shift = $em->getRepository(Shift::class)->findOneBy(['id' => $shiftId]);
+        $status = 'ACCEPTED';
+        $shift->setShiftStatus($status);
+        $em->persist($shift);
+        $em->flush();
         
+        $this->addFlash(
+                    'success', 'Thanks for Accepting the Shift'
+            );
+        
+        return $this->redirectToRoute('employeeViewShift', array('id' => $shiftId));
     }
+    
+    public function checkInShiftAction (Request $request) {
+        
+        $shiftId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $shift = $em->getRepository(Shift::class)->findOneBy(['id' => $shiftId]);
+       
+
+        
+        date_default_timezone_set('Europe/London');
+        
+        $datetime1 = $shift->getStartDateHours();
+        $datetime2 = date_create('now');
+        //$interval = $datetime1->diff($datetime2);
+        
+        $interval = date_diff($datetime1,$datetime2,FALSE);
+        
+        if ($interval->format('%d') >= 1) {
+         
+            $this->addFlash(
+                    'failure', 'You can not check IN earlier than one hour to start of shift'
+            );
+            
+        }
+        else{
+         
+            $status = 'CHECKEDIN';
+            $shift->setShiftStatus($status);
+            $em->persist($shift);
+            $em->flush();
+        }
+        
+        
+        $this->addFlash(
+                    'success', 'You have Checked IN. Good luck'
+            );
+        
+        //email should go to shift created by
+        return $this->redirectToRoute('employeeViewShift', array('id' => $shiftId));
+    }
+    
+    public function completeShiftAction (Request $request) {
+
+        $shiftId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $shift = $em->getRepository(Shift::class)->findOneBy(['id' => $shiftId]);
+       
+        date_default_timezone_set('Europe/London');
+        
+        $datetime1 = $shift->getEndDateHours();
+        $datetime2 = date_create('now');
+        
+        $interval = date_diff($datetime1,$datetime2,FALSE);
+        
+        if ($interval->format('%d') <= 0) {
+            
+            $endTimeString = $datetime1->format('Y-M-d H');
+            $this->addFlash(
+                    'failure', "You can mark complete only after shift ends at:  $endTimeString" 
+            );
+            
+        }
+        else{
+         
+            $status = 'COMPLETE';
+            $shift->setShiftStatus($status);
+            $em->persist($shift);
+            $em->flush();
+            
+            $this->addFlash(
+                    'success', 'Well done on completing shift. We will progress with payment approvals'
+            );
+        }
+        
+        
+        
+        
+        //email should go to shift created by
+        
+        return $this->redirectToRoute('employeeViewShift', array('id' => $shiftId));
+    }
+    
 }
