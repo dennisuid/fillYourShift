@@ -1,53 +1,400 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Fill your shift{% endblock %}
+{% block title %}Staff your shifts on demand{% endblock %}
 {% block head %}
     {{ parent() }}
-   {% endblock %}
+{% endblock %}
 {% block body %}
+    <body data-spy="scroll" data-target="#navigation" data-offset="120">
+    <!-- *** NAVBAR ***
+    _________________________________________________________ -->
 
-    <body>
-        <!-- First Container -->
-        <div class="container-fluid bg-1 text-center">
-            <h2 class="margin">Fill Your Shift</h2>
-            <img src="{{ asset('images/bird.jpg') }}" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
-            <h3>Making temp employments easier !</h3>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand scrollTo" href="#intro">Fill your shift</a>
+            </div>
+
+            <div class="navbar-collapse collapse" id="navigation">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#intro">Intro</a>
+                    </li>
+                    <li><a href="#section1">What we do??</a>
+                    </li>
+                    <li><a href="#section3">Testimonials</a>
+                    </li>
+                    <li><a href="#section4">Contact</a>
+                    </li>
+                    <li>
+                        <a href="#section2" style="color: green; font-size: larger;"> Login / Sign Up</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!--/.nav-collapse -->
         </div>
+    </div>
+    <!-- /#navbar -->
 
-        <!-- Second Container -->
-        <div class="container-fluid bg-2 text-center">
-            <h3 class="margin">Your place to match your skills with market</h3>
-            <p>We match the latest shift requirements with a wide range of UK employers with available short term skills. Once matched the employee is notified of the available opportunity and then ask to him apply. The employers quickly sort the applications and choose the match in the next 12 hours</p>
-            <a href="#" class="btn btn-default btn-lg">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </a>
-        </div>
+    <!-- *** NAVBAR END *** -->
 
-        <!-- Third Container (Grid) -->
-        <div class="container-fluid bg-3 text-center">    
-            <h3 class="margin">Where To Find Me?</h3><br>
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Employers will be able to quickly set up an account and then publish available shifts they want to fulfill. The shifts can be edited for later dates and once ready may be published for inviting employees to apply. </p>
-                    <img src="{{ asset('images/birds1.jpg') }}" class="img-responsive margin" style="width:100%" alt="Image">
-                </div>
-                <div class="col-sm-4"> 
-                    <p>Once a shift is fulfilled the employees will mark the shift complete. Employers will review the work and if found satisfactory approve into payment in the next invoice cycle</p>
-                    <img src="{{ asset('images/birds2.jpg') }}" class="img-responsive margin" style="width:100%" alt="Image">
-                </div>
-                <div class="col-sm-4"> 
-                    <p>Employees can set up resumes for quick review for potential employers, can request feedback on the work done and so on.</p>
-                    <img src="{{ asset('images/birds3.jpg') }}" class="img-responsive margin" style="width:100%" alt="Image">
+
+    <div id="all">
+
+
+        <!-- *** INTRO IMAGE ***
+    _________________________________________________________ -->
+        <div id="intro" class="clearfix">
+            <div class="item">
+                <div class="container">
+                    <div class="row">
+
+                        <h1 data-animate="fadeInDown">Make on demand work possible</h1>
+                        <p class="message" data-animate="fadeInUp">
+                            If you need to manage daily spikes in your workforce
+                            we help you with quality people with a quick turn around Or
+                            if you are in search of work for that extra bucks
+                            which you need to save join us
+                        </p>
+
+                        <div class="col-md-6 col-md-offset-3" data-animate="fadeInUp">
+                            <a class="btn btn-default" href="#section1">Read More</a>
+                            {#<a class="btn btn-default" id="frm-landingPage1-submit" href="/user/register">Sign Up</a>#}
+                            {#<a class="btn btn-default" id="frm-landingPage1-submit" href="/user/login">Login</a>#}
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="container-fluid bg-4 text-center">
-            <p>Sponsored by Fill Your Shift Enterprises @2017</p> 
-        </footer>
+        <!-- *** INTRO IMAGE END *** -->
+
+
+        <!-- *** SERVICES ***
+    _________________________________________________________ -->
+        <div class="section" id="section1">
+            <div class="container">
+                <div class="col-md-12">
+                    <h2 class="title" data-animate="fadeInDown">What we do?</h2>
+
+                    <p class="lead">We help you manage work that needs to be done by providing employees who you can
+                        depend upon when needed </p>
+
+                    <div class="row services">
+
+                        <div class="col-md-4" data-animate="fadeInUp">
+                            <div class="icon"><i class="fa fa-home"></i>
+                            </div>
+                            <h3 class="heading">Great home</h3>
+                            <p>Junk MTV quiz graced by fox whelps. </p>
+                        </div>
+
+                        <div class="col-md-4" data-animate="fadeInUp">
+                            <div class="icon"><i class="fa fa-shopping-cart"></i>
+                            </div>
+                            <h3 class="heading">Stuff we would buy ourselves</h3>
+                            <p>Bawds jog, flick quartz, vex nymphs. </p>
+                        </div>
+
+                        <div class="col-md-4" data-animate="fadeInUp">
+                            <div class="icon"><i class="fa fa-euro"></i>
+                            </div>
+                            <h3 class="heading">Free trial</h3>
+                            <p>Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. </p>
+                        </div>
+
+                    </div>
+                    <div class="row services">
+
+                        <div class="col-md-4" data-animate="fadeInUp">
+                            <div class="icon"><i class="fa fa-bullhorn"></i>
+                            </div>
+                            <h3 class="heading">We will propagate your stuff</h3>
+                            <p>Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack.</p>
+                        </div>
+
+                        <div class="col-md-4" data-animate="fadeInUp">
+                            <div class="icon"><i class="fa fa-desktop"></i>
+                            </div>
+                            <h3 class="heading">Responsive web and app</h3>
+                            <p>Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. </p>
+                        </div>
+
+                        <div class="col-md-4" data-animate="fadeInUp">
+                            <div class="icon"><i class="fa fa-heart-o"></i>
+                            </div>
+                            <h3 class="heading">Dedicated support team</h3>
+                            <p>Quick, Baz, get my woven flax jodhpurs! "Now fax quiz Jack!" my brave ghost pled. </p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.12 -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.section -->
+
+        <!-- *** SERVICES END *** -->
+
+        <!-- *** JOIN US ***
+    _________________________________________________________ -->
+
+        <div class="section" data-animate="bounceIn" id="section2">
+            <div class="container">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 class="title"> Login / Sign Up</h2>
+                    <p class="lead margin-bottom">
+                        Login to our easy to use and flexible system and find the work you need and add the shifts you
+                        want to fill in
+                        if you are already a member please
+                    </p>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <span class="input-group-btn">
+                                <a class="btn btn-default" id="frm-landingPage1-submit" href="/user/login">Login</a>
+                            </span>
+                            <span class="input-group-btn">
+                                <a class="btn btn-default" id="frm-landingPage1-submit" href="/user/register">Sign Up</a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.12 -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.section -->
+
+        <!-- *** JOIN US END *** -->
+
+        <!-- *** TESTIMONIALS ***
+    _________________________________________________________ -->
+
+        <div class="section text-gray" id="section3" data-animate="fadeInUp">
+
+            <div class="container">
+                <div class="col-md-12">
+
+                    <div class="mb20">
+                        <h2 class="title" data-animate="fadeInUp">Customers said about us</h2>
+
+                        <p class="lead text-center" data-animate="fadeInUp">Quick, Baz, get my woven flax jodhpurs! "Now
+                            fax
+                            quiz Jack!" my brave ghost pled. </p>
+                    </div>
+
+                    <ul class="owl-carousel testimonials same-height-row" data-animate="fadeInUp">
+                        <li class="item">
+                            <div class="testimonial same-height-always">
+                                <div class="text">
+                                    <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself
+                                        transformed in his bed into a horrible vermin. He lay on his armour-like back,
+                                        and
+                                        if he lifted his head a little he could see his brown belly, slightly domed and
+                                        divided by arches into stiff sections.</p>
+                                </div>
+                                <div class="bottom">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="name-picture">
+                                        <img class="" alt="" src="img/person-1.jpg">
+                                        <h5>John McIntyre</h5>
+                                        <p>CEO, TransTech</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="testimonial same-height-always">
+                                <div class="text">
+                                    <p>The bedding was hardly able to cover it and seemed ready to slide off any moment.
+                                        His
+                                        many legs, pitifully thin compared with the size of the rest of him, waved about
+                                        helplessly as he looked. "What's happened to me? " he thought. It wasn't a
+                                        dream.</p>
+                                </div>
+                                <div class="bottom">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="name-picture">
+                                        <img class="" alt="" src="img/person-2.jpg">
+                                        <h5>John McIntyre</h5>
+                                        <p>CEO, TransTech</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="testimonial same-height-always">
+                                <div class="text">
+                                    <p>His room, a proper human room although a little too small, lay peacefully between
+                                        its
+                                        four familiar walls.</p>
+
+                                    <p>A collection of textile samples lay spread out on the table - Samsa was a
+                                        travelling
+                                        salesman - and above it there hung a picture that he had recently cut out of an
+                                        illustrated magazine and housed in a nice, gilded frame.</p>
+                                </div>
+                                <div class="bottom">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="name-picture">
+                                        <img class="" alt="" src="img/person-3.jpg">
+                                        <h5>John McIntyre</h5>
+                                        <p>CEO, TransTech</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="testimonial same-height-always">
+                                <div class="text">
+                                    <p>It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a
+                                        heavy fur muff that covered the whole of her lower arm towards the viewer.
+                                        Gregor
+                                        then turned to look out the window at the dull weather. Drops of rain could be
+                                        heard
+                                        hitting the pane, which made him feel quite sad.</p>
+                                </div>
+
+                                <div class="bottom">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="name-picture">
+                                        <img class="" alt="" src="img/person-4.jpg">
+                                        <h5>John McIntyre</h5>
+                                        <p>CEO, TransTech</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="testimonial same-height-always">
+                                <div class="text">
+                                    <p>It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a
+                                        heavy fur muff that covered the whole of her lower arm towards the viewer.
+                                        Gregor
+                                        then turned to look out the window at the dull weather. Drops of rain could be
+                                        heard
+                                        hitting the pane, which made him feel quite sad. Gregor then turned to look out
+                                        the
+                                        window at the dull weather. Drops of rain could be heard hitting the pane, which
+                                        made him feel quite sad.</p>
+                                </div>
+
+                                <div class="bottom">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="name-picture">
+                                        <img class="" alt="" src="img/person-4.jpg">
+                                        <h5>John McIntyre</h5>
+                                        <p>CEO, TransTech</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul> <!-- /.owl-carousel -->
+                </div> <!-- /.12 -->
+            </div> <!-- /.container -->
+
+        </div><!-- /.section -->
+
+        <!-- *** TESTIMONIALS END *** -->
+
+        <!-- *** CONTACT ***
+    _________________________________________________________ -->
+
+        <div class="section" id="section4">
+            <div class="container">
+                <div class="col-md-8 col-md-offset-2">
+
+
+                    <h2 class="title" data-animate="fadeInDown">Contact us</h2>
+
+                    <p class="lead margin-bottom" data-animate="fadeInUp">A wonderful serenity has taken possession of
+                        my
+                        entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+
+
+                    <ul class="list-unstyled text-large text-thin" data-animate="fadeInUp">
+                        <li><strong>E-mail:</strong> hello@hello.com</li>
+                        <li><strong>Phone:</strong> 123 456 888</li>
+                    </ul>
+
+                </div>
+                <!-- /.12 -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.section -->
+
+
+        <!-- *** FOOTER ***
+    _________________________________________________________ -->
+
+        <div class="section" id="footer">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-6">
+
+                        <p class="social">
+                            <a href="#" class="external facebook" data-animate-hover="shake" data-animate="fadeInUp"><i
+                                        class="fa fa-facebook"></i></a>
+                            <a href="#" class="external instagram" data-animate-hover="shake" data-animate="fadeInUp"><i
+                                        class="fa fa-instagram"></i></a>
+                            <a href="#" class="external twitter" data-animate-hover="shake" data-animate="fadeInUp"><i
+                                        class="fa fa-twitter"></i></a>
+                            <a href="mailto:#" class="email" data-animate-hover="shake" data-animate="fadeInUp"><i
+                                        class="fa fa-envelope"></i></a>
+                        </p>
+                    </div>
+                    <!-- /.6 -->
+
+                    <div class="col-sm-6">
+                        <p>&copy; 2016 Your name goes here.
+                            <!-- Do not remove the attribution, thx! If you need to do so, pls donate (http://bootstrapious.com/donate) to support us! -->
+                            Template by <a href="https://www.bootstrapious.com/landing-pages"
+                                           class="external">Bootstrapious</a>.</p>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.section -->
+
+        <!-- *** FOOTER END *** -->
+    </div>
+
+    <!-- js base -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <!-- waypoints for scroll spy -->
+    <script src="js/waypoints.min.js"></script>
+
+    <!-- owl carousel -->
+    <script src="js/owl.carousel.min.js"></script>
+
+    <!-- jQuery scroll to -->
+    <script src="js/jquery.scrollTo.min.js"></script>
+
+    <!-- main js file -->
+
+    <script src="js/front.js"></script>
+
 
     </body>
-</html>
 
 {% endblock %}

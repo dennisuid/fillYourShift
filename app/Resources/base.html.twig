@@ -1,45 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Fill your shift{% endblock %}</title>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Staff your shifts on demand{% endblock %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
     {% block stylesheets %}{% endblock %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/front.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.scrollTo.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/respond.min.js') }}"></script>
+    <script src="{{ asset('js/waypoints.min.js') }}"></script>
+    <!-- Mordernizr -->
+    <script src="{{ asset('js/modernizr-2.6.2.min.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-social.css') }}" >
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap and Font Awesome css -->
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- owl carousel css -->
+
+    <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/owl.theme.css') }}" rel="stylesheet">
+
+    <!-- Theme stylesheet -->
+    <link href="{{ asset('css/style.default.css') }}" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- Custom stylesheet - for your changes -->
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
+    <!-- CSS Animations -->
+    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
-    {% include "nav.html.twig" %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                {% for flash_message in app.session.flashBag.get('success') %}
-                    <div class="flash-notice alert alert-success">
-                        {{ flash_message }}
-                    </div>
-                {% endfor %}
-                
-                  {% for flash_message in app.session.flashBag.get('failure') %}
-                    <div class="flash-notice alert alert-danger">
-                        {{ flash_message }}
-                    </div>
-                {% endfor %}
-                
-                {% block body %}
-                {% endblock %}
-            </div>
-        </div>
+<!-- Navbar -->
+{% include "nav.html.twig" %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            {% for flash_message in app.session.flashBag.get('success') %}
+                <div class="flash-notice alert alert-success">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
 
-    </div><!-- /.container -->
+            {% for flash_message in app.session.flashBag.get('failure') %}
+                <div class="flash-notice alert alert-danger">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div><!-- /.container -->
+
+{% block body %}
+{% endblock %}
 </body>
 </html>
 
