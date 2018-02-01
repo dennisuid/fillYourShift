@@ -32,9 +32,20 @@
                     </li>
                     <li><a href="#section4">Contact</a>
                     </li>
-                    <li>
-                        <a href="#section2" style="color: green; font-size: larger;"> Login / Sign Up</a>
-                    </li>
+                    {% if app.user.userType is defined %}
+                        <li>
+                            <a href="/dashboard" style="color: green; font-size: larger;"> {{ app.user.username }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        </li>
+                     {% else %}
+                         <li>
+                             <a href="#section2" style="color: green; font-size: larger;"> Login / Sign Up</a>
+                         </li>
+                    {% endif %}
                 </ul>
 
             </div>
