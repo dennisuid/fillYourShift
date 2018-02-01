@@ -90,7 +90,9 @@ function animations() {
 
 function sliding() {
     $('.scrollTo, #navigation a').click(function (event) {
-        event.preventDefault();
+        // this is been commented out that we can make the links
+        // work on the home page nav bar
+        //event.preventDefault();
         var full_url = this.href;
         var parts = full_url.split("#");
         var trgt = parts[1];

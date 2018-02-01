@@ -30,11 +30,19 @@
                     </li>
                     <li><a href="#section3">Testimonials</a>
                     </li>
-                    <li><a href="#section4">Contact</a>
-                    </li>
                     {% if app.user.userType is defined %}
                         <li>
                             <a href="/dashboard" style="color: green; font-size: larger;"> {{ app.user.username }}</a>
+                            <div class="dropdown">
+                                <!-- Link or button to toggle dropdown -->
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <li><a tabindex="-1" href="#">Action</a></li>
+                                    <li><a tabindex="-1" href="#">Another action</a></li>
+                                    <li><a tabindex="-1" href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a tabindex="-1" href="#">Separated link</a></li>
+                                </ul>
+                            </div>
                         </li>
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">
@@ -43,8 +51,11 @@
                         </li>
                      {% else %}
                          <li>
-                             <a href="#section2" style="color: green; font-size: larger;"> Login / Sign Up</a>
+                             <a href="/user/login" style="color: green; font-size: larger;"> Login</a>
                          </li>
+                        <li>
+                            <a href="/user/register" style="color: green; font-size: larger;"> Register</a>
+                        </li>
                     {% endif %}
                 </ul>
 
@@ -65,7 +76,7 @@
         <div id="intro" class="clearfix">
             <div class="item">
                 <div class="container">
-                    <div class="row">
+                    <div class="row" style="color: black;">
 
                         <h1 data-animate="fadeInDown">Make on demand work possible</h1>
                         <p class="message" data-animate="fadeInUp">
@@ -156,38 +167,6 @@
         <!-- /.section -->
 
         <!-- *** SERVICES END *** -->
-
-        <!-- *** JOIN US ***
-    _________________________________________________________ -->
-
-        <div class="section" data-animate="bounceIn" id="section2">
-            <div class="container">
-                <div class="col-md-8 col-md-offset-2">
-                    <h2 class="title"> Login / Sign Up</h2>
-                    <p class="lead margin-bottom">
-                        Login to our easy to use and flexible system and find the work you need and add the shifts you
-                        want to fill in
-                        if you are already a member please
-                    </p>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <span class="input-group-btn">
-                                <a class="btn btn-default" id="frm-landingPage1-submit" href="/user/login">Login</a>
-                            </span>
-                            <span class="input-group-btn">
-                                <a class="btn btn-default" id="frm-landingPage1-submit" href="/user/register">Sign Up</a>
-                            </span>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.12 -->
-            </div>
-            <!-- /.container -->
-        </div>
-        <!-- /.section -->
-
-        <!-- *** JOIN US END *** -->
 
         <!-- *** TESTIMONIALS ***
     _________________________________________________________ -->
@@ -318,34 +297,6 @@
         </div><!-- /.section -->
 
         <!-- *** TESTIMONIALS END *** -->
-
-        <!-- *** CONTACT ***
-    _________________________________________________________ -->
-
-        <div class="section" id="section4">
-            <div class="container">
-                <div class="col-md-8 col-md-offset-2">
-
-
-                    <h2 class="title" data-animate="fadeInDown">Contact us</h2>
-
-                    <p class="lead margin-bottom" data-animate="fadeInUp">A wonderful serenity has taken possession of
-                        my
-                        entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-
-
-                    <ul class="list-unstyled text-large text-thin" data-animate="fadeInUp">
-                        <li><strong>E-mail:</strong> hello@hello.com</li>
-                        <li><strong>Phone:</strong> 123 456 888</li>
-                    </ul>
-
-                </div>
-                <!-- /.12 -->
-            </div>
-            <!-- /.container -->
-        </div>
-        <!-- /.section -->
-
 
         <!-- *** FOOTER ***
     _________________________________________________________ -->
