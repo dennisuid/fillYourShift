@@ -110,24 +110,17 @@ opacity:0.9;
 .omb_login{
     margin-top:100px;
 }
-.omb_login .btn-twitter{
-    font-weight: normal;
-    text-transform: none;
-    font-size: 12px;
-    padding: 7px;
-}
-
 .omb_login .btn-facebook{
     font-weight: normal;
     text-transform: none;
-    font-size: 12px;
+    font-size: 14px;
     padding: 7px;
 }
 
 .omb_login .btn-google{
     font-weight: normal;
     text-transform: none;
-    font-size: 12px;
+    font-size: 14px;
     padding: 7px;
 }
 
