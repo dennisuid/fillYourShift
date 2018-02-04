@@ -37,7 +37,8 @@
         "symfony/finder": "^3.2",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "doctrine/doctrine-migrations-bundle": "^1.0",
-        "hwi/oauth-bundle": "^0.5.3"
+        "hwi/oauth-bundle": "^0.5.3",
+        "google/apiclient": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
