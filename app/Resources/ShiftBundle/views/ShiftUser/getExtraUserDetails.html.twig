@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}ShiftBundle:ShiftUser:get{% endblock %}
+
+{% block error %}
+    <p>{{ error }}</p>
+{% endblock %}
+
+{% block body %}
+    <div class="omb_login">
+        <div class="row omb_row-sm-offset-3">
+            <div class="col-xs-12 col-sm-6" style="border: 1px solid grey;">
+                <form method="post" action="/user/login/social/save">
+                    <div class="form-group" style="alignment: center;">
+                        <div class="panel-heading">Please fill in these details to complete your profile</div>
+                        <div class="input-group">
+                            <label>Please enter the user type</label>
+                            <select id="usertype" name="usertype" class="form-control">
+                                {% for role in roles %}
+                                    <option value="{{ role }}">{{ role | capitalize}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {#<div class="input-group">#}
+                        {#<label>Existing email</label>#}
+                        <input type="hidden" class="form-control" name="email" id="email" value="{{ email }}"/>
+                        {#</div>#}
+
+                        <div class="input-group">
+                            <label>Mobile number</label>
+                            <input type="text" class="form-control" name="mobile" id="mobile"/>
+                        </div>
+                        <div class="input-group">
+                            <label>Post Code</label>
+                            <input type="text" class="form-control" name="postcode" id="postcode"/>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="submit" value="Save" name="postcode" id="postcode"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

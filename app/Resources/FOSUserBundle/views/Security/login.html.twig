@@ -38,11 +38,13 @@
                                 </a>
                             </div>
                         </li>
+                        {% if google_url is defined %}
                         <li class="list-group-item">
-                            <a class="btn btn-lg  btn-block btn-google " href="/connect/googleplus">
-                                <span class="fa fa-google"></span> Sign in with Google
-                            </a>
+                                <a class="btn btn-lg  btn-block btn-google " href="{{ google_url }}">
+                                    <span class="fa fa-google"></span> Sign in with Google
+                                </a>
                         </li>
+                        {% endif %}
                         <li class="list-group-item">
                             <label class="checkbox" style="margin:6px;">
                                 <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>

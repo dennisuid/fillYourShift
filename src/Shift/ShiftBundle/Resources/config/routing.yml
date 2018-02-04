@@ -39,6 +39,20 @@ update:
 register:
     path:     /user/register
     defaults: { _controller: ShiftBundle:ShiftUser:register }
+login:
+    path:     /user/login/social
+    defaults: { _controller: ShiftBundle:User:login }
+
+save_extra:
+    path:     /user/login/social/save
+    defaults: { _controller: ShiftBundle:User:saveExtraDetails }
+google:
+    path:     /user/google
+    defaults: { _controller: ShiftBundle:ShiftUser:loginWithGoogle }
+
+google_redirect:
+    path:     /user/google/redirect
+    defaults: { _controller: ShiftBundle:User:redirectWithGoogle }
 
 createShift:
     path: /shift/create

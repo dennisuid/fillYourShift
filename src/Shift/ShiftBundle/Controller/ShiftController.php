@@ -29,7 +29,7 @@ class ShiftController extends Controller {
         $subscribedShifts = [];
         $assignedShifts = [];
         $notAssignedShifts = [];
-       
+
         if ($usertype == "employee") {
             $shifts = $this->getDoctrine()
                     ->getRepository(Shift::class) 

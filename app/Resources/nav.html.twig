@@ -12,7 +12,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="/">Home</a></li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") == false %}
-                    <li><a href="/user/login">Login</a></li>
+                    <li><a href="/user/login/social">Login</a></li>
                     <li><a href="/user/register">Register</a></li>
                     {% endif %}
                     {% if app.user.userType is defined and app.user.userType == "employer" %}
