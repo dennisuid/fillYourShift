@@ -70,7 +70,9 @@ class ShiftUserController extends Controller
                 $dispatcher->dispatch(
                         FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response)
                 );
-                return $response;
+                $this->get('login.valid.user')->loginAsValidUser($user, $request);
+                $url = $this->generateUrl('dashboard');
+                return new RedirectResponse($url);
             }
         }
         $event = new FormEvent($form, $request);
@@ -84,5 +86,4 @@ class ShiftUserController extends Controller
                     'form' => $form->createView(),
         ));
     }
-
 }

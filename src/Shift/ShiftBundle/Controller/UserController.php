@@ -115,8 +115,10 @@ class UserController extends BaseController
             $em->persist($user);
             $em->flush();
         }
+        $this->get('login.valid.user')->loginAsValidUser($user, $request);
 
-        return $this->loginAsValidUser($user, $request);
+        $url = $this->generateUrl('dashboard');
+        return new RedirectResponse($url);
     }
 
     private function createUserFromGoogleAccountData(Google_Service_Oauth2_Userinfoplus $googleUserDetails)
@@ -133,24 +135,6 @@ class UserController extends BaseController
             $em->flush();
         }
     }
-
-    private function loginAsValidUser(FysUser $user, $request)
-    {
-        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-        $this->get('security.token_storage')->setToken($token);
-
-        // If the firewall name is not main, then the set value would be instead:
-        // $this->get('session')->set('_security_XXXFIREWALLNAMEXXX', serialize($token));
-        $this->get('session')->set('_security_main', serialize($token));
-
-        // Fire the login event manually
-        $event = new InteractiveLoginEvent($request, $token);
-        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-
-        $url = $this->generateUrl('dashboard');
-        return new RedirectResponse($url);
-    }
-
     /**
      * @param $email
      * @return bool|object

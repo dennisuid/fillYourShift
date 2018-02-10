@@ -1,4 +1,8 @@
 services:
+ login.valid.user:
+   class: Shift\ShiftBundle\Services\LoginAsValidUser
+   arguments:
+     - '@service_container'
 #    shift.example:
 #        class: Shift\ShiftBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
