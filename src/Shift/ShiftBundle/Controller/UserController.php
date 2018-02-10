@@ -2,6 +2,10 @@
 
 namespace Shift\ShiftBundle\Controller;
 
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook;
+use Facebook\FacebookResponse;
 use FOS\UserBundle\Controller\SecurityController as BaseController;
 use Google_Client;
 use Google_Service_Oauth2_Userinfoplus;
@@ -43,11 +47,13 @@ class UserController extends BaseController
             ? $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue()
             : null;
         $googleUrl = $this->getGoogleUrl();
+        $faceBookUrl = $this->getFaceBookUrl();
         $data = array(
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
             'google_url' => $googleUrl,
+            'facebook_url' => $faceBookUrl,
         );
         return $this->render('@FOSUser/Security/login.html.twig', $data);
     }
@@ -57,7 +63,13 @@ class UserController extends BaseController
         $client = $this->createGoogleClient();
         return $client->createAuthUrl();// to get login url
     }
-
+    private function getFaceBookUrl()
+    {
+        $client = $this->createFaceBookClient();
+        $helper = $client->getRedirectLoginHelper();
+        $scope = ['email'];
+        return $helper->getLoginUrl( $this->container->getParameter('facebook_redirect_url'), $scope);
+    }
     public function redirectWithGoogleAction(Request $request)
     {
         $client = $this->createGoogleClient();
@@ -95,7 +107,7 @@ class UserController extends BaseController
          * @var $user FysUser
          */
         $user = $this->checkEmailExistsAndReturnUser($email);
-        if ($user){
+        if ($user) {
             $user->setUserType($userType);
             $user->setMobileNumber($mobile);
             $user->setPostcode($postcode);
@@ -198,4 +210,18 @@ class UserController extends BaseController
         $client->setScopes(['email profile']);
         return $client;
     }
+    public function loginWithFacebookAction()
+    {
+        $this->createFaceBookClient();
+    }
+    private function createFaceBookClient()
+    {
+        $client = new Facebook([
+            'app_id' => $this->container->getParameter('facebook_client_id'),
+            'app_secret' => $this->container->getParameter('facebook_secret'),
+            'default_graph_version' => $this->container->getParameter('facebook_graph_version'),
+        ]);
+        return $client;
+    }
+
 }
