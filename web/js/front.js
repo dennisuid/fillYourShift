@@ -5,8 +5,21 @@ $(function () {
     sliders();
     utils();
     sliding();
+    $('.form_datetime').datetimepicker({
+        useCurrent: false
+    });
+    
+    $('#start_date_hours').datetimepicker();
+    $('#end_date_hours').datetimepicker({
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#start_date_hours").on("dp.change", function (e) {
+        $('#end_date_hours').data("DateTimePicker").minDate(e.date);
+    });
+    $("#end_date_hours").on("dp.change", function (e) {
+        $('#start_date_hours').data("DateTimePicker").maxDate(e.date);
+    });
 });
-
 $(window).load(function () {
     windowWidth = $(window).width();
     $(this).alignElementsSameHeight();

@@ -55,7 +55,7 @@ class Shift {
      * @ORM\Column(name="start_date_hours", type="date")
      */
     private $startDateHours;
-
+    //protected $startDateHours = ['start_date_hours'];
     /**
      * @var \DateTime
      *

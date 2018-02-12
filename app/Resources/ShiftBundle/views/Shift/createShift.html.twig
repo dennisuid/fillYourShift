@@ -1,18 +1,164 @@
 {% extends "base.html.twig" %}
 
+{#{% block javascripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('#shift_start_date_hours1').datetimepicker();
+            $('#shift_end_date_hours1').datetimepicker({
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#shift_start_date_hours1").on("dp.change", function (e) {
+                $('#shift_end_date_hours1').data("DateTimePicker").minDate(e.date);
+            });
+            $("#shift_end_date_hours1").on("dp.change", function (e) {
+                $('#shift_start_date_hours1').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script>
+{% endblock %}#}
+
 {% block body %}
     <body>
         <div class="panel panel-default">
             <div class="panel-heading">Create new shift</div>
             <div class="panel-body">
                 {{ form_start(form) }}
-                {{ form_widget(form) }}
-                 <div>
+                {{ form_widget(form) }} 
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="shift_shift_rate">Shift start date</label>
+                    <div class="col-sm-10">
+                        <div class="input-group date form_datetime col-md-5" data-date-format="dd MM yyyy - HH:ii p" data-link-field="shift_start_date_hours">
+                            <input class="form-control" size="16" type="text" value="" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        {{ form_errors(form.start_date_hours) }}
+                        {{ form_widget(form.start_date_hours) }}  
+                        <br/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required" for="shift_shift_rate">Shift end date</label>
+                    <div class="col-sm-10">
+                        <div class="input-group date form_datetime col-md-5" data-date-format="dd MM yyyy - HH:ii p" data-link-field="shift_end_date_hours">
+                            <input class="form-control" size="16" type="text" value="" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        {{ form_errors(form.end_date_hours) }}
+                        {{ form_widget(form.end_date_hours) }}
+                        <br/>
+                    </div>
+                </div>
+                <div>
                     <input type="submit" value="Save" />
                 </div>
                 {{ form_end(form) }}
             </div>
         </div>
-         
+
     </body>
 {% endblock %}
+
+{#{% block body %}
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <div class="col-xs-push-4 col-lg-8   col-sm-6">
+        <br>
+        <h2 class="title" data-animate="fadeInUp">Create Shift</h2>
+        <br>
+    </div>
+    <div class="col-xs-push-1 col-lg-8   col-sm-6" style="border: 1px solid #999999; border-radius: 0.5em; vertical-align: middle;">
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+       
+
+        <div class="form-group" style="margin-top: 40px;">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                           
+                        {{ form_errors(form.first_name) }}
+                        {{ form_widget(form.first_name, { 'attr': {'class': 'form-control', 'placeholder': 'First Name', 'style': 'width: 70%'} }) }}  
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        
+                        {{ form_errors(form.last_name) }}
+                        {{ form_widget(form.last_name, { 'attr': {'class': 'form-control', 'placeholder': 'Last Name', 'style': 'width: 70%'} }) }} 
+                </div>
+            </div>
+            
+        </div>
+                
+        <div class="form-group">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                           
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email Address', 'style': 'width: 70%'} }) }}  
+                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                        
+                        {{ form_errors(form.username) }}
+                        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'User Name', 'style': 'width: 70%'} }) }} 
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    
+                        {{ form_errors(form.plainPassword) }}
+                        {% for passwordField in form.plainPassword %}
+                        
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            
+                        {{ form_widget(passwordField, { 'attr': {'class': 'form-control', 'placeholder': 'Password', 'style': 'width: 70%'} }) }}
+                       
+                        {% endfor %}
+                   
+                </div>
+            </div>
+                
+        </div>
+
+        <div class="form-group">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mobile-phone" aria-hidden="true"></i></span>
+                           
+                        {{ form_errors(form.mobile_number) }}
+                        {{ form_widget(form.mobile_number, { 'attr': {'class': 'form-control', 'placeholder': 'Mobile Number', 'style': 'width: 70%'} }) }}  
+                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                        
+                        {{ form_errors(form.user_type) }}
+                        {{ form_widget(form.user_type, { 'attr': {'class': 'form-control', 'placeholder': 'User Type', 'style': 'width: 70%'} }) }} 
+                </div>
+            </div>
+                
+        </div>
+
+                <div class="form-group">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                           
+                        {{ form_errors(form.postcode) }}
+                        {{ form_widget(form.postcode, { 'attr': {'class': 'form-control', 'placeholder': 'Post Code', 'style': 'width: 70%'} }) }}  
+                    <span class="input-group-addon"><i class="fa fa-clipboard" aria-hidden="true"></i></span>
+                        
+                        {{ form_errors(form.country) }}
+                        {{ form_widget(form.country, { 'attr': {'class': 'form-control', 'placeholder': 'Country', 'style': 'width: 70%'} }) }} 
+                </div>
+            </div>
+        </div>
+        
+        <div class = "btn-adn">
+                    <input type="submit" value="Save" />
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+        
+{% endblock %}
+#}

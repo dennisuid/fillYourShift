@@ -1,0 +1,4 @@
+parameters:
+    pay_lead_time: 5 
+    # number of days for payment
+    

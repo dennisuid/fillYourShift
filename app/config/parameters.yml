@@ -4,7 +4,7 @@ parameters:
     database_port: null
     database_name: fillyourshift
     database_user: root
-    database_password: null
+    database_password: password
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: admin@fillyourshift.com
@@ -19,3 +19,6 @@ parameters:
     googleplus_secret: Fg9QfqeZrT-kS-d0kWoBn4Kv
     googleplus_application_name: fillYourShift
     googleplus_redirect_url: http://localhost:8000/user/google/redirect
+    
+#    Shift related parameters
+    shift.pay_leadtime: 5 

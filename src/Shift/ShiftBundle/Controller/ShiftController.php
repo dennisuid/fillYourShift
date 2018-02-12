@@ -78,12 +78,19 @@ class ShiftController extends Controller {
 
     public function createNewShiftAction(Request $request) {
         $shift = new Shift();
+//        $shift->setPayLeadtime($this->container->getParameter('shift.pay_leadtime'));
         $form = $this->createForm(ShiftType::class, $shift, array(
             'action' => $this->generateUrl('submitShift'),
             'method' => 'POST',
             'mode' => 'create',
+            'payleadtime' => $this->container->getParameter('shift.pay_leadtime'),
+            'shiftCreatedBy' => $this->getUser()->getEmail(),
+            'shiftCreatedById' => $this->getUser()->getID()
+           
         ));
+        
 
+        
         $form->handleRequest($request);
 
         return $this->render('@Shift/Shift/createShift.html.twig', [
@@ -99,6 +106,24 @@ class ShiftController extends Controller {
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $shift = $form->getData();
+            var_dump($shift->getStartDateHours());
+            var_dump($shift->getShiftRate());
+            
+            $startTime = $request->request->get('start_date_hours');
+            var_dump($startTime);
+            //var_dump($request);
+            
+            $startDateHours = date_create_from_format('Y-m-d H:i:s', $shift->getStartDateHours());
+            $shift->setStartDateHours($startDateHours);
+            
+            //$shift->setStartDateHours($startTime);
+            var_dump($shift->getStartDateHours());
+            var_dump($shift);
+            
+            $endDateHours = date_create_from_format('Y-m-d H:i:s', $shift->getEndDateHours());
+            $shift->setEndDateHours($endDateHours);
+            $shift->setShiftJobRate(5.7);
+//            print_r($shift); die;
             $em = $this->getDoctrine()->getManager();
             $em->persist($shift);
             $em->flush();
@@ -123,7 +148,9 @@ class ShiftController extends Controller {
                     'failure', 'Shift you tried to access dont exist'
             );
         }
-
+        
+        
+        
         /**
          * @var $shift Shift
          */
