@@ -10,7 +10,7 @@
 }
 
 .omb_login .omb_socialButtons a {
-    color: white; // In yourUse @body-bg
+    color: white; /* In yourUse @body-bg */
 opacity:0.9;
 }
 .omb_login .omb_socialButtons a:hover {
@@ -61,4 +61,19 @@ opacity:0.9;
         text-align: right;
         margin-top:10px;
     }
+}
+
+*[role="form"] {
+    max-width: 1200px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0.3em;
+    vertical-align: middle;
+    
+}
+
+*[role="form"] h2 {
+    margin-left: 5em;
+    margin-bottom: 1em;
 }

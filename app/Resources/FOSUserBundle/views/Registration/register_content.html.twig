@@ -1,16 +1,101 @@
-{% trans_default_domain 'FOSUserBundle' %}
-
-{{ form_start(form, {'method': 'post', 'action': path('register'), 'attr': {'class': 'well form-horizontal'}}) }}
-{{ form_widget(form) }}
-
-<div class="form-group">
-    <label class="col-md-4 control-label"></label>
-    <div class="col-md-4"><br>
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        <button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT 
-            <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        </button>
+{% block fos_user_content %}
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <div class="col-xs-push-4 col-lg-8   col-sm-6">
+        <br>
+        <h2 class="title" data-animate="fadeInUp">Register with us!</h2>
+        <br>
     </div>
-</div>
+    <div class="col-xs-push-1 col-lg-8   col-sm-6" style="border: 1px solid #999999; border-radius: 0.5em; vertical-align: middle;">
 
-{{ form_end(form) }}
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+       
+
+        <div class="form-group" style="margin-top: 40px;">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                           
+                        {{ form_errors(form.first_name) }}
+                        {{ form_widget(form.first_name, { 'attr': {'class': 'form-control', 'placeholder': 'First Name', 'style': 'width: 70%'} }) }}  
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        
+                        {{ form_errors(form.last_name) }}
+                        {{ form_widget(form.last_name, { 'attr': {'class': 'form-control', 'placeholder': 'Last Name', 'style': 'width: 70%'} }) }} 
+                </div>
+            </div>
+            
+        </div>
+                
+        <div class="form-group">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                           
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email Address', 'style': 'width: 70%'} }) }}  
+                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                        
+                        {{ form_errors(form.username) }}
+                        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'User Name', 'style': 'width: 70%'} }) }} 
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    
+                        {{ form_errors(form.plainPassword) }}
+                        {% for passwordField in form.plainPassword %}
+                        
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            
+                        {{ form_widget(passwordField, { 'attr': {'class': 'form-control', 'placeholder': 'Password', 'style': 'width: 70%'} }) }}
+                       
+                        {% endfor %}
+                   
+                </div>
+            </div>
+                
+        </div>
+
+        <div class="form-group">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mobile-phone" aria-hidden="true"></i></span>
+                           
+                        {{ form_errors(form.mobile_number) }}
+                        {{ form_widget(form.mobile_number, { 'attr': {'class': 'form-control', 'placeholder': 'Mobile Number', 'style': 'width: 70%'} }) }}  
+                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                        
+                        {{ form_errors(form.user_type) }}
+                        {{ form_widget(form.user_type, { 'attr': {'class': 'form-control', 'placeholder': 'User Type', 'style': 'width: 70%'} }) }} 
+                </div>
+            </div>
+                
+        </div>
+
+                <div class="form-group">
+            <div class="cols-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                           
+                        {{ form_errors(form.postcode) }}
+                        {{ form_widget(form.postcode, { 'attr': {'class': 'form-control', 'placeholder': 'Post Code', 'style': 'width: 70%'} }) }}  
+                    <span class="input-group-addon"><i class="fa fa-clipboard" aria-hidden="true"></i></span>
+                        
+                        {{ form_errors(form.country) }}
+                        {{ form_widget(form.country, { 'attr': {'class': 'form-control', 'placeholder': 'Country', 'style': 'width: 70%'} }) }} 
+                </div>
+            </div>
+        </div>
+        
+        <div class = "btn-adn">
+                    <input type="submit" value="Save" />
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock fos_user_content %}
+
