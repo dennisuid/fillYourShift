@@ -21,10 +21,28 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        {#<div class="input-group">#}
-                        {#<label>Existing email</label>#}
-                        <input type="hidden" class="form-control" name="email" id="email" value="{{ email }}"/>
-                        {#</div>#}
+                        {% if facebook_id is defined %}
+                            <input type="hidden" class="form-control" name="facebook_id" id="facebook_id" value="{{ facebook_id }}"/>
+                        {% endif %}
+                        {% if googleplus_id is defined %}
+                            <input type="hidden" class="form-control" name="googleplus_id" id="googleplus_id" value="{{ googleplus_id }}"/>
+                        {% endif %}
+                        {% if email is not empty %}
+                            <input type="hidden" class="form-control" name="email" id="email" value="{{ email }}"/>
+                        {% elseif facebook_id is defined %}
+                            <div class="input-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" name="email" id="email"/>
+                            </div>
+                            <div class="input-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name"/>
+                            </div>
+                            <div class="input-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name"/>
+                            </div>
+                        {% endif %}
 
                         <div class="input-group">
                             <label>Mobile number</label>
