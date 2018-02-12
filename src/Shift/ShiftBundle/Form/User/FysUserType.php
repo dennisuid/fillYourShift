@@ -24,12 +24,13 @@ class FysUserType extends AbstractType
             ->add('mobile_number', TextType::class)
             ->add('user_type', ChoiceType::class, array(
                 'choices'  => $options['user_types']))
-            ->add('house_number', TextType::class)
-            ->add('address_line1', TextType::class)
-            ->add('address_line2', TextType::class)
+//            ->add('house_number', TextType::class)
+//            ->add('address_line1', TextType::class)
+//            ->add('address_line2', TextType::class)
+//            ->add('registration_number', TextType::class)
             ->add('postcode', TextType::class)
             ->add('country', TextType::class)
-            ->add('registration_number', TextType::class);
+            ;
     }
 
     /**
