@@ -58,6 +58,9 @@ facebook:
     path:     /user/facebook
     defaults: { _controller: ShiftBundle:User:loginWithFacebook }
 
+facebook_redirect:
+    path:     /user/facebook/redirect
+    defaults: { _controller: ShiftBundle:User:redirectWithFaceBook }
 createShift:
     path: /shift/create
     defaults: { _controller: ShiftBundle:Shift:createNewShift }
