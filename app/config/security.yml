@@ -17,7 +17,7 @@ security:
             pattern: ^/
             form_login:
                 check_path: /user/login_check
-                login_path: /user/login
+                login_path: /user/login/social
                 csrf_parameter:       _csrf_token
                 csrf_token_id:        authenticate
                 csrf_token_generator: security.csrf.token_manager
