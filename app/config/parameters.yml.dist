@@ -19,13 +19,11 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     cors_allow_origin: http://localhost
-    # For Facebook you'll need the client_id and secret
     facebook_client_id: 354250021713951
     facebook_secret: c9a0b88ec1b4e7ca9f756a8835db42f5
-    facebook_graph_version: v2.10
-    facebook_redirect_url: http://localhost:8080/redirect/facebook
-     # For Google+ you'll need the client_id and secret
-     googleplus_client_id: 163768292944-qdje480orehaokbi37mf7hddks2fs3e0.apps.googleusercontent.com
-     googleplus_secret: Fg9QfqeZrT-kS-d0kWoBn4Kv
-     googleplus_application_name: fillYourShift
-     googleplus_redirect_url: http://localhost:8000/user/google/redirect
+    facebook_graph_version: v2.11
+    facebook_redirect_url: http://localhost:8000/user/facebook/redirect
+    googleplus_client_id: 163768292944-qdje480orehaokbi37mf7hddks2fs3e0.apps.googleusercontent.com
+    googleplus_secret: Fg9QfqeZrT-kS-d0kWoBn4Kv
+    googleplus_application_name: fillYourShift
+    googleplus_redirect_url: http://localhost:8000/user/google/redirect
