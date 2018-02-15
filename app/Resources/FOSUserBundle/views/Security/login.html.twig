@@ -4,7 +4,7 @@
 {% block fos_user_content %}
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     {% if error %}
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" style="margin: 10px;">
             {{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
     {% endif %}

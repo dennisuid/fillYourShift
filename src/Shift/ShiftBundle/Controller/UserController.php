@@ -12,6 +12,7 @@ use Google_Service_Oauth2_Userinfoplus;
 use Shift\ShiftBundle\Entity\User\FysUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Security;
 
 class UserController extends BaseController
