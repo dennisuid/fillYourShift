@@ -51,7 +51,7 @@ class ShiftController extends Controller {
                     } 
                     else {
                         
-                        if($shiftApplied->getApplyStatus() == 'SELECTED'){
+                        if(!empty($shiftApplied) && $shiftApplied->getApplyStatus() == 'SELECTED'){
                             $assignedShifts[] = $shift;
                         } 
                         else {

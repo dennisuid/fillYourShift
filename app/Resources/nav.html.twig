@@ -20,26 +20,29 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Shifts <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/shift/create">Create new Shifts</a></li>
-                            <li><a href="shift/list">See all the shifts</a></li>
+                            <li><a href="/shift/list">See all the shifts</a></li>
                         </ul>
-                        {% endif %}
-                        {% if app.user.userType is defined and app.user.userType == "employee" %}
+                    {% endif %}
+                    </li>
+                    {% if app.user.userType is defined and app.user.userType == "employee" %}
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Shifts <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/shift/create">Manage Profile</a></li>
-                            <li><a href="#">Subscribe to Shift</a></li>
-                            <li><a href="#">`check Invoice</a></li>
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Manage Work</a></li>
                             {#<li role="separator" class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
                             <li><a href="#">Separated link</a></li>
                             <li><a href="#">One more separated link</a></li>#}
                         </ul>
-                        {% endif %}
+                    {% endif %}
                     
                     </li>
 
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li>
-                            <a href="#">
+                            <a href="/dashboard">
                                 {{  app.user.username }}
                             </a>
                         <li>
