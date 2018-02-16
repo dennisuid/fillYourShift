@@ -1,0 +1,11 @@
+{
+  "name": "fillyourshift",
+  "dependencies": {
+    "bower": "^1.8.2",
+    "module": "^1.2.5",
+    "q": "^1.5.1"
+  },
+  "engines": {
+    "node": "4.1.1"
+  }
+}
