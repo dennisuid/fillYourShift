@@ -37,6 +37,9 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     path: "%kernel.root_dir%/Resources"
+    paths:
+      "%kernel.root_dir%/Resources" : root
+      "%kernel.root_dir%/Resources/ShiftBundle/views/ShiftUser" : user
     form_themes:
         - 'bootstrap_3_horizontal_layout.html.twig'
 

@@ -57,36 +57,35 @@
 </head>
 <body>
 <!-- Navbar -->
-{% include "nav.html.twig" %}
+{% include "@root/nav.html.twig" %}
 <div class="main_container">
-    <div class="right_col" role="main">
-        <div class="col-sm-12">
-            {% for flash_message in app.session.flashBag.get('success') %}
-                <div class="flash-notice alert alert-success">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
+    <div class="col-sm-12">
+        {% for flash_message in app.session.flashBag.get('success') %}
+            <div class="flash-notice alert alert-success">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
 
-            {% for flash_message in app.session.flashBag.get('failure') %}
-                <div class="flash-notice alert alert-danger">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-            {% for flash_message in app.session.flashBag.get('error') %}
-                <div class="flash-notice alert alert-danger">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-        </div>
+        {% for flash_message in app.session.flashBag.get('failure') %}
+            <div class="flash-notice alert alert-danger">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="flash-notice alert alert-danger">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
     </div>
     <div class="row">
         {% block body %}
         {% endblock %}
     </div>
+    {% block javascripts %}
+    {% endblock %}
 </div><!-- /.container -->
 {% block home_body %}
 {% endblock %}
-
 </body>
 </html>
 
