@@ -1,0 +1,77 @@
+{% block body %}
+    <h2 class="StepTitle">Step 1: Personal Details </h2>
+    <form class="form-horizontal form-label-left">
+        <span class="section">Personal Info</span>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3" for="first-name">First Name <span
+                        class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" id="first-name2" required="required"
+                       class="form-control col-md-7 col-xs-12" value="{{ app.user.firstName }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3" for="last-name">Last Name <span
+                        class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" id="last-name2" name="last-name" required="required"
+                       class="form-control col-md-7 col-xs-12" value="{{ app.user.lastName }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="middle-name" class="control-label col-md-3 col-sm-3">Email
+                Initial</label>
+            <div class="col-md-6 col-sm-6">
+                <input id="middle-name2" class="form-control col-md-7 col-xs-12" type="email"
+                       name="middle-name" value="{{ app.user.email }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="middle-name" class="control-label col-md-3 col-sm-3">User Name</label>
+            <div class="col-md-6 col-sm-6">
+                <input id="middle-name2" class="form-control col-md-7 col-xs-12" type="text"
+                       name="middle-name" value="{{ app.user.userName }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="middle-name" class="control-label col-md-3 col-sm-3">Mobile</label>
+            <div class="col-md-6 col-sm-6">
+                <input id="middle-name2" class="form-control col-md-7 col-xs-12" type="text"
+                       name="middle-name" value="{{ app.user.mobileNumber }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="middle-name" class="control-label col-md-3 col-sm-3">Selected Role</label>
+            <div class="col-md-6 col-sm-6">
+                <input id="middle-name2" class="form-control col-md-7 col-xs-12" type="text"
+                       name="middle-name" value="{{ app.user.userType }}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3">Gender</label>
+                <div class="col-md-6 col-sm-6">
+                    <div id="gender2" class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default" data-toggle-class="btn-primary"
+                               data-toggle-passive-class="btn-default">
+                            <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
+                        </label>
+                        <label class="btn btn-primary" data-toggle-class="btn-primary"
+                               data-toggle-passive-class="btn-default">
+                            <input type="radio" name="gender" value="female" checked=""> Female
+                        </label>
+                    </div>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3">Date Of Birth <span
+                        class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6">
+                <input id="birthday2" class="date-picker form-control col-md-7 col-xs-12"
+                       required="required" type="text">
+            </div>
+        </div>
+    </form>
+{% endblock %}
