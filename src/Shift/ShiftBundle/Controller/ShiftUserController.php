@@ -2,6 +2,7 @@
 
 namespace Shift\ShiftBundle\Controller;
 
+use Behat\Mink\Exception\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Shift\ShiftBundle\Entity\User\FysUser;
@@ -61,20 +62,23 @@ class ShiftUserController extends Controller
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-
-                $user = $form->getData();
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
-
-                $url = $this->generateUrl('fos_user_registration_confirmed');
-                $response = new RedirectResponse($url);
-                $dispatcher->dispatch(
+                try{
+                    $user = $form->getData();
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                    $em->flush();
+                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $response = new RedirectResponse($url);
+                    $dispatcher->dispatch(
                         FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response)
-                );
-                $this->get('login.valid.user')->loginAsValidUser($user, $request);
-                $url = $this->generateUrl('dashboard');
-                return new RedirectResponse($url);
+                    );
+                    $this->get('login.valid.user')->loginAsValidUser($user, $request);
+                    $url = $this->generateUrl('dashboard');
+                    return new RedirectResponse($url);
+                }catch (\Exception $e){
+                    $this->addFlash('error', "Unable to add the user");
+                }
+
             }
         }
         $event = new FormEvent($form, $request);

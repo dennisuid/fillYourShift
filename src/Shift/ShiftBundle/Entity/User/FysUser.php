@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="fys_user")
  * @ORM\Entity(repositoryClass="Shift\ShiftBundle\Repository\User\FysUserRepository")
  * @ORM\AttributeOverrides({
- *              @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
- *              @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true, unique=false))
+ *              @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true, unique=true)),
+ *              @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true, unique=true))
  * })
  */
 class FysUser extends BaseUser
