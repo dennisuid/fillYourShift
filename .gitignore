@@ -9,4 +9,5 @@ bootstrap.php.cache
 /var/
 /web/bundles/
 .idea/
-
+node_modules/
+web/assets/vendors/*

@@ -97,7 +97,7 @@
                               <td>{{subscriber.subscriber_resume_id}}</td>
                               <td>{{subscriber.applied_time}}</td>
                               <td>{{subscriber.apply_status}}</td>
-                              {% if shift.shift_status == "CREATED" %}
+                              {% if shift.shift_status != "CREATED" %}
                               <td><a href="{{ url('approveShift', {'id': subscriber.shiftId, 'subscriberId':subscriber.subscriberId })}}" class ='btn bg-success'>Approve</a></td>
                               {% endif %}
                             </tr>

@@ -2,6 +2,7 @@
 
 namespace Shift\ShiftBundle\Controller;
 
+use Behat\Mink\Exception\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Shift\ShiftBundle\Entity\User\FysUser;
@@ -39,7 +40,10 @@ class ShiftUserController extends Controller
 
         return new Response($response, $status, ['Content-type' => 'json']);
     }
-
+    public function profileAction(Request $request)
+    {
+        return $this->render('@Shift/ShiftUser/profile.html.twig');
+    }
     public function registerAction(Request $request)
     {
         /** @var $dispatcher EventDispatcherInterface */
@@ -52,27 +56,32 @@ class ShiftUserController extends Controller
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
         $form = $this->createForm(
                 FysUserType::class, 
-                $user, ['user_types' => $roles]
+                $user,
+                ['user_types' => $roles,'attr'=> array('class'=>'form-label-left input_mask')]
         );
         $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-
-                $user = $form->getData();
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
-
-                $url = $this->generateUrl('fos_user_registration_confirmed');
-                $response = new RedirectResponse($url);
-                $dispatcher->dispatch(
+                try{
+                    $user = $form->getData();
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                    $em->flush();
+                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $response = new RedirectResponse($url);
+                    $dispatcher->dispatch(
                         FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response)
-                );
-                $this->get('login.valid.user')->loginAsValidUser($user, $request);
-                $url = $this->generateUrl('dashboard');
-                return new RedirectResponse($url);
+                    );
+                    $this->get('login.valid.user')->loginAsValidUser($user, $request);
+                    $url = $this->generateUrl('dashboard');
+                    return new RedirectResponse($url);
+                }catch (\Exception $e){
+                    $this->addFlash('error', "Unable to add the user");
+                }
+
             }
         }
         $event = new FormEvent($form, $request);

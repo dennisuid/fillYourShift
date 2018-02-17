@@ -1,57 +1,63 @@
 <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>                        
-                </button>
-                <a class="navbar-brand" href="#">Fill Your Shift</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="/">Home</a></li>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") == false %}
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Fill Your Shift</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/">Home</a></li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") == false %}
                     <li><a href="/user/login/social">Login</a></li>
                     <li><a href="/user/register">Register</a></li>
+                {% endif %}
+                {% if app.user.userType is defined and app.user.userType == "employer" %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Manage Shifts <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/shift/create">Create new Shifts</a></li>
+                        <li><a href="/shift/list">See all the shifts</a></li>
+                    </ul>
                     {% endif %}
-                    {% if app.user.userType is defined and app.user.userType == "employer" %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Shifts <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/shift/create">Create new Shifts</a></li>
-                            <li><a href="/shift/list">See all the shifts</a></li>
-                        </ul>
+                </li>
+                {% if app.user.userType is defined and app.user.userType == "employee" %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Manage Shifts <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Manage Work</a></li>
+                        {#<li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>#}
+                    </ul>
                     {% endif %}
-                    </li>
-                    {% if app.user.userType is defined and app.user.userType == "employee" %}
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Shifts <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/dashboard">Dashboard</a></li>
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Manage Work</a></li>
-                            {#<li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>#}
-                        </ul>
-                    {% endif %}
-                    
-                    </li>
 
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li>
-                            <a href="/dashboard">
-                                {{  app.user.username }}
-                            </a>
-                        <li>
-                            <a href="{{ path('fos_user_security_logout') }}">
-                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
+                </li>
+                {% if app.user.username is defined %}
+                    <li class="">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                           aria-expanded="false">
+                            {#<img src="{{ asset('assets/images/img.jpg') }}" alt="">#}
+                            {{ app.user.username }}
+                            <span class=" fa fa-angle-down"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                            <li><a href="/user/profile"> Profile</a></li>
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    <i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>

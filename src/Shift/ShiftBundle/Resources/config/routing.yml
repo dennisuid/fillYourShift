@@ -7,7 +7,9 @@ dashboard:
 add:
     path:     user/add
     defaults: { _controller: ShiftBundle:ShiftUser:add }
-
+profile:
+  path:     /user/profile
+  defaults: { _controller: ShiftBundle:ShiftUser:profile }
 update:
     path:     /user/update
     defaults: { _controller: ShiftBundle:ShiftUser:update }

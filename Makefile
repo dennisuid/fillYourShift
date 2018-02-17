@@ -12,6 +12,8 @@ composer.phar:
 
 deps: composer.phar
 	php composer.phar install --no-interaction
+	npm install
+	node_modules/.bin/bower install
 
 clean:
 	rm -rf vendor
