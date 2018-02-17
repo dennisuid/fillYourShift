@@ -1,170 +1,72 @@
 {% block fos_user_content %}
-    <div class="clearfix"></div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Register with us</h2>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div id="gender" class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                        <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
-                                    </label>
-                                    <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                        <input type="radio" name="gender" value="female"> Female
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                            </div>
-                        </div>
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button class="btn btn-primary" type="button">Cancel</button>
-                                <button class="btn btn-primary" type="reset">Reset</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
+    <br/>
+    <div class="col-md-6 col-xs-12 center-margin">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Register with us</h2>
+                <div class="clearfix"></div>
             </div>
-        </div>
-    </div>
-
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-    <div class="col-xs-push-4 col-lg-8   col-sm-6">
-        <br>
-        <h2 class="title" data-animate="fadeInUp">Register with us!</h2>
-        <br>
-    </div>
-    <div class="panel-body">
-        <div class="col-xs-push-1 col-lg-8   col-sm-6"
-             style="border: 1px solid #999999; border-radius: 0.5em; vertical-align: middle;">
-            {{ form_start(form) }}
-            {{ form_errors(form) }}
-            <div class="form-group" style="margin-top: 40px;">
-                <div class="cols-lg-2">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-
-                        {{ form_errors(form.first_name) }}
-                        {{ form_widget(form.first_name, { 'attr': {'class': 'form-control', 'placeholder': 'First Name', 'style': 'width: 70%'} }) }}
-                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-
-                        {{ form_errors(form.last_name) }}
-                        {{ form_widget(form.last_name, { 'attr': {'class': 'form-control', 'placeholder': 'Last Name', 'style': 'width: 70%'} }) }}
-                    </div>
+            <div class="x_content">
+                <br/>
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <input type="hidden" name="form[_token]" value="{{ form._token.vars.value }}" />
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    {{ form_errors(form.first_name) }}
+                    {{ form_widget(form.first_name, { 'attr': {'class': 'has-feedback-left', 'placeholder': 'First Name'} }) }}
+                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
-            </div>
-
-            <div class="form-group">
-                <div class="cols-lg-2">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-
-                        {{ form_errors(form.email) }}
-                        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email Address', 'style': 'width: 70%'} }) }}
-                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-
-                        {{ form_errors(form.username) }}
-                        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'User Name', 'style': 'width: 70%'} }) }}
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="cols-lg-2">
-                    <div class="input-group">
-
-                        {{ form_errors(form.plainPassword) }}
-                        {% for passwordField in form.plainPassword %}
-
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-
-                            {{ form_widget(passwordField, { 'attr': {'class': 'form-control', 'placeholder': 'Password', 'style': 'width: 70%'} }) }}
-
-                        {% endfor %}
-
-                    </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    {{ form_errors(form.last_name) }}
+                    {{ form_widget(form.last_name, { 'attr': {'class': 'form-control', 'placeholder': 'Last Name'} }) }}
+                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
-            </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email Address'} }) }}
+                    <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                </div>
 
-            <div class="form-group">
-                <div class="cols-lg-2">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-mobile-phone" aria-hidden="true"></i></span>
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    {{ form_errors(form.mobile_number) }}
+                    {{ form_widget(form.mobile_number, { 'attr': {'class': 'form-control', 'placeholder': 'Mobile Number'}}) }}
+                    <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                </div>
 
-                        {{ form_errors(form.mobile_number) }}
-                        {{ form_widget(form.mobile_number, { 'attr': {'class': 'form-control', 'placeholder': 'Mobile Number', 'style': 'width: 70%'} }) }}
-                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Register as</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
                         {{ form_errors(form.user_type) }}
                         {{ form_widget(form.user_type, { 'attr': {'class': 'form-control', 'placeholder': 'User Type', 'style': 'width: 70%'} }) }}
                     </div>
                 </div>
-
-            </div>
-
-            <div class="form-group">
-                <div class="cols-lg-2">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Post Code </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
                         {{ form_errors(form.postcode) }}
                         {{ form_widget(form.postcode, { 'attr': {'class': 'form-control', 'placeholder': 'Post Code', 'style': 'width: 70%'} }) }}
-                        <span class="input-group-addon"><i class="fa fa-clipboard" aria-hidden="true"></i></span>
-
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
                         {{ form_errors(form.country) }}
                         {{ form_widget(form.country, { 'attr': {'class': 'form-control', 'placeholder': 'Country', 'style': 'width: 70%'} }) }}
                     </div>
                 </div>
-            </div>
-            <div class="cols-lg-2">
-                <div class="input-group" style="margin: auto;">
-                    <button type="submit" class="btn btn-warning" style="alignment: center;">
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT
-                        <span class="glyphicon glyphicon-send"></span>
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    </button>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                        <button type="button" class="btn btn-primary">Cancel</button>
+                        <button class="btn btn-primary" type="reset">Reset</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
                 </div>
+
+                </form>
             </div>
-            {{ form_end(form) }}
         </div>
     </div>
 {% endblock fos_user_content %}

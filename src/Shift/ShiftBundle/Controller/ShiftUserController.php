@@ -52,9 +52,11 @@ class ShiftUserController extends Controller
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
         $form = $this->createForm(
                 FysUserType::class, 
-                $user, ['user_types' => $roles]
+                $user,
+                ['user_types' => $roles,'attr'=> array('class'=>'form-label-left input_mask')]
         );
         $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);

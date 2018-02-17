@@ -58,8 +58,8 @@
 <body>
 <!-- Navbar -->
 {% include "nav.html.twig" %}
-<div class="container">
-    <div class="row">
+<div class="main_container">
+    <div class="right_col" role="main">
         <div class="col-sm-12">
             {% for flash_message in app.session.flashBag.get('success') %}
                 <div class="flash-notice alert alert-success">
@@ -74,8 +74,10 @@
             {% endfor %}
         </div>
     </div>
-    {% block body %}
-    {% endblock %}
+    <div class="row">
+        {% block body %}
+        {% endblock %}
+    </div>
 </div><!-- /.container -->
 {% block home_body %}
 {% endblock %}
