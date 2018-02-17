@@ -40,7 +40,10 @@ class ShiftUserController extends Controller
 
         return new Response($response, $status, ['Content-type' => 'json']);
     }
-
+    public function profileAction(Request $request)
+    {
+        return $this->render('@Shift/ShiftUser/profile.html.twig');
+    }
     public function registerAction(Request $request)
     {
         /** @var $dispatcher EventDispatcherInterface */
