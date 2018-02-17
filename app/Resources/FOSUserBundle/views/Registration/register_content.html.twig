@@ -10,7 +10,6 @@
                 <br/>
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
-                <input type="hidden" name="form[_token]" value="{{ form._token.vars.value }}" />
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                     {{ form_errors(form.first_name) }}
                     {{ form_widget(form.first_name, { 'attr': {'class': 'has-feedback-left', 'placeholder': 'First Name'} }) }}
@@ -39,34 +38,49 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Register as</label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         {{ form_errors(form.user_type) }}
-                        {{ form_widget(form.user_type, { 'attr': {'class': 'form-control', 'placeholder': 'User Type', 'style': 'width: 70%'} }) }}
+                        {{ form_widget(form.user_type, { 'attr': {'class': 'form-control', 'placeholder': 'User Type'} }) }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Post Code </label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         {{ form_errors(form.postcode) }}
-                        {{ form_widget(form.postcode, { 'attr': {'class': 'form-control', 'placeholder': 'Post Code', 'style': 'width: 70%'} }) }}
+                        {{ form_widget(form.postcode, { 'attr': {'class': 'form-control', 'placeholder': 'Post Code'} }) }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         {{ form_errors(form.country) }}
-                        {{ form_widget(form.country, { 'attr': {'class': 'form-control', 'placeholder': 'Country', 'style': 'width: 70%'} }) }}
+                        {{ form_widget(form.country, { 'attr': {'class': 'form-control', 'placeholder': 'Country'} }) }}
                     </div>
                 </div>
-                <div class="ln_solid"></div>
                 <div class="form-group">
-                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                        <button type="button" class="btn btn-primary">Cancel</button>
-                        <button class="btn btn-primary" type="reset">Reset</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">User Name</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        {{ form_errors(form.username) }}
+                        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'User Name'} }) }}
                     </div>
                 </div>
+                {% for passwordField in form.plainPassword %}
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">PassWord</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            {{ form_errors(form.plainPassword) }}
+                            {{ form_widget(passwordField, { 'attr': {'class': 'form-control', 'placeholder': 'Password'} }) }}
+                        </div>
+                    </div>
+                {% endfor %}
 
-                </form>
             </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock fos_user_content %}
