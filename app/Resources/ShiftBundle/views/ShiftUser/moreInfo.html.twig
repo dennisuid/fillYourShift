@@ -1,0 +1,30 @@
+{% block body %}
+    <h2 class="StepTitle">Step 3: More.. </h2>
+    <form class="form-horizontal form-label-left">
+        <span class="section">More about yourself</span>
+        <div class="form-group">
+            <label for="middle-name" class="control-label col-md-3 col-sm-3">Describe yourself</label>
+            <div class="col-md-6 col-sm-6">
+                <textarea class="form-control" rows="3" placeholder="About yourself in few lines"></textarea>
+                <p>
+                    Help other people get to know you.
+                    Tell them about the things you like,
+                    Tell them what it’s like to have you as a part of their organisation.
+                    Tell them about you: Do you have a life motto?
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="middle-name" class="control-label col-md-3 col-sm-3">Domains of Interest</label>
+            <div class="col-md-6 col-sm-9 col-xs-12">
+                <select  id="domains" name="domains" class="select2_multiple form-control" multiple="multiple" >
+                    <option>Retail</option>
+                    <option>Ware Houses</option>
+                    <option>Restaurants</option>
+                    <option>Charities</option>
+                    <option>Construction</option>
+                </select>
+            </div>
+        </div>
+    </form>
+{% endblock %}
