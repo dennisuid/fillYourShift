@@ -63,56 +63,68 @@ facebook:
 facebook_redirect:
     path:     /user/facebook/redirect
     defaults: { _controller: ShiftBundle:User:redirectWithFaceBook }
+    
 createShift:
-    path: /shift/create
-    defaults: { _controller: ShiftBundle:Shift:createNewShift }
+    path: /employer/create
+    defaults: { _controller: ShiftBundle:Employer:createNewShift }
 
 submitShift:
-    path: /shift/submit
-    defaults: { _controller: ShiftBundle:Shift:submitShift }
+    path: /employer/submit
+    defaults: { _controller: ShiftBundle:Employer:submitShift }
     
 viewShift:
-    path: /shift/view/{id}
-    defaults: { _controller: ShiftBundle:Shift:viewShift }
+    path: /employer/view/{id}
+    defaults: { _controller: ShiftBundle:Employer:viewShift }
     
 deleteShift:
-    path: /shift/delete/{id}
-    defaults: { _controller: ShiftBundle:Shift:deleteShift }
+    path: /employer/delete/{id}
+    defaults: { _controller: ShiftBundle:Employer:deleteShift }
     
-listShifts:
-    path: /shift/list
-    defaults: { _controller: ShiftBundle:Shift:listShifts }
+employerListShifts:
+    path: /employer/list
+    defaults: { _controller: ShiftBundle:Employer:listShifts }
     
 publishShift:
-    path: /shift/publish/{id}
-    defaults: { _controller: ShiftBundle:Shift:publishShift } 
+    path: /employer/publish/{id}
+    defaults: { _controller: ShiftBundle:Employer:publishShift }
+    
 updateShift:
-    path: /shift/update/{id}
-    defaults: { _controller: ShiftBundle:Shift:updateShift }
+    path: /employer/update/{id}
+    defaults: { _controller: ShiftBundle:Employer:updateShift }
+    
 saveShift:
-    path: /shift/save/{id}
-    defaults: { _controller: ShiftBundle:Shift:saveShift }
-subscribeShift:
-    path: /shift/subscribe/{id}
-    defaults: { _controller: ShiftBundle:Shift:subscribeShift }
-unsubscribeShift:
-    path: /shift/unsubscribe/{id}
-    defaults: { _controller: ShiftBundle:Shift:unsubscribeShift }
+    path: /employer/save/{id}
+    defaults: { _controller: ShiftBundle:Employer:saveShift }
+    
 approveShift:
-    path: /shift/approve/{id}/{subscriberId}
-    defaults: { _controller: ShiftBundle:Shift:approveShift }
+    path: /employer/approve/{id}/{subscriberId}
+    defaults: { _controller: ShiftBundle:Employer:approveShift } 
+
 employeeViewShift:
-    path: /shift/eview/{id}
-    defaults: { _controller: ShiftBundle:Shift:employeeViewShift }
+    path: /employee/view/{id}
+    defaults: { _controller: ShiftBundle:Employee:employeeViewShift }  
+
+employeeListShifts:
+    path: /employee/list
+    defaults: { _controller: ShiftBundle:Employee:listShifts }
+    
+subscribeShift:
+    path: /employee/subscribe/{id}
+    defaults: { _controller: ShiftBundle:Employee:subscribeShift }
+
+unsubscribeShift:
+    path: /employee/unsubscribe/{id}
+    defaults: { _controller: ShiftBundle:Employee:unsubscribeShift }
+ 
 acceptShift:
-    path: /shift/accept/{id}
-    defaults: { _controller: ShiftBundle:Shift:acceptShift }
+    path: /employee/accept/{id}
+    defaults: { _controller: ShiftBundle:Employee:acceptShift }
 checkInShift:
-    path: /shift/checkin/{id}
-    defaults: { _controller: ShiftBundle:Shift:checkInShift }
+    path: /employee/checkin/{id}
+    defaults: { _controller: ShiftBundle:Employee:checkInShift }
 completeShift:
-    path: /shift/complete/{id}
-    defaults: { _controller: ShiftBundle:Shift:completeShift }
+    path: /employee/complete/{id}
+    defaults: { _controller: ShiftBundle:Employee:completeShift }
 rejectShift:
-    path: /shift/reject/{id}
-    defaults: { _controller: ShiftBundle:Shift:rejectShift }
+    path: /employee/reject/{id}
+    defaults: { _controller: ShiftBundle:Employee:rejectShift }
