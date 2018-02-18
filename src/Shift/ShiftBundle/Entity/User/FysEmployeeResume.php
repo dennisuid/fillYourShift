@@ -45,49 +45,49 @@ class FysEmployeeResume
     /**
      * @var string
      *
-     * @ORM\Column(name="user_experience_1", type="string", length=255)
+     * @ORM\Column(name="user_experience_1", type="string", length=255, nullable=true)
      */
     private $userExperience1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_experience_2", type="string", length=255)
+     * @ORM\Column(name="user_experience_2", type="string", length=255, nullable=true)
      */
     private $userExperience2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_experience_3", type="string", length=255)
+     * @ORM\Column(name="user_experience_3", type="string", length=255, nullable=true)
      */
     private $userExperience3;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_certificate_1", type="string", length=255)
+     * @ORM\Column(name="user_certificate_1", type="string", length=255, nullable=true)
      */
     private $userCertificate1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_certificate_2", type="string", length=255)
+     * @ORM\Column(name="user_certificate_2", type="string", length=255), nullable=true
      */
     private $userCertificate2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_certificate_3", type="string", length=255)
+     * @ORM\Column(name="user_certificate_3", type="string", length=255, nullable=true)
      */
     private $userCertificate3;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="user_experience_year", type="integer")
+     * @ORM\Column(name="user_experience_year", type="integer" , nullable=true)
      */
     private $userExperienceYear;
 
@@ -98,7 +98,13 @@ class FysEmployeeResume
      */
     private $employeeResumeDoc;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="employee_profile_photo", type="blob", nullable=true)
+     */
+    private $employeeProfilePhoto;
+    
     /**
      * Get id
      *
@@ -371,5 +377,29 @@ class FysEmployeeResume
     public function getEmployeeResumeDoc()
     {
         return $this->employeeResumeDoc;
+    }
+    
+    /**
+     * Set employeeProfilePhoto
+     *
+     * @param string $employeeProfilePhoto
+     *
+     * @return FysEmployeeProfilePhoto
+     */
+    public function setEmployeeProfilePhoto($employeeProfilePhoto)
+    {
+        $this->employeeProfilePhoto = $employeeProfilePhoto;
+
+        return $this;
+    }
+
+    /**
+     * Get employeeProfilePhoto
+     *
+     * @return string
+     */
+    public function getEmployeeProfilePhoto()
+    {
+        return $this->employeeProfilePhoto;
     }
 }

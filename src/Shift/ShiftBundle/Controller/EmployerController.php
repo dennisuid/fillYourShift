@@ -17,6 +17,12 @@ class EmployerController extends Controller
     public function dashboardAction() {
         
     }
+    
+    public function employerShiftFlowAction(Request $request)
+    {
+        return $this->render('@Shift/Shift/employerShiftFlow.html.twig');
+    }
+    
     public function createNewShiftAction(Request $request) {
         $shift = new Shift();
 //        $shift->setPayLeadtime($this->container->getParameter('shift.pay_leadtime'));

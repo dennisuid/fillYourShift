@@ -38,18 +38,40 @@ class FysRole
     /**
      * @var string
      *
-     * @ORM\Column(name="role_description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="role_description", type="string", length=255 , nullable=true)
      */
     private $roleDescription;
-
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="org_id", type="integer", nullable=true)
+     */
+    private $orgId;
+    
     /**
      * @var string
      *
-     * @ORM\Column(name="org_name", type="string", length=255)
+     * @ORM\Column(name="org_name", type="string", length=255, nullable=true)
      */
     private $orgName;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="sector_id", type="integer")
+     */
+    private $sectorId;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sector_name", type="string", length=255, nullable=true)
+     */
+    private $sectorName;
+    
 
-
+    
     /**
      * Get id
      *
@@ -83,7 +105,8 @@ class FysRole
     {
         return $this->roleId;
     }
-
+    
+    
     /**
      * Set roleName
      *
@@ -131,7 +154,31 @@ class FysRole
     {
         return $this->roleDescription;
     }
+    
+    /**
+     * Set orgId
+     *
+     * @param integer $orgId
+     *
+     * @return FysRole
+     */
+    public function setOrgId($orgId)
+    {
+        $this->orgId = $orgId;
 
+        return $this;
+    }
+
+    /**
+     * Get orgId
+     *
+     * @return int
+     */
+    public function getOrgId()
+    {
+        return $this->orgId;
+    }
+    
     /**
      * Set orgName
      *
@@ -154,5 +201,53 @@ class FysRole
     public function getOrgName()
     {
         return $this->orgName;
+    }
+    
+    /**
+     * Set sectorId
+     *
+     * @param integer $sectorId
+     *
+     * @return FysRole
+     */
+    public function setSectorId($sectorId)
+    {
+        $this->sectorId = $sectorId;
+
+        return $this;
+    }
+
+    /**
+     * Get sectorId
+     *
+     * @return int
+     */
+    public function getSectorId()
+    {
+        return $this->sectorId;
+    }
+    
+    /**
+     * Set sectorName
+     *
+     * @param string $sectorName
+     *
+     * @return FysRole
+     */
+    public function setSectorName($sectorName)
+    {
+        $this->sectorName = $sectorName;
+
+        return $this;
+    }
+
+    /**
+     * Get sectorName
+     *
+     * @return string
+     */
+    public function getSectorName()
+    {
+        return $this->sectorName;
     }
 }

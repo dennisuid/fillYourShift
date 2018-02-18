@@ -63,7 +63,10 @@ facebook:
 facebook_redirect:
     path:     /user/facebook/redirect
     defaults: { _controller: ShiftBundle:User:redirectWithFaceBook }
-    
+
+employerShiftFlow:
+  path:     /employer/shiftFlow
+  defaults: { _controller: ShiftBundle:Employer:employerShiftFlow }
 createShift:
     path: /employer/create
     defaults: { _controller: ShiftBundle:Employer:createNewShift }
