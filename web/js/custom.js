@@ -204,16 +204,16 @@ $(document).ready(function() {
 
 
 // iCheck
-$(document).ready(function() {
-    if ($("input.flat")[0]) {
-        $(document).ready(function () {
-            $('input.flat').iCheck({
-                checkboxClass: 'icheckbox_flat-green',
-                radioClass: 'iradio_flat-green'
-            });
-        });
-    }
-});
+// $(document).ready(function() {
+//     if ($("input.flat")[0]) {
+//         $(document).ready(function () {
+//             $('input.flat').iCheck({
+//                 checkboxClass: 'icheckbox_flat-green',
+//                 radioClass: 'iradio_flat-green'
+//             });
+//         });
+//     }
+// });
 // /iCheck
 
 // Table
@@ -1775,7 +1775,16 @@ if (typeof NProgress != 'undefined') {
 			});
 	
 		}
-	   
+	function leaveAStepCallback(obj, context){
+        $.ajax({
+            type:'POST',
+            url: '/user/profile/personal',
+            dataType: "json",
+            data: $("#personal").serializeArray(),
+            cache: false
+        });
+        return true;
+    }
 	   /* SMART WIZARD */
 		
 		function init_SmartWizard() {
@@ -1786,13 +1795,14 @@ if (typeof NProgress != 'undefined') {
 			$('#wizard').smartWizard();
 
 			$('#wizard_verticle').smartWizard({
-			  transitionEffect: 'slide'
+			  	transitionEffect: 'slide',
+                enableFinishButton: true,
+                onLeaveStep: leaveAStepCallback
 			});
 
 			$('.buttonNext').addClass('btn btn-success');
 			$('.buttonPrevious').addClass('btn btn-primary');
 			$('.buttonFinish').addClass('btn btn-default');
-			
 		};
 	   
 	   

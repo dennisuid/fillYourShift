@@ -10,6 +10,12 @@ add:
 profile:
   path:     /user/profile
   defaults: { _controller: ShiftBundle:ShiftUser:profile }
+finish_profile:
+  path:     /user/profile/finish
+  defaults: { _controller: ShiftBundle:ShiftUser:finishProfile }
+ajax_personal_profile:
+  path:     /user/profile/personal
+  defaults: { _controller: ShiftBundle:ShiftUser:savePersonal }
 update:
     path:     /user/update
     defaults: { _controller: ShiftBundle:ShiftUser:update }

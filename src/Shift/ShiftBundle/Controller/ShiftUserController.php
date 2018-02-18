@@ -44,6 +44,30 @@ class ShiftUserController extends Controller
     {
         return $this->render('@Shift/ShiftUser/profile.html.twig');
     }
+    public function savePersonalAction(Request $request){
+        /**
+         * @var $user FysUser
+         */
+        $user = $this->getDoctrine()
+            ->getRepository(FysUser::class)
+            ->findOneBy(['id' => $this->getUser()->getId()]);
+
+        $dob = date_create_from_format('Y-m-d H:i:s', $request->request->get('birthday'));
+        $user->setFirstName($request->request->get('first-name'));
+        $user->setLastName($request->request->get('last-name'));
+        $user->setGender($request->request->get('gender'));
+        $user->setDob($dob);
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($user);
+        $em->flush();
+        return new Response("success");
+    }
+
+    public function finishProfileAction(Request $request)
+    {
+        $url = $this->generateUrl('dashboard');
+        return new RedirectResponse($url);
+    }
     public function registerAction(Request $request)
     {
         /** @var $dispatcher EventDispatcherInterface */

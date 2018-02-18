@@ -88,7 +88,18 @@ class FysUser extends BaseUser
      * @ORM\Column(name="country", type="string", length=255,  nullable=true)
      */
     private $country;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gender", type="string", length=15,  nullable=true)
+     */
+    private $gender;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dob", type="date", length=150,  nullable=true)
+     */
+    private $dob;
     /**
      * @var string
      *
@@ -470,5 +481,37 @@ class FysUser extends BaseUser
     public function setGoogleplusAccessToken($googleplus_access_token)
     {
         $this->googleplus_access_token = $googleplus_access_token;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender(string $gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDob(): string
+    {
+        return $this->dob;
+    }
+
+    /**
+     * @param string $dob
+     */
+    public function setDob(string $dob)
+    {
+        $this->dob = $dob;
     }
 }
