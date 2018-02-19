@@ -488,6 +488,9 @@ class FysUser extends BaseUser
      */
     public function getGender(): string
     {
+        if (empty($this->gender)){
+            return "";
+        }
         return $this->gender;
     }
 
