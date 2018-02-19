@@ -53,13 +53,13 @@
             <label class="control-label col-md-3 col-sm-3">Gender</label>
             <p>
                 M:
-                {% if app.user.gender == 'M' %}
+                {% if app.user.gender is defined and app.user.gender == 'M' %}
                     <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required/>
                 {% else %}
                     <input type="radio" class="flat" name="gender" id="genderM" value="M" required/>
                 {% endif %}
                 F:
-                {% if app.user.gender == 'F' %}
+                {% if app.user.gender is defined and app.user.gender == 'F' %}
                     <input type="radio" class="flat" name="gender" id="genderF" checked="" value="F"/>
                 {% else %}
                     <input type="radio" class="flat" name="gender" id="genderF" value="F"/>
