@@ -72,7 +72,7 @@
             </label>
             <div class="col-md-6 col-sm-6">
                 <input id="birthday" name="birthday" class="date-picker form-control col-md-7 col-xs-12"
-                       required="required" type="text">
+                       required="required" type="date" value="{{ app.user.dob|date('Y-m-d') }}">
             </div>
         </div>
     </form>

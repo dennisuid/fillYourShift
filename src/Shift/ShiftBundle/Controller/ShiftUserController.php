@@ -22,6 +22,11 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 class ShiftUserController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws UserNotFoundException
+     */
     public function getAction(Request $request)
     {
         $user = $this->getDoctrine()
@@ -52,7 +57,11 @@ class ShiftUserController extends Controller
             ->getRepository(FysUser::class)
             ->findOneBy(['id' => $this->getUser()->getId()]);
 
-        $dob = date_create_from_format('Y-m-d H:i:s', $request->request->get('birthday'));
+        $dob = date_create_from_format('Y-m-d', $request->request->get('birthday'));
+        /**
+         * @var $user FysUser
+         */
+        $user = $this->getUserFromSession();
         $user->setFirstName($request->request->get('first-name'));
         $user->setLastName($request->request->get('last-name'));
         $user->setGender($request->request->get('gender'));
@@ -63,6 +72,28 @@ class ShiftUserController extends Controller
         return new Response("success");
     }
 
+    public function saveAddressDetailsAction(Request $request)
+    {
+        /**
+         * @var $user FysUser
+         */
+        $user = $this->getUserFromSession();
+        $user->setHouseNumber($request->request->get('house_number'));
+        $user->setAddressLine1($request->request->get('address_line1'));
+        $user->setAddressLine2($request->request->get('address_line2'));
+        $user->setPostcode($request->request->get('post_code'));
+        $user->setCountry($request->request->get('country'));
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($user);
+        $em->flush();
+        return new Response("success");
+    }
+    private function getUserFromSession()
+    {
+        return $this->getDoctrine()
+            ->getRepository(FysUser::class)
+            ->findOneBy(['id' => $this->getUser()->getId()]);
+    }
     public function finishProfileAction(Request $request)
     {
         $url = $this->generateUrl('dashboard');

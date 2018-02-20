@@ -2,8 +2,10 @@
 
 namespace Shift\ShiftBundle\Entity\User;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use function PHPSTORM_META\type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -502,18 +504,16 @@ class FysUser extends BaseUser
         $this->gender = $gender;
     }
 
-    /**
-     * @return string
-     */
-    public function getDob(): string
+
+    public function getDob()
     {
         return $this->dob;
     }
 
     /**
-     * @param string $dob
+     * @param DateTime $dob
      */
-    public function setDob(string $dob)
+    public function setDob(DateTime $dob)
     {
         $this->dob = $dob;
     }
