@@ -32,19 +32,21 @@
                 </ul>
                 <div id="stepContainer">
                     <div id="step-1">
-                        {% include "@user/personal.html.twig" %}
+{#                        {% if shift.getShiftStatus() != "CREATED" %} #}
+                        {% include "@shift/createShift.html_1.twig" %}
                     </div>
                     <div id="step-2">
-                        {% include "@user/address.html.twig" %}
+                        {% include "@shift/viewShift.html_1.twig" %}
                     </div>
                     <div id="step-3">
-                        {% include "@user/moreInfo.html.twig" %}
+{#                        {% include "@shift/subscription.html.twig" %}#}
+                          {% include "@shift/viewShift.html_1.twig" %}
                     </div>
                     <div id="step-4">
-                        {% include "@user/resume.html.twig" %}
+                        {% include "@shift/viewShift.html_1.twig" %}
                     </div>
                     <div id="step-5">
-                        {% include "@user/resume.html.twig" %}
+                        {% include "@shift/viewShift.html_1.twig" %}
                     </div>
                 </div>
             </div>

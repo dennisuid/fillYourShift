@@ -25,12 +25,12 @@
                     
                     <tr>
                         <td>Start Date</td>
-                        <td>{{ shift.start_date_hours }}</td> 
+                        <td>{{ shift.start_date_hours|date('Y-m-d H:i:s') }}</td> 
                         
                     </tr>
                     <tr>
                         <td>End Date</td>
-                        <td>{{ shift.end_date_hours }}</td> 
+                        <td>{{ shift.end_date_hours|date('Y-m-d H:i:s') }}</td> 
                         
                     </tr>
                     <tr>

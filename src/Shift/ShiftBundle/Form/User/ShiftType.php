@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Shift\ShiftBundle\Entity\Shift\Shift;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ShiftType extends AbstractType
 {
@@ -27,8 +28,10 @@ class ShiftType extends AbstractType
             ->add('pay_leadtime', HiddenType::class,['data' => $payLeadTime])
             ->add('role_id', TextType::class)
             ->add('role_name', TextType::class)
-            ->add('start_date_hours', HiddenType::class)
-            ->add('end_date_hours', HiddenType::class)
+//            ->add('start_date_hours', HiddenType::class)
+//            ->add('end_date_hours', HiddenType::class)
+            ->add('start_date_hours', DateTimeType::class)
+            ->add('end_date_hours', DateTimeType::class)
             ->add('shift_duration', TextType::class)
             ->add('shift_rate', TextType::class)
             ->add('shift_status', TextType::class)

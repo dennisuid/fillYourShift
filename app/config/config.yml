@@ -39,6 +39,7 @@ twig:
     paths:
         "%kernel.root_dir%/Resources" : root
         "%kernel.root_dir%/Resources/ShiftBundle/views/ShiftUser" : user
+        "%kernel.root_dir%/Resources/ShiftBundle/views/Shift" : shift
     form_themes:
         - 'bootstrap_3_horizontal_layout.html.twig'
 

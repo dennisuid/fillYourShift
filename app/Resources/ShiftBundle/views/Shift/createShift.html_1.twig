@@ -1,55 +1,13 @@
-{% extends "@root/base.html.twig" %}
-{% block javascripts %}
-{#    <script type="text/javascript">
-        $(function () {
-            $('#shift_start_date_hours').datetimepicker();
-            $('#shift_end_date_hours').datetimepicker({
-                useCurrent: false //Important! See issue #1075
-            });
-            $("#shift_start_date_hours").on("dp.change", function (e) {
-                $('#shift_end_date_hours').data("DateTimePicker").minDate(e.date);
-            });
-            $("#shift_end_date_hours").on("dp.change", function (e) {
-                $('#shift_start_date_hours').data("DateTimePicker").maxDate(e.date);
-            });
-        });
-    </script>#}
-{% endblock %}
+
 
 {% block body %}
-    <body>
+   
    <script src="{{ asset('js/front.js') }}"></script>
         <div class="panel panel-default">
             <div class="panel-heading">Create new shift</div>
             <div class="panel-body">
                 {{ form_start(form) }}
                 {{ form_widget(form) }} 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label required" for="shift_start_date_hours">Shift start date</label>
-                    <div class="col-sm-10">
-                        {#<div class="input-group date form_datetime col-md-5" data-date-format="dd MM yyyy - HH:ii p" data-link-field="shift_start_date_hours">
-                            <input class="form-control" size="16" type="text" value="" readonly>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </div>#}
-                        {{ form_errors(form.start_date_hours) }}
-                        {{ form_widget(form.start_date_hours) }}  
-                        <br/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label required" for="shift_end_date_hours">Shift end date</label>
-                    <div class="col-sm-10">
-                        {#<div class="input-group date form_datetime col-md-5" data-date-format="dd MM yyyy - HH:ii p" data-link-field="shift_end_date_hours">
-                            <input class="form-control" size="16" type="text" value="" readonly>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </div>#}
-                        {{ form_errors(form.end_date_hours)}}
-                        {{ form_widget(form.end_date_hours) }}
-                        <br/>
-                    </div>
-                </div>
                 <div>
                     <input type="submit" value="Save" />
                 </div>
@@ -57,7 +15,7 @@
             </div>
         </div>
 
-    </body>
+    
 {% endblock %}
 
 {#{% block body %}

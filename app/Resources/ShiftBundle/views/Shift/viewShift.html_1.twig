@@ -1,0 +1,75 @@
+
+{% block body %}
+    
+        <div class="panel panel-default">
+            <div class="panel-heading">View Shift</div>
+            <div class="panel-body">
+                <table style="width:80%">
+                    <tr>
+                        <td>Shift ID</td>
+                        <td>{{shift.getId()}}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Org Name</td>
+                        <td>{{ shift.getOrgName() }}</td> 
+                        
+                    </tr>
+                 
+                    <tr>
+                        <td>Role Name</td>
+                        <td>{{ shift.getRoleName() }}</td> 
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td>Start Date</td>
+                        <td>{{ shift.getStartDateHours()|date('Y-m-d H:i:s') }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>End Date</td>
+                        <td>{{ shift.getEndDateHours()|date('Y-m-d H:i:s') }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Rate</td>
+                        <td>{{ shift.getShiftRate() }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Status</td>
+                        <td>{{ shift.getShiftStatus() }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Shift Created By</td>
+                        <td>{{ shift.getShiftCreatedBy() }}</td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Pay Lead time</td>
+                        <td>{{ shift.getPayLeadTime() }}</td> 
+                </table>
+                
+                {% if app.user.userType is defined and app.user.userType == "employer" %}
+                    
+                <a href="{{ url('updateShift', {'id': shift.id })}}" class ='btn bg-success'>Edit</a>
+ 
+                <a href="{{ url('publishShift', {'id': shift.id })}}" class ='btn bg-success'>Publish</a>
+                <a href="{{ url('deleteShift', {'id': shift.id })}}" class ='btn btn-danger'>Delete</a>
+                {% endif %}
+                
+                {% if app.user.userType is defined and app.user.userType == "employee" %}
+                  
+                <a href="{{ url('subscribeShift', {'id': shift.id })}}" class ='btn bg-success'>Subscribe</a>
+                <a href="{{ url('unsubscribeShift', {'id': shift.id })}}" class ='btn bg-success'>Unsubscribe</a>
+                
+                {% endif %}
+                
+            </div>
+            
+            
+         
+    
+{% endblock %}

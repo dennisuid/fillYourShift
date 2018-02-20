@@ -52,14 +52,14 @@ class Shift {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_date_hours", type="date")
+     * @ORM\Column(name="start_date_hours", type="datetime")
      */
     private $startDateHours;
-    //protected $startDateHours = ['start_date_hours'];
+
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_date_hours", type="date")
+     * @ORM\Column(name="end_date_hours", type="datetime")
      */
     private $endDateHours;
 
@@ -278,6 +278,10 @@ class Shift {
      * @return \DateTime
      */
     public function getStartDateHours() {
+//        if (empty($this->startDateHours)){
+//            return "";
+//        }
+//        return $this->startDateHours->format('Y-m-d H:i:s');
         return $this->startDateHours;
     }
 
@@ -300,6 +304,12 @@ class Shift {
      * @return \DateTime
      */
     public function getEndDateHours() {
+//        if (empty($this->endDateHours)){
+//            return "";
+//        }
+//        return $this->endDateHours->format('Y-m-d H:i:s');
+        
+        
         return $this->endDateHours;
     }
 

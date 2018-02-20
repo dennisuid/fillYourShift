@@ -20,12 +20,51 @@ class EmployerController extends Controller
     
     public function employerShiftFlowAction(Request $request)
     {
-        return $this->render('@Shift/Shift/employerShiftFlow.html.twig');
+        $shiftId = $request->get('id');
+        $subscribers = [];
+        $shift = $this->getDoctrine()
+                ->getRepository(Shift::class)
+                ->find($shiftId);
+        if (empty($shift)) {
+            $this->addFlash(
+                    'failure', 'Shift you tried to access dont exist'
+            );
+        }
+        
+
+        if ($shift->getShiftStatus() != 'CREATED') {
+            $appliedShifts = $this->getDoctrine()
+                    ->getRepository(FysShiftApply::class)
+                    ->findBy(['shiftId' => $shiftId]);
+            if (!empty($appliedShifts)) {
+                foreach ($appliedShifts as $appliedShift) {
+                    $subscribers[] = $appliedShift;
+                   
+                }
+            }
+        }
+        
+         $form = $this->createForm(ShiftType::class, $shift, array(
+            'action' => $this->generateUrl('submitShift'),
+            'method' => 'POST',
+            'mode' => 'create',
+            'payleadtime' => $this->container->getParameter('shift.pay_leadtime'),
+            'shiftCreatedBy' => $this->getUser()->getEmail(),
+            'shiftCreatedById' => $this->getUser()->getID()
+           
+        ));
+        
+
+        
+        $form->handleRequest($request);
+
+        
+        return $this->render('@Shift/Shift/employerShiftFlow.html.twig', ['form' => $form->createView(), 'shift' => $shift, 'subscribers' => $subscribers]);
     }
     
     public function createNewShiftAction(Request $request) {
         $shift = new Shift();
-//        $shift->setPayLeadtime($this->container->getParameter('shift.pay_leadtime'));
+//      $shift->setPayLeadtime($this->container->getParameter('shift.pay_leadtime'));
         $form = $this->createForm(ShiftType::class, $shift, array(
             'action' => $this->generateUrl('submitShift'),
             'method' => 'POST',
@@ -53,23 +92,30 @@ class EmployerController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $shift = $form->getData();
-            var_dump($shift->getStartDateHours());
-            var_dump($shift->getShiftRate());
             
-            $startTime = $request->request->get('start_date_hours');
-            var_dump($startTime);
-            //var_dump($request);
+            //everything to do with date picker here
             
-            $startDateHours = date_create_from_format('Y-m-d H:i:s', $shift->getStartDateHours());
-            $shift->setStartDateHours($startDateHours);
+//            var_dump($shift->getStartDateHours());
+//            var_dump($shift->getShiftRate());
+//            
+//            $startTime = $request->request->get('start_date_hours');
+//            var_dump($startTime);
+//            //var_dump($request);
+//            
+//            $startDateHours = date_create_from_format('Y-m-d H:i:s', $shift->getStartDateHours());
+//            $shift->setStartDateHours($startDateHours);
+//            
+//            //$shift->setStartDateHours($startTime);
+//            var_dump($shift->getStartDateHours());
+//            var_dump($shift);
+//            
+//            $endDateHours = date_create_from_format('Y-m-d H:i:s', $shift->getEndDateHours());
+//            $shift->setEndDateHours($endDateHours);
             
-            //$shift->setStartDateHours($startTime);
-            var_dump($shift->getStartDateHours());
-            var_dump($shift);
+            // Everything to do with date picker ends 
             
-            $endDateHours = date_create_from_format('Y-m-d H:i:s', $shift->getEndDateHours());
-            $shift->setEndDateHours($endDateHours);
             $shift->setShiftJobRate(5.7);
+     
 //            print_r($shift); die;
             $em = $this->getDoctrine()->getManager();
             $em->persist($shift);
@@ -106,8 +152,8 @@ class EmployerController extends Controller
             'shift_org_name' => $shift->getOrgName(),
             'pay_lead_time' => $shift->getPayLeadtime(),
             'role_name' => $shift->getRoleName(),
-            'start_date_hours' => date_format($shift->getStartDateHours(), "Y/m/d H:i:s"),
-            'end_date_hours' => date_format($shift->getEndDateHours(), "Y/m/d H:i:s"),
+            'start_date_hours' => $shift->getStartDateHours(),
+            'end_date_hours' => $shift->getEndDateHours(),
             'shift_rate' => $shift->getShiftRate(),
             'shift_status' => $shift->getShiftStatus(),
             'shift_created_by' => $shift->getShiftCreatedBy()
@@ -180,7 +226,26 @@ class EmployerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            
+            $shiftId = $request->get('id');
+            $shift = $this->getDoctrine()
+                ->getRepository(Shift::class)
+                ->find($shiftId);
+            $shift = $form->getData();
+            
+            var_dump($shift->getStartDateHours());
+            var_dump($request->get('shift_start_date_hours'));
+            
+            var_dump($shift->getEndDateHours());
+            var_dump($request->get('shift_end_date_hours'));
+            
+            $shift->setShiftCreatedBy($this->getUser()->getEmail());
+            $shift->setShiftCreatedById($this->getUser()->getId());
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($shift);
+            $em->flush();
+            
         }
 
         $shifts = $this->getDoctrine()

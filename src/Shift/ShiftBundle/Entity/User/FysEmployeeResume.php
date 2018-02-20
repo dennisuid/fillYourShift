@@ -20,7 +20,7 @@ class FysEmployeeResume
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    
     /**
      * @var int
      *

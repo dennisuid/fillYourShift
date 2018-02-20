@@ -8,17 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
     {% block stylesheets %}{% endblock %}
 
-    <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.scrollTo.min.js') }}"></script>
-    <!-- Mordernizr -->
-    <script src="{{ asset('js/modernizr-2.6.2.min.js') }}"></script>
 
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('js/respond.min.js') }}"></script>
-    <script src="{{ asset('js/waypoints.min.js') }}"></script>
-    <script src="{{ asset('js/moment-with-locales.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <!-- Theme stylesheet -->
@@ -85,7 +75,23 @@
 </div><!-- /.container -->
 {% block home_body %}
 {% endblock %}
+{% block page_scripts %}
+    <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script> {#yes#}
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script> {#yes#}
+    <script src="{{ asset('js/jquery.scrollTo.min.js') }}"></script> {#yes#}
+    <!-- Mordernizr -->
+    <script src="{{ asset('js/modernizr-2.6.2.min.js') }}"></script> {#yes#}
+
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script> {#yes#}
+    <script src="{{ asset('js/respond.min.js') }}"></script> {#yes#}
+    <script src="{{ asset('js/waypoints.min.js') }}"></script> {#yes#}
+    <script src="{{ asset('js/moment-with-locales.js') }}"></script> {#yes#}
+    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script> {#yes#}
+{#    <script src="{{ asset('js/custom.js') }}"></script> {#yes#}#}
+    
+{% endblock %}
 {% block javascripts %}
+    
 {% endblock %}
 </body>
 </html>
