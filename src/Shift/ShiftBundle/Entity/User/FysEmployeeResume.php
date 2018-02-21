@@ -27,14 +27,6 @@ class FysEmployeeResume
      * @ORM\Column(name="employee_id", type="integer")
      */
     private $employeeId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="user_resume_id", type="integer")
-     */
-    private $userResumeId;
-
     /**
      * @var string
      *
@@ -66,23 +58,23 @@ class FysEmployeeResume
     /**
      * @var string
      *
-     * @ORM\Column(name="user_certificate_1", type="string", length=255, nullable=true)
+     * @ORM\Column(name="user_organisation_1", type="string", length=255, nullable=true)
      */
-    private $userCertificate1;
+    private $userOrganisation1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_certificate_2", type="string", length=255), nullable=true
+     * @ORM\Column(name="user_organisation_2", type="string", length=255, nullable=true)
      */
-    private $userCertificate2;
+    private $userOrganisation2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_certificate_3", type="string", length=255, nullable=true)
+     * @ORM\Column(name="user_organisation_3", type="string", length=255, nullable=true)
      */
-    private $userCertificate3;
+    private $userOrganisation3;
 
     /**
      * @var int
@@ -138,31 +130,6 @@ class FysEmployeeResume
     {
         return $this->employeeId;
     }
-
-    /**
-     * Set userResumeId
-     *
-     * @param integer $userResumeId
-     *
-     * @return FysEmployeeResume
-     */
-    public function setUserResumeId($userResumeId)
-    {
-        $this->userResumeId = $userResumeId;
-
-        return $this;
-    }
-
-    /**
-     * Get userResumeId
-     *
-     * @return int
-     */
-    public function getUserResumeId()
-    {
-        return $this->userResumeId;
-    }
-
     /**
      * Set employeeResumeDesc
      *

@@ -2088,8 +2088,11 @@ function leaveAStepCallbackProfile(obj, context) {
         case 2 :
             ajaxCall('/user/profile/address', $("#address").serializeArray());
             return true;
+        case 3 :
+            ajaxCall('/user/profile/resume', $("#more_info").serializeArray());
+            return true;
         default:
-            ajaxCall('/user/profile/personal', $("#personal").serializeArray());
+            ajaxCall('//user/profile/resume', $("#more_info").serializeArray());
             return true;
     }
 }

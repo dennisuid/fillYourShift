@@ -14,13 +14,11 @@ class Version20171230160922 extends AbstractMigration
     public function up(Schema $schema)
     {
         $roles = [
-            [1, 'employee', 'some body who does the work', 'test org'],
-            [2, 'employer', 'some body who assigns the work', 'test org']
+            [1, 'employee', 'some body who does the work'],
+            [2, 'employer', 'some body who assigns the work']
         ];
         foreach ($roles as $role) {
-            $sql = 'INSERT INTO fillyourshift.fys_role(role_id, role_name, role_description, org_name) VALUES'
-                    .'('.$role[0].',"'. $role[1].'","'. $role[2].'","'. $role[3].'")';
-            echo $sql. "\n";
+            $sql = "INSERT INTO fillyourshift.fys_role(role_id, role_name, role_description) VALUES ($role[0],'$role[1]','$role[2]')";
             $this->addSql($sql);
         }
     }

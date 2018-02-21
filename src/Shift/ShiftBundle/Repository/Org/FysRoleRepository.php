@@ -1,9 +1,10 @@
 <?php
 
-namespace Shift\ShiftBundle\Repository;
+namespace Shift\ShiftBundle\Repository\Org;
 
 use Doctrine\ORM\EntityRepository;
 use Shift\ShiftBundle\Entity\Org\FysRole;
+
 class FysRoleRepository extends EntityRepository
 {
     public function getAllRoles()

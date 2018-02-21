@@ -10,4 +10,13 @@ namespace Shift\ShiftBundle\Repository\User;
  */
 class FysEmployeeResumeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByEmployeeId($employeeID)
+    {
+        $q = $this->createQueryBuilder('e')
+            ->where('e.employeeId > :employeeID')
+            ->setParameter('employeeID', $employeeID)
+            ->getQuery();
+
+        return $q->getResult();
+    }
 }
