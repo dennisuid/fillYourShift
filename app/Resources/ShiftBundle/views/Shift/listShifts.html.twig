@@ -8,9 +8,9 @@
                 {% for shift in shifts %}
                 <section>
                     <h3>
-                        <a href="{{ path('viewShift', {'id': shift.getId()}) }}">{{ shift.orgName()}}</a>
+                        <a href="{{ path('employerShiftFlow', {'id': shift.getId()}) }}">{{ shift.orgName()}}</a>
                     </h3>
-
+                    
                     <dl>
                         {#<dt>where:</dt>
                         <dd>{{ event.location }}</dd>

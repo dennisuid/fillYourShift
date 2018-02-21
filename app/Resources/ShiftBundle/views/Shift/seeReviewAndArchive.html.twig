@@ -1,0 +1,43 @@
+
+
+{% block body %}
+   <div class="panel panel-default">
+        <div class="panel-heading">Subscribers</div>
+            <div class="panel-body">
+                <table style="width:100%">
+                    <tr>
+                      <th>EMP ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th> 
+                      <th>Resume ID</th>
+                      <th>Apply Time</th>
+                      <th>Status</th>
+                      {% if shift.getShiftStatus() != "CREATED" %}
+                      <th>Action</th>
+                      {% endif %}
+                    </tr>
+                    
+                    {% if app.user.userType is defined and app.user.userType == "employer" %}
+                        
+                        {% if subscribers != null %}
+                            {% for subscriber in subscribers %}
+
+                            <tr>
+                              <td>{{subscriber.getUserId()}}</td>
+                              <td>{{ subscriber.getEmployeeFirstName() }}</td> 
+                              <td>{{subscriber.getEmployeeLastName()}}</td>
+                              <td>{{subscriber.getEmployeeResumeId()}}</td>
+                              <td>{{subscriber.getShiftApplyTime()|date('Y-m-d H:i:s')}}</td>
+                              <td>{{subscriber.getApplyStatus()}}</td>
+                              {% if shift.getShiftStatus() != "CREATED" %}
+                              <td><a href="{{ url('approveShift', {'id': shift.getId(), 'subscriberId':subscriber.getUserId() })}}" class ='btn bg-success'>Approve</a></td>
+                              {% endif %}
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                   
+                </table>
+            </div>
+    </div>
+{% endblock %}

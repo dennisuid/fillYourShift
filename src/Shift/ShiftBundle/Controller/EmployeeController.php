@@ -94,7 +94,13 @@ class EmployeeController extends Controller
         $fysShiftApply->setApplyStatus('SUBSCRIBED');
         $em->persist($fysShiftApply);
         $em->flush();
-
+        
+        $shift = $this->getDoctrine()
+                ->getRepository(Shift::class)
+                ->find($shiftId);
+        
+        $this->get('fys.genericEvent')->genericEvent('SHIFT_SUBSCRIBED', 'SHIFT', $this->getUser(), $shift); //generating an event for CREATE
+        
         return $this->redirectToRoute('dashboard');
     }
 
@@ -152,6 +158,8 @@ class EmployeeController extends Controller
                     'success', 'Thanks for Accepting the Shift'
             );
         
+        $this->get('fys.genericEvent')->genericEvent('SHIFT_ACCEPTED', 'SHIFT', $this->getUser(), $shift); //generating an event for CREATE
+
         return $this->redirectToRoute('employeeViewShift', array('id' => $shiftId));
     }
     
@@ -184,6 +192,9 @@ class EmployeeController extends Controller
             $shift->setShiftStatus($status);
             $em->persist($shift);
             $em->flush();
+        
+        $this->get('fys.genericEvent')->genericEvent('SHIFT_CHECKEDIN', 'SHIFT', $this->getUser(), $shift); //generating an event for CREATE
+
         }
         
         
@@ -208,6 +219,12 @@ class EmployeeController extends Controller
         
         $interval = date_diff($datetime1,$datetime2,FALSE);
         
+        var_dump('I am in complete');
+        var_dump($datetime1);
+        var_dump($datetime2);
+        
+        var_dump($interval->format('%d'));
+        
         if ($interval->format('%d') <= 0) {
             
             $endTimeString = $datetime1->format('Y-M-d H');
@@ -226,6 +243,8 @@ class EmployeeController extends Controller
             $this->addFlash(
                     'success', 'Well done on completing shift. We will progress with payment approvals'
             );
+            
+            $this->get('fys.genericEvent')->genericEvent('SHIFT_COMPLETE', 'SHIFT', $this->getUser(), $shift);
         }
         
         

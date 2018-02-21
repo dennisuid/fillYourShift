@@ -52,19 +52,18 @@
                 <tr>
                     <td>Status</td>
                     {%if shift.getShiftStatus() == 'APPROVED'%}
-                    <td><a href="{{ url()}}" class ='btn bg-success'>Waiting Acceptance</a></td>
-                    <td><a href="{{ url()}}" class ='btn bg-success'>{{shift.get}}</a></td>
+                    <td><a href="" class ='btn bg-success'>Waiting Acceptance</a></td>
                     {%endif%}
                     {%if shift.getShiftStatus() == 'ACCEPTED'%}
-                    <td><a href="{{ url()}}" class ='btn bg-success'>Accepted</a></td> 
+                    <td><a href="" class ='btn bg-success'>Accepted</a></td> 
                     {%endif%}
-                    {%if shift.getShiftStatus() == 'APPROVED'%}
-                    <td><a href="{{ url()}}" class ='btn bg-success'>Waiting Acceptance</a></td> 
+                    {%if shift.getShiftStatus() == 'CHECKEDIN'%}
+                    <td><a href="" class ='btn bg-success'>Checked In</a></td> 
                     {%endif%}
                 </tr>
             </table>
 
-            {% if app.user.userType is defined and app.user.userType == "employer" %}
+ {#           {% if app.user.userType is defined and app.user.userType == "employer" %}
 
                 <a href="{{ url('updateShift', {'id': shift.id })}}" class ='btn bg-success'>Edit</a>
                 <a href="{{ url('publishShift', {'id': shift.id })}}" class ='btn bg-success'>Publish</a>
@@ -76,7 +75,34 @@
                 <a href="{{ url('subscribeShift', {'id': shift.id })}}" class ='btn bg-success'>Subscribe</a>
                 <a href="{{ url('unsubscribeShift', {'id': shift.id })}}" class ='btn bg-success'>Unsubscribe</a>
 
-            {% endif %}
+            {% endif %}#}
+
+        </div>
+ 
+        <div class="panel-heading">Shift Audit Trail</div>
+        <div class="panel-body">
+            <table style="width:80%">
+                <tr>
+                      <th>ACTION</th>
+                      <th>UPDATED BY</th>
+                      <th>UPDATED AT</th> 
+                </tr>
+                    
+                {% if app.user.userType is defined and app.user.userType == "employer" %}
+                        
+                    {% if eventTrails != null %}
+                        {% for eventTrail in eventTrails %}
+
+                        <tr>
+                            <td><a href="" class ='btn bg-success'>{{eventTrail.getEventName()}}</a></td>
+                            <td>{{ eventTrail.getEventCreatedByName()}}</td> 
+                            <td>{{eventTrail.getEventCreatedTime()|date('Y-m-d H:i:s')}}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            </table>
+
 
         </div>
     </div>

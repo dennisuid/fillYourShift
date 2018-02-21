@@ -10,6 +10,7 @@ use \Shift\ShiftBundle\Entity\Shift\FysShiftApply;
 use \Shift\ShiftBundle\Entity\User\FysUser;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\Date;
+use \Shift\ShiftBundle\Entity\Event\FysEvents;
 
 class EmployerController extends Controller
 {
@@ -39,7 +40,7 @@ class EmployerController extends Controller
             if (!empty($subscribers)) {
                 foreach ($subscribers as $subscriber) {
                     
-                    if ($shift->getShiftStatus() == "APPROVED"){
+                    if ($shift->getShiftStatus() == "APPROVED" || "ACCEPTED" || "CHECKEDIN" || 'COMPLETED'){
                         
                         if($subscriber->getApplyStatus() == "SELECTED"){
                            
@@ -54,6 +55,9 @@ class EmployerController extends Controller
             }
         }
         
+        $eventTrails = $this->getDoctrine()
+                    ->getRepository(FysEvents::class)
+                    ->findBy(['eventModifiedObjectId' => $shiftId]);
         
          $form = $this->createForm(ShiftType::class, $shift, array(
             'action' => $this->generateUrl('submitShift'),
@@ -70,7 +74,7 @@ class EmployerController extends Controller
         $form->handleRequest($request);
 
         
-        return $this->render('@Shift/Shift/employerShiftFlow.html.twig', ['form' => $form->createView(), 'shift' => $shift, 'subscribers' => $subscribers, 'selectedSubscriber' => $selectedSubscriber]);
+        return $this->render('@Shift/Shift/employerShiftFlow.html.twig', ['form' => $form->createView(), 'shift' => $shift, 'subscribers' => $subscribers, 'selectedSubscriber' => $selectedSubscriber, 'eventTrails' => $eventTrails]);
     }
     
     public function createNewShiftAction(Request $request) {
@@ -132,6 +136,9 @@ class EmployerController extends Controller
             $em->persist($shift);
             $em->flush();
         }
+        
+        $this->get('fys.genericEvent')->genericEvent('SHIFT_CREATED', 'SHIFT', $this->getUser(), $shift); //generating an event for CREATE
+        
         if (!empty($shift->getId())) {
             $shiftId = $shift->getId();
         }
@@ -201,6 +208,9 @@ class EmployerController extends Controller
         $em->remove($shift);
         $em->flush();
         //building form with SHIFT returned from DB
+        
+        $this->get('fys.genericEvent')->genericEvent('SHIFT_DELETED', 'SHIFT', $this->getUser(), $shift); //generating an event for DELETE
+        
         $shifts = $this->getDoctrine()
                 ->getRepository(Shift::class)
                 ->findBy(['shiftCreatedById' => $this->getUser()->getId()]);
@@ -258,7 +268,9 @@ class EmployerController extends Controller
             $em->flush();
             
         }
-
+        
+        $this->get('fys.genericEvent')->genericEvent('SHIFT_MODIFIED', 'SHIFT', $this->getUser(), $shift); //generating an event for CREATE
+        
         $shifts = $this->getDoctrine()
                 ->getRepository(Shift::class)
                 ->findBy(['shiftCreatedById' => $this->getUser()->getId()]);
@@ -289,7 +301,9 @@ class EmployerController extends Controller
         $shift->setShiftStatus($status);
         $em->persist($shift);
         $em->flush();
-
+        
+        $this->get('fys.genericEvent')->genericEvent('SHIFT_PUBLISHED', 'SHIFT', $this->getUser(), $shift); //generating an event for CREATE
+        
         return $this->redirectToRoute('viewShift', array('id' => $shiftId));
     }
 
@@ -337,9 +351,11 @@ class EmployerController extends Controller
                     $em->persist($appliedShift);
                     $em->flush();
                 }
-              
+        
         }
         
+        $this->get('fys.genericEvent')->genericEvent('SHIFT_APPROVED', 'SHIFT', $this->getUser(), $shift); //generating an event for CREATE
+        //
         // Send the list of all Shifts created by this user
         
         $shiftsForThisUser = $this->getDoctrine()
