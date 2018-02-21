@@ -49,6 +49,19 @@
                     <td>Country</td>
                     <td>{{ selectedSubscriber.getcountry() }}</td> 
                 </tr>
+                <tr>
+                    <td>Status</td>
+                    {%if shift.getShiftStatus() == 'APPROVED'%}
+                    <td><a href="{{ url()}}" class ='btn bg-success'>Waiting Acceptance</a></td>
+                    <td><a href="{{ url()}}" class ='btn bg-success'>{{shift.get}}</a></td>
+                    {%endif%}
+                    {%if shift.getShiftStatus() == 'ACCEPTED'%}
+                    <td><a href="{{ url()}}" class ='btn bg-success'>Accepted</a></td> 
+                    {%endif%}
+                    {%if shift.getShiftStatus() == 'APPROVED'%}
+                    <td><a href="{{ url()}}" class ='btn bg-success'>Waiting Acceptance</a></td> 
+                    {%endif%}
+                </tr>
             </table>
 
             {% if app.user.userType is defined and app.user.userType == "employer" %}
