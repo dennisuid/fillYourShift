@@ -12,11 +12,13 @@ class FysEmployeeResumeRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findByEmployeeId($employeeID)
     {
-        $q = $this->createQueryBuilder('e')
-            ->where('e.employeeId > :employeeID')
+        $resumeDetails = $this->createQueryBuilder('e')
+            ->where('e.employeeId = :employeeID')
             ->setParameter('employeeID', $employeeID)
-            ->getQuery();
-
-        return $q->getResult();
+            ->getQuery()->getResult();
+        if (empty($resumeDetails)){
+            return [];
+        }
+        return $resumeDetails[0];
     }
 }

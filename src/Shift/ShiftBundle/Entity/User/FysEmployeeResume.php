@@ -20,7 +20,7 @@ class FysEmployeeResume
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @var int
      *
@@ -96,7 +96,7 @@ class FysEmployeeResume
      * @ORM\Column(name="employee_profile_photo", type="blob", nullable=true)
      */
     private $employeeProfilePhoto;
-    
+
     /**
      * Get id
      *
@@ -130,6 +130,7 @@ class FysEmployeeResume
     {
         return $this->employeeId;
     }
+
     /**
      * Set employeeResumeDesc
      *
@@ -226,77 +227,6 @@ class FysEmployeeResume
         return $this->userExperience3;
     }
 
-    /**
-     * Set userCertificate1
-     *
-     * @param string $userCertificate1
-     *
-     * @return FysEmployeeResume
-     */
-    public function setUserCertificate1($userCertificate1)
-    {
-        $this->userCertificate1 = $userCertificate1;
-
-        return $this;
-    }
-
-    /**
-     * Get userCertificate1
-     *
-     * @return string
-     */
-    public function getUserCertificate1()
-    {
-        return $this->userCertificate1;
-    }
-
-    /**
-     * Set userCertificate2
-     *
-     * @param string $userCertificate2
-     *
-     * @return FysEmployeeResume
-     */
-    public function setUserCertificate2($userCertificate2)
-    {
-        $this->userCertificate2 = $userCertificate2;
-
-        return $this;
-    }
-
-    /**
-     * Get userCertificate2
-     *
-     * @return string
-     */
-    public function getUserCertificate2()
-    {
-        return $this->userCertificate2;
-    }
-
-    /**
-     * Set userCertificate3
-     *
-     * @param string $userCertificate3
-     *
-     * @return FysEmployeeResume
-     */
-    public function setUserCertificate3($userCertificate3)
-    {
-        $this->userCertificate3 = $userCertificate3;
-
-        return $this;
-    }
-
-    /**
-     * Get userCertificate3
-     *
-     * @return string
-     */
-    public function getUserCertificate3()
-    {
-        return $this->userCertificate3;
-    }
 
     /**
      * Set userExperienceYear
@@ -345,7 +275,7 @@ class FysEmployeeResume
     {
         return $this->employeeResumeDoc;
     }
-    
+
     /**
      * Set employeeProfilePhoto
      *
@@ -368,5 +298,53 @@ class FysEmployeeResume
     public function getEmployeeProfilePhoto()
     {
         return $this->employeeProfilePhoto;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserOrganisation1(): string
+    {
+        return $this->userOrganisation1;
+    }
+
+    /**
+     * @param string $userOrganisation1
+     */
+    public function setUserOrganisation1(string $userOrganisation1)
+    {
+        $this->userOrganisation1 = $userOrganisation1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserOrganisation2(): string
+    {
+        return $this->userOrganisation2;
+    }
+
+    /**
+     * @param string $userOrganisation2
+     */
+    public function setUserOrganisation2(string $userOrganisation2)
+    {
+        $this->userOrganisation2 = $userOrganisation2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserOrganisation3(): string
+    {
+        return $this->userOrganisation3;
+    }
+
+    /**
+     * @param string $userOrganisation3
+     */
+    public function setUserOrganisation3(string $userOrganisation3)
+    {
+        $this->userOrganisation3 = $userOrganisation3;
     }
 }
