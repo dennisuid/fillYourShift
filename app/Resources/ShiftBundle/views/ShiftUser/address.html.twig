@@ -33,7 +33,9 @@
         <div class="form-group">
             <label for="middle-name" class="control-label col-md-3 col-sm-3">Country</label>
             <div class="col-md-6 col-sm-6">
-                <input id="country" class="form-control col-md-7 col-xs-12" type="text"
+                <div id="countryDiv" class="bfh-selectbox bfh-countries" data-country="GB" data-flags="true">
+                </div>
+                <input id="country" class="form-control col-md-7 col-xs-12" type="hidden"
                        name="country" value="{{ app.user.country }}">
             </div>
         </div>

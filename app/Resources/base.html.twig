@@ -44,6 +44,8 @@
 
     <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet">
     <link href="{{ asset('css/owl.theme.css') }}" rel="stylesheet">
+    <!-- Form Helpers -->
+    <link href="{{ asset('assets/vendors/bootstrap-formhelpers/dist/css/bootstrap-formhelpers.css') }}" rel="stylesheet">
 </head>
 <body>
 <!-- Navbar -->
@@ -87,7 +89,8 @@
     <script src="{{ asset('js/waypoints.min.js') }}"></script> {#yes#}
     <script src="{{ asset('js/moment-with-locales.js') }}"></script> {#yes#}
     <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script> {#yes#}
-{#    <script src="{{ asset('js/custom.js') }}"></script> {#yes#}
+    <script src="{{ asset('assets/vendors/bootstrap-formhelpers/dist/js/bootstrap-formhelpers.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script> {#yes#}
     
 {% endblock %}
 {% block javascripts %}

@@ -125,28 +125,32 @@ class ShiftUserController extends Controller
         $employeeId = $this->getUser()->getId();
         $resumeDesc = $request->request->get('resume_desc');
         $sectorIds = $request->request->get('sector_details');
-        $em = $this->getDoctrine()->getManager();
-        if ($resumeDesc != "") {
-            $employeeResume = $this->setEmployeeResume($employeeId, $resumeDesc);
-            $em->merge($employeeResume);
+        if ($resumeDesc) {
+            $this->setEmployeeResume($employeeId, $resumeDesc);
         }
         if ($sectorIds) {
-            $this->getDoctrine()
-                ->getRepository(FysEmployeeSector::class)
-                ->deleteSectorsForEmployee($employeeId);
+            $this->setSectorIds($employeeId, $sectorIds);
+        }
+        return new Response("success");
+    }
+    private function setSectorIds($employeeId, $sectorIds)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $this->getDoctrine()
+            ->getRepository(FysEmployeeSector::class)
+            ->deleteSectorsForEmployee($employeeId);
 
+        foreach ($sectorIds as $sectorId) {
             $sector = new FysEmployeeSector();
-            foreach ($sectorIds as $sectorId) {
-                $sector->setEmployeeId($employeeId);
-                $sector->setSectorId($sectorId);
-                $em->merge($sector);
-            }
+            $sector->setEmployeeId($employeeId);
+            $sector->setSectorId($sectorId);
+            $em->merge($sector);
         }
         $em->flush();
-        return new Response("success");
     }
     private function setEmployeeResume($employeeId, $resumeDesc)
     {
+        $em = $this->getDoctrine()->getManager();
         /**
          * @var $employeeResume FysEmployeeResume
          */
@@ -158,7 +162,8 @@ class ShiftUserController extends Controller
             $employeeResume->setEmployeeId($employeeId);
         }
         $employeeResume->setEmployeeResumeDesc(trim($resumeDesc));
-        return $employeeResume;
+        $em->merge($employeeResume);
+        $em->flush();
     }
     private function getUserFromSession()
     {
