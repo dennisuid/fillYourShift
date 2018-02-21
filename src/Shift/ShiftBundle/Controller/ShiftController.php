@@ -29,7 +29,9 @@ class ShiftController extends Controller {
         $subscribedShifts = [];
         $assignedShifts = [];
         $notAssignedShifts = [];
-
+        
+        $this->get('fys.genericEvent')->genericEvent('USER_LOGGEDIN', 'USER', $this->getUser()); //generating an event for Login
+        
         if ($usertype == "employee") {
             $shifts = $this->getDoctrine()
                     ->getRepository(Shift::class) 

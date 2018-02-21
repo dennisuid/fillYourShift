@@ -77,7 +77,9 @@ class FysEvents
      */
     private $eventModifiedObjectOwnerName;
 
-
+    public function __construct() {
+        $this->eventCreatedTime = new \DateTime();
+    }
     /**
      * Get id
      *
