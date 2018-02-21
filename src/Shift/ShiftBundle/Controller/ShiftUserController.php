@@ -2,8 +2,8 @@
 
 namespace Shift\ShiftBundle\Controller;
 
-use Behat\Mink\Exception\Exception;
 use Shift\ShiftBundle\Entity\User\FysEmployeeResume;
+use Shift\ShiftBundle\Entity\User\FysEmployeeSector;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Shift\ShiftBundle\Entity\User\FysUser;
@@ -31,13 +31,13 @@ class ShiftUserController extends Controller
     public function getAction(Request $request)
     {
         $user = $this->getDoctrine()
-                ->getRepository('ShiftBundle:User\FysUser')
-                ->find($request->get('id'));
+            ->getRepository('ShiftBundle:User\FysUser')
+            ->find($request->get('id'));
         $encoders = array(new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
         if (!$user) {
             throw new UserNotFoundException(
-            "Invalid user id " . $request->get('id'), JsonResponse::HTTP_NOT_FOUND
+                "Invalid user id " . $request->get('id'), JsonResponse::HTTP_NOT_FOUND
             );
         }
         $serializer = new Serializer($normalizers, $encoders);
@@ -48,11 +48,39 @@ class ShiftUserController extends Controller
     }
     public function profileAction(Request $request)
     {
+        $employeeResume = $this->getDoctrine()
+            ->getRepository(FysEmployeeResume::class)
+            ->findByEmployeeId($this->getUser()->getId());
+        $data = [
+            'sectors' => $this->createSectors(),
+            'resume_details' => $employeeResume,
+        ];
+        return $this->render('@Shift/ShiftUser/profile.html.twig', $data);
+    }
+
+    private function createSectors()
+    {
         $sectors = $this->getDoctrine()
             ->getRepository('ShiftBundle:Org\Sector')->getAllSectors();
-        return $this->render('@Shift/ShiftUser/profile.html.twig', ['sectors' => $sectors]);
+        $employeeSectors = [];
+        $employeeSectorDetails = $this->getDoctrine()
+            ->getRepository(FysEmployeeSector::class)
+            ->findByEmployeeId($this->getUser()->getId());
+        foreach ($sectors as $id =>  $sector) {
+            $employeeSectors[$id]['name'] = $sector;
+            $employeeSectors[$id]['selected'] = false;
+            foreach ($employeeSectorDetails as $employeeSectorDetail) {
+                if ($id == $employeeSectorDetail){
+                    $employeeSectors[$id]['selected'] = true;
+                }
+            }
+
+        }
+        return $employeeSectors;
     }
-    public function savePersonalAction(Request $request){
+
+    public function savePersonalAction(Request $request)
+    {
         /**
          * @var $user FysUser
          */
@@ -91,16 +119,51 @@ class ShiftUserController extends Controller
         $em->flush();
         return new Response("success");
     }
+
     public function saveEmployeeResumeAction(Request $request)
     {
+        $employeeId = $this->getUser()->getId();
+        $resumeDesc = $request->request->get('resume_desc');
+        $sectorIds = $request->request->get('sector_details');
+        if ($resumeDesc) {
+            $this->setEmployeeResume($employeeId, $resumeDesc);
+        }
+        if ($sectorIds) {
+            $this->setSectorIds($employeeId, $sectorIds);
+        }
+        return new Response("success");
+    }
+    private function setSectorIds($employeeId, $sectorIds)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $this->getDoctrine()
+            ->getRepository(FysEmployeeSector::class)
+            ->deleteSectorsForEmployee($employeeId);
+
+        foreach ($sectorIds as $sectorId) {
+            $sector = new FysEmployeeSector();
+            $sector->setEmployeeId($employeeId);
+            $sector->setSectorId($sectorId);
+            $em->merge($sector);
+        }
+        $em->flush();
+    }
+    private function setEmployeeResume($employeeId, $resumeDesc)
+    {
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var $employeeResume FysEmployeeResume
+         */
         $employeeResume = $this->getDoctrine()
             ->getRepository(FysEmployeeResume::class)
-            ->findOneBy(['employee_id' => $this->getUser()->getId()]);
-        if (empty($employeeResume))
-        {
+            ->findByEmployeeId($employeeId);
+        if (empty($employeeResume)) {
             $employeeResume = new FysEmployeeResume();
+            $employeeResume->setEmployeeId($employeeId);
         }
-
+        $employeeResume->setEmployeeResumeDesc(trim($resumeDesc));
+        $em->merge($employeeResume);
+        $em->flush();
     }
     private function getUserFromSession()
     {
@@ -108,11 +171,13 @@ class ShiftUserController extends Controller
             ->getRepository(FysUser::class)
             ->findOneBy(['id' => $this->getUser()->getId()]);
     }
+
     public function finishProfileAction(Request $request)
     {
         $url = $this->generateUrl('dashboard');
         return new RedirectResponse($url);
     }
+
     public function registerAction(Request $request)
     {
         /** @var $dispatcher EventDispatcherInterface */
@@ -120,13 +185,13 @@ class ShiftUserController extends Controller
         $user = new FysUser();
         $event = new GetResponseUserEvent($user, $request);
         $roles = $this->getDoctrine()
-                ->getRepository('ShiftBundle:Org\FysRole')
-                ->getAllRoles();
+            ->getRepository('ShiftBundle:Org\FysRole')
+            ->getAllRoles();
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
         $form = $this->createForm(
-                FysUserType::class, 
-                $user,
-                ['user_types' => $roles,'attr'=> array('class'=>'form-label-left input_mask')]
+            FysUserType::class,
+            $user,
+            ['user_types' => $roles, 'attr' => array('class' => 'form-label-left input_mask')]
         );
         $form->handleRequest($request);
 
@@ -134,7 +199,7 @@ class ShiftUserController extends Controller
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-                try{
+                try {
                     $user = $form->getData();
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($user);
@@ -147,7 +212,7 @@ class ShiftUserController extends Controller
                     $this->get('login.valid.user')->loginAsValidUser($user, $request);
                     $url = $this->generateUrl('dashboard');
                     return new RedirectResponse($url);
-                }catch (\Exception $e){
+                } catch (\Exception $e) {
                     $this->addFlash('error', "Unable to add the user");
                 }
 
@@ -161,7 +226,7 @@ class ShiftUserController extends Controller
         }
 
         return $this->render('@FOSUser/Registration/register.html.twig', array(
-                    'form' => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 }

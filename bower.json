@@ -34,6 +34,7 @@
     "iCheck": "icheck#^1.0.2",
     "Flot": "flot#^0.8.3",
     "bootstrap-daterangepicker": "^2.1.25",
+    "bootstrap-formhelpers": "^2.3.0",
     "skycons": "https://github.com/darkskyapp/skycons.git",
     "jquery-sparkline": "^2.1.3",
     "morris.js": "^0.5.1",

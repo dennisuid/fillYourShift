@@ -5,7 +5,7 @@
         <div class="form-group">
             <label for="middle-name" class="control-label col-md-3 col-sm-3">Describe yourself</label>
             <div class="col-md-6 col-sm-6">
-                <textarea id="resume_desc" name="resume_desc" class="form-control" rows="3" placeholder="About yourself in few lines"></textarea>
+                <textarea style="height: 103px; width: 405px;"id="resume_desc" name="resume_desc" class="form-control" rows="3" placeholder="About yourself in few lines">{% if resume_details is not empty %}{{ resume_details.employeeResumeDesc|trim }}{% endif %}</textarea>
                 <p>
                     Help other people get to know you.
                     Tell them about the things you like,
@@ -17,9 +17,13 @@
         <div class="form-group">
             <label for="middle-name" class="control-label col-md-3 col-sm-3">Domains of Interest</label>
             <div class="col-md-6 col-sm-9 col-xs-12">
-                <select  id="domains" name="domains" class="select2_multiple form-control" multiple="multiple" >
+                <select  id="sector_details" name="sector_details[]" class="select2_multiple form-control" multiple="multiple" >
                     {% for id,sector in sectors %}
-                        <option value="{{ id }}"> {{ sector }}</option>
+                        {% if sector.selected %}
+                            <option value="{{ id }}" selected> {{ sector.name }}</option>
+                        {% else %}
+                            <option value="{{ id }}"> {{ sector.name }}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             </div>
