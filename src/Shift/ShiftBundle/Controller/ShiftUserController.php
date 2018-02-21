@@ -3,6 +3,7 @@
 namespace Shift\ShiftBundle\Controller;
 
 use Behat\Mink\Exception\Exception;
+use Shift\ShiftBundle\Entity\User\FysEmployeeResume;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Shift\ShiftBundle\Entity\User\FysUser;
@@ -47,7 +48,9 @@ class ShiftUserController extends Controller
     }
     public function profileAction(Request $request)
     {
-        return $this->render('@Shift/ShiftUser/profile.html.twig');
+        $sectors = $this->getDoctrine()
+            ->getRepository('ShiftBundle:Org\Sector')->getAllSectors();
+        return $this->render('@Shift/ShiftUser/profile.html.twig', ['sectors' => $sectors]);
     }
     public function savePersonalAction(Request $request){
         /**
@@ -87,6 +90,17 @@ class ShiftUserController extends Controller
         $em->merge($user);
         $em->flush();
         return new Response("success");
+    }
+    public function saveEmployeeResumeAction(Request $request)
+    {
+        $employeeResume = $this->getDoctrine()
+            ->getRepository(FysEmployeeResume::class)
+            ->findOneBy(['employee_id' => $this->getUser()->getId()]);
+        if (empty($employeeResume))
+        {
+            $employeeResume = new FysEmployeeResume();
+        }
+
     }
     private function getUserFromSession()
     {

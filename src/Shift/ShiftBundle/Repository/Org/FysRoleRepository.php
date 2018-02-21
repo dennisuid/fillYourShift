@@ -2,11 +2,10 @@
 
 namespace Shift\ShiftBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
 use Shift\ShiftBundle\Entity\Org\FysRole;
-
-class FysRoleRepository extends \Doctrine\ORM\EntityRepository
+class FysRoleRepository extends EntityRepository
 {
-
     public function getAllRoles()
     {
         $roles = [];

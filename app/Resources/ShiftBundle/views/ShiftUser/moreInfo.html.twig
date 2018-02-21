@@ -18,11 +18,9 @@
             <label for="middle-name" class="control-label col-md-3 col-sm-3">Domains of Interest</label>
             <div class="col-md-6 col-sm-9 col-xs-12">
                 <select  id="domains" name="domains" class="select2_multiple form-control" multiple="multiple" >
-                    <option>Retail</option>
-                    <option>Ware Houses</option>
-                    <option>Restaurants</option>
-                    <option>Charities</option>
-                    <option>Construction</option>
+                    {% for id,sector in sectors %}
+                        <option value="{{ id }}"> {{ sector }}</option>
+                    {% endfor %}
                 </select>
             </div>
         </div>
