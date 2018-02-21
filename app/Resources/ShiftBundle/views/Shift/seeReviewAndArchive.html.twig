@@ -1,43 +1,19 @@
-
-
 {% block body %}
-   <div class="panel panel-default">
-        <div class="panel-heading">Subscribers</div>
-            <div class="panel-body">
-                <table style="width:100%">
-                    <tr>
-                      <th>EMP ID</th>
-                      <th>First Name</th>
-                      <th>Last Name</th> 
-                      <th>Resume ID</th>
-                      <th>Apply Time</th>
-                      <th>Status</th>
-                      {% if shift.getShiftStatus() != "CREATED" %}
-                      <th>Action</th>
-                      {% endif %}
-                    </tr>
+    <h2 class="StepTitle">Step 3: More.. </h2>
+    <form class="form-horizontal form-label-left" id="more_info">
+        <span class="section">More about yourself</span>
+        <div class="form-group">
+            <label for="middle-name" class="control-label col-md-3 col-sm-3">Describe yourself</label>
+            <div class="col-md-6 col-sm-6">
+                <textarea style="height: 103px; width: 405px;"id="resume_desc" name="resume_desc" class="form-control" rows="3" placeholder="About yourself in few lines">Please add your review</textarea>
+                <p>
                     
-                    {% if app.user.userType is defined and app.user.userType == "employer" %}
-                        
-                        {% if subscribers != null %}
-                            {% for subscriber in subscribers %}
-
-                            <tr>
-                              <td>{{subscriber.getUserId()}}</td>
-                              <td>{{ subscriber.getEmployeeFirstName() }}</td> 
-                              <td>{{subscriber.getEmployeeLastName()}}</td>
-                              <td>{{subscriber.getEmployeeResumeId()}}</td>
-                              <td>{{subscriber.getShiftApplyTime()|date('Y-m-d H:i:s')}}</td>
-                              <td>{{subscriber.getApplyStatus()}}</td>
-                              {% if shift.getShiftStatus() != "CREATED" %}
-                              <td><a href="{{ url('approveShift', {'id': shift.getId(), 'subscriberId':subscriber.getUserId() })}}" class ='btn bg-success'>Approve</a></td>
-                              {% endif %}
-                            </tr>
-                            {% endfor %}
-                        {% endif %}
-                    {% endif %}
-                   
-                </table>
+                    Tell them about the things you like,
+                    Tell them what it’s like to work with {{selectedSubscriber.getFirstName()}}&nbsp{{selectedSubscriber.getLastName()}}
+                    
+                </p>
             </div>
-    </div>
+        </div>
+
+    </form>
 {% endblock %}

@@ -217,7 +217,7 @@ class EmployeeController extends Controller
         $datetime1 = $shift->getEndDateHours();
         $datetime2 = date_create('now');
         
-        $interval = date_diff($datetime1,$datetime2,FALSE);
+        $interval = date_diff($datetime2,$datetime1,FALSE);
         
         var_dump('I am in complete');
         var_dump($datetime1);
