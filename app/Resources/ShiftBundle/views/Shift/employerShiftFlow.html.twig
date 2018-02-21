@@ -6,7 +6,7 @@
                 <ul class="list-unstyled wizard_steps anchor">
                     <li>
                         <a href="#step-1">
-                            <span class="step_no">C</span>
+                            <span class="step_no">1</span>
                         </a>
                     </li>
                     <li>
@@ -24,29 +24,19 @@
                             <span class="step_no">4</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#step-5">
-                            <span class="step_no">5</span>
-                        </a>
-                    </li>
                 </ul>
                 <div id="stepContainer">
-                    <div id="step-1">
-{#                        {% if shift.getShiftStatus() != "CREATED" %} #}
+                    <div id="step-1">             
                         {% include "@shift/createShift.html_1.twig" %}
                     </div>
                     <div id="step-2">
                         {% include "@shift/viewShift.html_1.twig" %}
                     </div>
                     <div id="step-3">
-{#                        {% include "@shift/subscription.html.twig" %}#}
-                          {% include "@shift/viewShift.html_1.twig" %}
+                        {% include "@shift/subscription.html.twig" %}
                     </div>
                     <div id="step-4">
-                        {% include "@shift/viewShift.html_1.twig" %}
-                    </div>
-                    <div id="step-5">
-                        {% include "@shift/viewShift.html_1.twig" %}
+                        {% include "@user/approvedProfile.html.twig" %}
                     </div>
                 </div>
             </div>

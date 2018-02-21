@@ -1,59 +1,59 @@
 {% block body %}
     <div class="panel panel-default">
-        <div class="panel-heading">View Shift</div>
+        <div class="panel-heading">Approved Applicant</div>
         <div class="panel-body">
             <table style="width:80%">
                 <tr>
-                    <td>Shift ID</td>
-                    <td>{{shift.getId()}}</td> 
+                    <td>Applicant ID</td>
+                    <td>{{selectedSubscriber.getId()}}</td> 
 
                 </tr>
                 <tr>
-                    <td>Shift Org Name</td>
-                    <td>{{ shift.getOrgName() }}</td> 
-
-                </tr>
-
-                <tr>
-                    <td>Role Name</td>
-                    <td>{{ shift.getRoleName() }}</td> 
+                    <td>First Name</td>
+                    <td>{{ selectedSubscriber.getFirstName() }}</td> 
 
                 </tr>
 
                 <tr>
-                    <td>Start Date</td>
-                    <td>{{ shift.getStartDateHours()|date('Y-m-d H:i:s') }}</td> 
+                    <td>Last Name</td>
+                    <td>{{ selectedSubscriber.getLastName() }}</td> 
+
+                </tr>
+
+                <tr>
+                    <td>Mobile Number</td>
+                    <td>{{ selectedSubscriber.getMobileNumber() }}</td> 
 
                 </tr>
                 <tr>
-                    <td>End Date</td>
-                    <td>{{ shift.getEndDateHours()|date('Y-m-d H:i:s') }}</td> 
+                    <td>Email</td>
+                    <td>{{ selectedSubscriber.getEmail() }}</td> 
 
                 </tr>
                 <tr>
-                    <td>Shift Rate</td>
-                    <td>{{ shift.getShiftRate() }}</td> 
+                    <td>House  Number</td>
+                    <td>{{ selectedSubscriber.getHouseNumber() }}</td> 
 
                 </tr>
                 <tr>
-                    <td>Shift Status</td>
-                    <td>{{ shift.getShiftStatus() }}</td> 
+                    <td>Address Line 1</td>
+                    <td>{{ selectedSubscriber.getAddressLine1() }}</td> 
 
                 </tr>
                 <tr>
-                    <td>Shift Created By</td>
-                    <td>{{ shift.getShiftCreatedBy() }}</td> 
+                    <td>Post Code</td>
+                    <td>{{ selectedSubscriber.getPostCode() }}</td> 
 
                 </tr>
                 <tr>
-                    <td>Pay Lead time</td>
-                    <td>{{ shift.getPayLeadTime() }}</td> 
+                    <td>Country</td>
+                    <td>{{ selectedSubscriber.getcountry() }}</td> 
+                </tr>
             </table>
 
             {% if app.user.userType is defined and app.user.userType == "employer" %}
 
                 <a href="{{ url('updateShift', {'id': shift.id })}}" class ='btn bg-success'>Edit</a>
-
                 <a href="{{ url('publishShift', {'id': shift.id })}}" class ='btn bg-success'>Publish</a>
                 <a href="{{ url('deleteShift', {'id': shift.id })}}" class ='btn btn-danger'>Delete</a>
             {% endif %}

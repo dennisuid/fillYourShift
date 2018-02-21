@@ -33,16 +33,27 @@ class EmployerController extends Controller
         
 
         if ($shift->getShiftStatus() != 'CREATED') {
-            $appliedShifts = $this->getDoctrine()
+            $subscribers = $this->getDoctrine()
                     ->getRepository(FysShiftApply::class)
                     ->findBy(['shiftId' => $shiftId]);
-            if (!empty($appliedShifts)) {
-                foreach ($appliedShifts as $appliedShift) {
-                    $subscribers[] = $appliedShift;
-                   
+            if (!empty($subscribers)) {
+                foreach ($subscribers as $subscriber) {
+                    
+                    if ($shift->getShiftStatus() == "APPROVED"){
+                        
+                        if($subscriber->getApplyStatus() == "SELECTED"){
+                           
+                          $selectedSubscriber = $this->getDoctrine()
+                                ->getRepository(FysUser::class)
+                                ->findOneBy(['id' => $subscriber->getUserId()]);
+                           
+                        }
+                            
+                    }
                 }
             }
         }
+        
         
          $form = $this->createForm(ShiftType::class, $shift, array(
             'action' => $this->generateUrl('submitShift'),
@@ -59,7 +70,7 @@ class EmployerController extends Controller
         $form->handleRequest($request);
 
         
-        return $this->render('@Shift/Shift/employerShiftFlow.html.twig', ['form' => $form->createView(), 'shift' => $shift, 'subscribers' => $subscribers]);
+        return $this->render('@Shift/Shift/employerShiftFlow.html.twig', ['form' => $form->createView(), 'shift' => $shift, 'subscribers' => $subscribers, 'selectedSubscriber' => $selectedSubscriber]);
     }
     
     public function createNewShiftAction(Request $request) {

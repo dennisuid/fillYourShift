@@ -27,3 +27,4 @@ parameters:
     googleplus_secret: Fg9QfqeZrT-kS-d0kWoBn4Kv
     googleplus_application_name: fillYourShift
     googleplus_redirect_url: http://localhost:8000/user/google/redirect
+    shift.pay_leadtime: 5

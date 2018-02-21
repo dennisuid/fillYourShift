@@ -1,0 +1,3 @@
+"id";"role_id";"role_name";"role_description";"org_name";"org_id";"sector_id";"sector_name"
+1;1;"employee";"some body who does the work";"test org";0;0;""
+2;2;"employer";"some body who assigns the work";"test org";0;0;""
