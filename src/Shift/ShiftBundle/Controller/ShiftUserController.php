@@ -123,21 +123,11 @@ class ShiftUserController extends Controller
     public function saveEmployeeResumeAction(Request $request)
     {
         $employeeId = $this->getUser()->getId();
-        /**
-         * @var $employeeResume FysEmployeeResume
-         */
-        $employeeResume = $this->getDoctrine()
-            ->getRepository(FysEmployeeResume::class)
-            ->findByEmployeeId($employeeId);
         $resumeDesc = $request->request->get('resume_desc');
         $sectorIds = $request->request->get('sector_details');
         $em = $this->getDoctrine()->getManager();
         if ($resumeDesc != "") {
-            if (empty($employeeResume)) {
-                $employeeResume = new FysEmployeeResume();
-                $employeeResume->setEmployeeId($employeeId);
-            }
-            $employeeResume->setEmployeeResumeDesc(trim($request->request->get('resume_desc')));
+            $employeeResume = $this->setEmployeeResume($employeeId, $resumeDesc);
             $em->merge($employeeResume);
         }
         if ($sectorIds) {
@@ -155,9 +145,20 @@ class ShiftUserController extends Controller
         $em->flush();
         return new Response("success");
     }
-    private function saveEmployeeResume()
+    private function setEmployeeResume($employeeId, $resumeDesc)
     {
-
+        /**
+         * @var $employeeResume FysEmployeeResume
+         */
+        $employeeResume = $this->getDoctrine()
+            ->getRepository(FysEmployeeResume::class)
+            ->findByEmployeeId($employeeId);
+        if (empty($employeeResume)) {
+            $employeeResume = new FysEmployeeResume();
+            $employeeResume->setEmployeeId($employeeId);
+        }
+        $employeeResume->setEmployeeResumeDesc(trim($resumeDesc));
+        return $employeeResume;
     }
     private function getUserFromSession()
     {
