@@ -1,32 +1,17 @@
 {% block body %}
     <h2 class="StepTitle">Step 4: Resume & Photo </h2>
-    <form class="form-horizontal form-label-left" enctype="multipart/form-data">
+    <form enctype="multipart/form-data" method="post" class="form-horizontal form-label-left" action="{{ url("ajax_resume") }}" id="resumeForm">
 
         <span class="section">Upload your resume and a lovely photograph</span>
         <!-- COMPONENT START -->
         <div class="form-group">
-            <div class="input-group input-file" id="resume">
-			<span class="input-group-btn">
-        		<button class="btn btn-default btn-choose" type="button">Resume</button>
-    		</span>
-                <input type="text" id="resume" class="form-control" placeholder='Choose a file...' />
-                <span class="input-group-btn">
-       			 <button class="btn btn-warning btn-reset" type="button">Reset</button>
-    		</span>
-            </div>
+            Resume <i class="fa fa-cloud-upload"></i>
+            <input type="file" id="resume" name="resume" class="form-control btn-info" placeholder='Choose file..' />
         </div>
-        <!-- COMPONENT END -->
         <!-- COMPONENT START -->
         <div class="form-group">
-            <div class="input-group input-file" id="photo">
-			<span class="input-group-btn">
-        		<button class="btn btn-default btn-choose" type="button">Profile Picture</button>
-    		</span>
-                <input type="text" id="photo" class="form-control" placeholder='Choose a file...' />
-                <span class="input-group-btn">
-       			 <button class="btn btn-warning btn-reset" type="button">Reset</button>
-    		</span>
-            </div>
+            Photo <i class="fa fa-cloud-upload"></i>
+            <input type="file" id="photo" name="photo" class="form-control btn-info" placeholder='Choose file..'/>
         </div>
         <!-- COMPONENT END -->
 

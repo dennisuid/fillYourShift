@@ -3,6 +3,7 @@
 namespace Shift\ShiftBundle\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * FysEmployeeResume
@@ -12,6 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FysEmployeeResume
 {
+    const DEFAULT_PROFILE_TYPE = "jpeg";
+    const DEFAULT_RESUME_TYPE = "doc";
+    const DEFAULT_RESUME_NAME = "resume";
+    const DEFAULT_PROFILE_PIC_NAME = "profile";
     /**
      * @var int
      *
@@ -84,16 +89,12 @@ class FysEmployeeResume
     private $userExperienceYear;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="employee_resume_doc", type="blob", nullable=true)
+     * @ORM\Column(name="employee_resume_doc", type="string",length=500, nullable=true)
      */
     private $employeeResumeDoc;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="employee_profile_photo", type="blob", nullable=true)
+     * @ORM\Column(name="employee_profile_photo", type="string",length=500, nullable=true)
      */
     private $employeeProfilePhoto;
 
@@ -269,7 +270,7 @@ class FysEmployeeResume
     /**
      * Get employeeResumeDoc
      *
-     * @return string
+     * @return File
      */
     public function getEmployeeResumeDoc()
     {
@@ -281,7 +282,7 @@ class FysEmployeeResume
      *
      * @param string $employeeProfilePhoto
      *
-     * @return FysEmployeeProfilePhoto
+     * @return FysEmployeeResume
      */
     public function setEmployeeProfilePhoto($employeeProfilePhoto)
     {
@@ -293,11 +294,95 @@ class FysEmployeeResume
     /**
      * Get employeeProfilePhoto
      *
-     * @return string
+     * @return File
      */
     public function getEmployeeProfilePhoto()
     {
         return $this->employeeProfilePhoto;
+    }
+
+    public function getAbsoluteProfilePath()
+    {
+        return null === $this->employeeProfilePhoto
+            ? null
+            : $this->getUploadProfileRootDir() . '/' . $this->employeeProfilePhoto;
+    }
+
+    public function getWebProfilePath()
+    {
+        return null === $this->employeeProfilePhoto
+            ? null
+            : $this->getUploadDir() . '/' . $this->employeeProfilePhoto;
+    }
+
+    public function UploadResumeDoc(File $resume)
+    {
+        // the file property can be empty if the field is not required
+        if (null === $resume) {
+            return;
+        }
+        $extension = $this->getFileType($resume, self::DEFAULT_RESUME_TYPE);
+        $resumeName = self::DEFAULT_RESUME_NAME . "_" . $this->getEmployeeId() . "." . $extension;
+        //delete existing file
+        //delete existing file
+        $this->deleteExistingFilesForUSer(self::DEFAULT_RESUME_NAME);
+
+        $resume->move($this->getUploadRootDir(), $resumeName);
+        return $this->getUploadRootDir() . $resumeName;
+    }
+
+    public function UploadProfilePhoto(File $profile)
+    {
+        // the file property can be empty if the field is not required
+        if (null === $profile) {
+            return;
+        }
+        $extension = $this->getFileType($profile, self::DEFAULT_PROFILE_TYPE);
+        // move takes the target directory and then the
+        // target filename to move to
+        $profilePicName = self::DEFAULT_PROFILE_PIC_NAME . "_" . $this->getEmployeeId() . "." . $extension;
+        //delete existing file
+        $this->deleteExistingFilesForUSer(self::DEFAULT_PROFILE_PIC_NAME);
+
+        $profile->move($this->getUploadRootDir(), $profilePicName);
+        // set the path property to the filename where you've saved the file
+        return $this->getUploadRootDir() . $profilePicName;
+    }
+
+    protected function deleteExistingFilesForUSer($type)
+    {
+        if (!is_dir($this->getUploadRootDir())) {
+            return;
+        }
+        $fileName = $type . "_" . $this->getEmployeeId();
+        foreach (scandir($this->getUploadRootDir()) as $file) {
+            if ('.' === $file) continue;
+            if ('..' === $file) continue;
+            $fileNameSplit = explode(".", $file);
+            if ($fileNameSplit[0] && $fileNameSplit[0] == $fileName) {
+                unlink($this->getUploadRootDir().$file);
+            }
+        }
+    }
+
+    protected function getFileType(File $file, $type)
+    {
+        if (empty($file->guessExtension())) {
+            return $type;
+        }
+        return $file->guessExtension();
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__ . '/../../../../../web/uploads/documents/';
+    }
+
+    protected function getUploadDir()
+    {
+        return 'uploads/documents';
     }
 
     /**

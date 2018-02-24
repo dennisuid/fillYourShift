@@ -19,6 +19,7 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ShiftUserController extends Controller
 {
@@ -120,7 +121,7 @@ class ShiftUserController extends Controller
         return new Response("success");
     }
 
-    public function saveEmployeeResumeAction(Request $request)
+    public function saveEmployeeMoreAction(Request $request)
     {
         $employeeId = $this->getUser()->getId();
         $resumeDesc = $request->request->get('resume_desc');
@@ -132,6 +133,37 @@ class ShiftUserController extends Controller
             $this->setSectorIds($employeeId, $sectorIds);
         }
         return new Response("success");
+    }
+    public function saveEmployeeResumeAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $employeeId = $this->getUser()->getId();
+        /**
+         * @var $employeeResume FysEmployeeResume
+         */
+        $employeeResume = $this->getDoctrine()
+            ->getRepository(FysEmployeeResume::class)
+            ->findByEmployeeId($employeeId);
+
+        /** @var $resumeFile UploadedFile*/
+        $resumeFile = $request->files->get('resume');
+        /** @var $profilePhoto UploadedFile*/
+        $profilePhoto = $request->files->get('photo');
+        if ($profilePhoto) {
+            $profileFilePath = $employeeResume->UploadProfilePhoto($profilePhoto);
+            $employeeResume->setEmployeeProfilePhoto($profileFilePath);
+        }
+        if ($resumeFile) {
+            $resumeFilePath = $employeeResume->UploadResumeDoc($resumeFile);
+            $employeeResume->setEmployeeResumeDoc($resumeFilePath);
+
+        }
+
+        $em->merge($employeeResume);
+        $em->flush();
+//        return new Response("success");
+        $url = $this->generateUrl('profile');
+        return new RedirectResponse($url);
     }
     private function setSectorIds($employeeId, $sectorIds)
     {
