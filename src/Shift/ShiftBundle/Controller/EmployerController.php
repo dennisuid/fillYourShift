@@ -21,6 +21,7 @@ class EmployerController extends Controller
     
     public function employerShiftFlowAction(Request $request)
     {
+        $selectedSubscriber = [];
         $shiftId = $request->get('id');
         $subscribers = [];
         $shift = $this->getDoctrine()
