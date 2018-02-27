@@ -11,3 +11,4 @@ bootstrap.php.cache
 .idea/
 node_modules/
 web/assets/vendors/*
+web/uploads/*

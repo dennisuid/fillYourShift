@@ -1,10 +1,9 @@
-<nav class="navbar navbar-default">
-    <div class="container">
+<!-- top navigation -->
+<div class="top_nav">
+    <nav class="navbar">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </button>
             <a class="navbar-brand" href="#">Fill Your Shift</a>
         </div>
@@ -48,7 +47,11 @@
                             <span class=" fa fa-angle-down"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-usermenu pull-right">
-                            <li><a href="/user/profile"> Profile</a></li>
+                            <li><a href="/user/profile">
+                                    Profile
+                                    <span class="badge bg-red pull-right">50%</span>
+                                </a>
+                            </li>
                             <li><a href="/dashboard">Dashboard</a></li>
                             <li>
                                 <a href="{{ path('fos_user_security_logout') }}">
@@ -59,5 +62,5 @@
                 {% endif %}
             </ul>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

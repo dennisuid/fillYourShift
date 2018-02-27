@@ -20,6 +20,9 @@ ajax_address_details:
   path:     /user/profile/address
   defaults: { _controller: ShiftBundle:ShiftUser:saveAddressDetails }
 ajax_more_info:
+  path:     /user/profile/more
+  defaults: { _controller: ShiftBundle:ShiftUser:saveEmployeeMore }
+ajax_resume:
   path:     /user/profile/resume
   defaults: { _controller: ShiftBundle:ShiftUser:saveEmployeeResume }
 update:
