@@ -328,7 +328,7 @@ class FysEmployeeResume
         $this->deleteExistingFilesForUSer(self::DEFAULT_RESUME_NAME);
 
         $resume->move($this->getUploadRootDir(), $resumeName);
-        return $this->getUploadRootDir() . $resumeName;
+        return $this->getUploadDir() . $resumeName;
     }
 
     public function UploadProfilePhoto(File $profile)
@@ -346,7 +346,7 @@ class FysEmployeeResume
 
         $profile->move($this->getUploadRootDir(), $profilePicName);
         // set the path property to the filename where you've saved the file
-        return $this->getUploadRootDir() . $profilePicName;
+        return $this->getUploadDir() . $profilePicName;
     }
 
     protected function deleteExistingFilesForUSer($type)
@@ -382,7 +382,7 @@ class FysEmployeeResume
 
     protected function getUploadDir()
     {
-        return 'uploads/documents';
+        return '/uploads/documents/';
     }
 
     /**
