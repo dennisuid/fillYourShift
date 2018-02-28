@@ -1822,7 +1822,9 @@ function init_daterangepicker_reservation() {
     });
 
 }
-
+function finishStepCallBackProfile(obj,context){
+  $(window).attr("location", "/user/profile/finish");
+}
 function leaveAStepCallbackProfile(obj, context) {
     switch (context.fromStep) {
         case 1 :
@@ -1866,7 +1868,8 @@ function init_SmartWizard() {
     $('#wizard_profile').smartWizard({
         transitionEffect: 'slide',
         enableFinishButton: true,
-        onLeaveStep: leaveAStepCallbackProfile
+        onLeaveStep: leaveAStepCallbackProfile,
+        onFinish: finishStepCallBackProfile,
     });
 
     $('#wizard_verticle').smartWizard({
@@ -2288,5 +2291,3 @@ $(document).ready(function () {
     bs_input_file();
     activateCountry();
 });
-	
-
