@@ -5059,3 +5059,15 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 .dataTables_wrapper > .row {
     overflow: auto !important; /*prevent datatables overflowing its container*/
 }
+#profile_pic{
+    width: 15vw;
+    height: 15vw;
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid black;
+}
+.profile-usertitle-name{
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 32px;
+}

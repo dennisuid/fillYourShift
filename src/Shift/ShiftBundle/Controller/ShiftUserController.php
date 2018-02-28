@@ -47,6 +47,7 @@ class ShiftUserController extends Controller
 
         return new Response($response, $status, ['Content-type' => 'json']);
     }
+
     public function profileAction(Request $request)
     {
         $employeeResume = $this->getDoctrine()
@@ -67,11 +68,11 @@ class ShiftUserController extends Controller
         $employeeSectorDetails = $this->getDoctrine()
             ->getRepository(FysEmployeeSector::class)
             ->findByEmployeeId($this->getUser()->getId());
-        foreach ($sectors as $id =>  $sector) {
+        foreach ($sectors as $id => $sector) {
             $employeeSectors[$id]['name'] = $sector;
             $employeeSectors[$id]['selected'] = false;
             foreach ($employeeSectorDetails as $employeeSectorDetail) {
-                if ($id == $employeeSectorDetail){
+                if ($id == $employeeSectorDetail) {
                     $employeeSectors[$id]['selected'] = true;
                 }
             }
@@ -134,6 +135,7 @@ class ShiftUserController extends Controller
         }
         return new Response("success");
     }
+
     public function saveEmployeeResumeAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -145,9 +147,9 @@ class ShiftUserController extends Controller
             ->getRepository(FysEmployeeResume::class)
             ->findByEmployeeId($employeeId);
 
-        /** @var $resumeFile UploadedFile*/
+        /** @var $resumeFile UploadedFile */
         $resumeFile = $request->files->get('resume');
-        /** @var $profilePhoto UploadedFile*/
+        /** @var $profilePhoto UploadedFile */
         $profilePhoto = $request->files->get('photo');
         if ($profilePhoto) {
             $profileFilePath = $employeeResume->UploadProfilePhoto($profilePhoto);
@@ -156,7 +158,6 @@ class ShiftUserController extends Controller
         if ($resumeFile) {
             $resumeFilePath = $employeeResume->UploadResumeDoc($resumeFile);
             $employeeResume->setEmployeeResumeDoc($resumeFilePath);
-
         }
 
         $em->merge($employeeResume);
@@ -165,6 +166,7 @@ class ShiftUserController extends Controller
         $url = $this->generateUrl('profile');
         return new RedirectResponse($url);
     }
+
     private function setSectorIds($employeeId, $sectorIds)
     {
         $em = $this->getDoctrine()->getManager();
@@ -180,6 +182,7 @@ class ShiftUserController extends Controller
         }
         $em->flush();
     }
+
     private function setEmployeeResume($employeeId, $resumeDesc)
     {
         $em = $this->getDoctrine()->getManager();
@@ -206,12 +209,15 @@ class ShiftUserController extends Controller
 
     public function finishProfileAction(Request $request)
     {
-      $employeeId = $this->getUser()->getId();
-      $employeeResume = $this->getDoctrine()
-          ->getRepository('ShiftBundle:User\FysEmployeeResume')
-          ->findByEmployeeId($employeeId);
-      $data = ['profile_pic' => $employeeResume->getEmployeeProfilePhoto()];
-      return $this->render('ShiftBundle:ShiftUser:finishedProfile.html.twig', $data);
+        $employeeId = $this->getUser()->getId();
+        $employeeResume = $this->getDoctrine()
+            ->getRepository('ShiftBundle:User\FysEmployeeResume')
+            ->findByEmployeeId($employeeId);
+        $data = [
+            'profile_pic' => $employeeResume->getEmployeeProfilePhoto(),
+            'resume_url' => $employeeResume->getEmployeeResumeDoc(),
+        ];
+        return $this->render('ShiftBundle:ShiftUser:finishedProfile.html.twig', $data);
     }
 
     public function registerAction(Request $request)
