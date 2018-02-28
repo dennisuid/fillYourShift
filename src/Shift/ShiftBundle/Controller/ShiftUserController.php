@@ -58,7 +58,7 @@ class ShiftUserController extends Controller
         ];
         return $this->render('@Shift/ShiftUser/profile.html.twig', $data);
     }
-
+  
     private function createSectors()
     {
         $sectors = $this->getDoctrine()
@@ -206,8 +206,12 @@ class ShiftUserController extends Controller
 
     public function finishProfileAction(Request $request)
     {
-        $url = $this->generateUrl('dashboard');
-        return new RedirectResponse($url);
+      $employeeId = $this->getUser()->getId();
+      $employeeResume = $this->getDoctrine()
+          ->getRepository('ShiftBundle:User\FysEmployeeResume')
+          ->findByEmployeeId($employeeId);
+      $data = ['profile_pic' => $employeeResume->getEmployeeResumeDoc()];
+      return $this->render('ShiftBundle:ShiftUser:finishedProfile.html.twig', $data);
     }
 
     public function registerAction(Request $request)
