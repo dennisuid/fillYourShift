@@ -3,6 +3,7 @@
   "dependencies": {
     "bower": "^1.8.2",
     "module": "^1.2.5",
+    "npm": "^5.7.1",
     "q": "^1.5.1"
   },
   "engines": {
