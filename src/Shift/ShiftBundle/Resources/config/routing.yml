@@ -16,6 +16,9 @@ finish_profile:
 ajax_personal_profile:
   path:     /user/profile/personal
   defaults: { _controller: ShiftBundle:ShiftUser:savePersonal }
+ajax_personal_profile_pic:
+  path:     /user/profile/getfile
+  defaults: { _controller: ShiftBundle:ShiftUser:getProfilePicturePath }
 ajax_address_details:
   path:     /user/profile/address
   defaults: { _controller: ShiftBundle:ShiftUser:saveAddressDetails }

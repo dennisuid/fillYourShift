@@ -166,6 +166,20 @@ class ShiftUserController extends Controller
         $url = $this->generateUrl('profile');
         return new RedirectResponse($url);
     }
+    public function getProfilePicturePathAction(Request $request){
+        $path = "";
+        $employeeResume = $this->getDoctrine()
+            ->getRepository(FysEmployeeResume::class)
+            ->findByEmployeeId($this->getUser()->getId());
+
+        /** @var $profilePhoto UploadedFile */
+        $profilePhoto = $request->files->get('photo');
+        if ($profilePhoto) {
+            $profileFilePath = $employeeResume->UploadProfilePhoto($profilePhoto);
+            $path = $employeeResume->getWebProfilePath();
+        }
+       return new Response($path);
+    }
 
     private function setSectorIds($employeeId, $sectorIds)
     {

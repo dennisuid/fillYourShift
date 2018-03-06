@@ -2052,4 +2052,37 @@ $(document).ready(function () {
     init_autocomplete();
     bs_input_file();
     activateCountry();
+    $("#photo").change(function(event) {
+
+        // $('#image').attr('src',src);
+        formdata = new FormData();
+        formdata.append('photo', $(this).prop("files")[0]);
+
+        $.ajax({
+            type: 'POST',
+            url: '/user/profile/getfile',
+            contentType: false,
+            processData: false,
+            data: formdata,
+            cache: false,
+            success: function (data) {
+                console.log(data);
+                $('#image_uploaded').attr('src', data)
+            }
+        });
+    });
+    // $('#photo').cropper({
+    //     aspectRatio: 16 / 9,
+    //     crop: function(e) {
+    //         // Output the result data for cropping image.
+    //         console.log(e.x);
+    //         console.log(e.y);
+    //         console.log(e.width);
+    //         console.log(e.height);
+    //         console.log(e.rotate);
+    //         console.log(e.scaleX);
+    //         console.log(e.scaleY);
+    //     }
+    // });
+
 });

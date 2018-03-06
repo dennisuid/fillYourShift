@@ -5071,3 +5071,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     font-weight: bold;
     font-size: 32px;
 }
+/* Limit image width to avoid overflow the container  for cropper*/
+#image_uploaded{
+    max-width: 100%;
+}

@@ -312,7 +312,7 @@ class FysEmployeeResume
     {
         return null === $this->employeeProfilePhoto
             ? null
-            : $this->getUploadDir() . '/' . $this->employeeProfilePhoto;
+            :  $this->employeeProfilePhoto;
     }
 
     public function UploadResumeDoc(File $resume)
