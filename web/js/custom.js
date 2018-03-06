@@ -2066,23 +2066,10 @@ $(document).ready(function () {
             data: formdata,
             cache: false,
             success: function (data) {
-                console.log(data);
-                $('#image_uploaded').attr('src', data)
+                $('#image_uploaded').attr('src', data);
+                $('#image_uploaded').cropper();
             }
         });
     });
-    // $('#photo').cropper({
-    //     aspectRatio: 16 / 9,
-    //     crop: function(e) {
-    //         // Output the result data for cropping image.
-    //         console.log(e.x);
-    //         console.log(e.y);
-    //         console.log(e.width);
-    //         console.log(e.height);
-    //         console.log(e.rotate);
-    //         console.log(e.scaleX);
-    //         console.log(e.scaleY);
-    //     }
-    // });
 
 });
