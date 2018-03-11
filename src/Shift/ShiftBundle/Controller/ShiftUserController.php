@@ -167,7 +167,11 @@ class ShiftUserController extends Controller
         return new RedirectResponse($url);
     }
     public function getProfilePicturePathAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
         $path = "";
+        /**
+         * @var $employeeResume FysEmployeeResume
+         */
         $employeeResume = $this->getDoctrine()
             ->getRepository(FysEmployeeResume::class)
             ->findByEmployeeId($this->getUser()->getId());
@@ -176,8 +180,11 @@ class ShiftUserController extends Controller
         $profilePhoto = $request->files->get('photo');
         if ($profilePhoto) {
             $profileFilePath = $employeeResume->UploadProfilePhoto($profilePhoto);
+            $employeeResume->setEmployeeProfilePhoto($profileFilePath);
             $path = $employeeResume->getWebProfilePath();
         }
+        $em->merge($employeeResume);
+        $em->flush();
        return new Response($path);
     }
 

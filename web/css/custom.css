@@ -5074,4 +5074,18 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 /* Limit image width to avoid overflow the container  for cropper*/
 #image_uploaded{
     max-width: 100%;
+    max-height: 100%;
+}
+#canvas {
+    height: 500px;
+    width: 600px;
+    background-color: #ffffff;
+    cursor: default;
+    border: 1px solid black;
+}
+#result{
+  float: left;
+}
+#btnCrop{
+    display: none;
 }

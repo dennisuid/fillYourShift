@@ -332,6 +332,7 @@ $('body').popover({
 function gd(year, month, day) {
     return new Date(year, month - 1, day).getTime();
 }
+
 /* STARRR */
 
 function init_starrr() {
@@ -1585,9 +1586,11 @@ function init_daterangepicker_reservation() {
     });
 
 }
-function finishStepCallBackProfile(obj,context){
-  $(window).attr("location", "/user/profile/finish");
+
+function finishStepCallBackProfile(obj, context) {
+    $(window).attr("location", "/user/profile/finish");
 }
+
 function leaveAStepCallbackProfile(obj, context) {
     switch (context.fromStep) {
         case 1 :
@@ -1600,9 +1603,9 @@ function leaveAStepCallbackProfile(obj, context) {
             ajaxCall('/user/profile/more', $("#more_info").serializeArray());
             return true;
         case 4 :
-            $("#resumeForm").submit();
-            // ajaxCall('/user/profile/resume', $("#resumeForm").serializeArray());
-            // return true;
+        /**
+         * @TODO need to save previous experience
+         */
         default:
             // ajaxCall('//user/profile/resume', $("#personal").serializeArray());
             return true;
@@ -1987,25 +1990,26 @@ function init_DataTables() {
     TableManageButtons.init();
 
 };
+
 function bs_input_file() {
     $(".input-file").before(
-        function() {
-            if ( ! $(this).prev().hasClass('input-ghost') ) {
+        function () {
+            if (!$(this).prev().hasClass('input-ghost')) {
                 var element = $("<input type='file' class='input-ghost' style='visibility:hidden; height:0'>");
                 console.log($(this));
-                element.attr("name",$(this).attr("name"));
-                element.change(function(){
+                element.attr("name", $(this).attr("name"));
+                element.change(function () {
                     element.next(element).find('input').val((element.val()).split('\\').pop());
                 });
-                $(this).find("button.btn-choose").click(function(){
+                $(this).find("button.btn-choose").click(function () {
                     element.click();
                 });
-                $(this).find("button.btn-reset").click(function(){
+                $(this).find("button.btn-reset").click(function () {
                     element.val(null);
                     $(this).parents(".input-file").find('input').val('');
                 });
-                $(this).find('input').css("cursor","pointer");
-                $(this).find('input').mousedown(function() {
+                $(this).find('input').css("cursor", "pointer");
+                $(this).find('input').mousedown(function () {
                     $(this).parents('.input-file').prev().click();
                     return false;
                 });
@@ -2014,7 +2018,8 @@ function bs_input_file() {
         }
     );
 }
-function activateCountry(){
+
+function activateCountry() {
     $('#countryDiv ul li a').bind('load click', function () {
         $('#country').val($(this).text());
         $('#shift_shiftbundle_user_fysuser_country').val($(this).text());
@@ -2052,24 +2057,63 @@ $(document).ready(function () {
     init_autocomplete();
     bs_input_file();
     activateCountry();
-    $("#photo").change(function(event) {
+    var canvas  = $("#canvas"),
+        context = canvas.get(0).getContext("2d"),
+        $result = $('#result');
 
-        // $('#image').attr('src',src);
-        formdata = new FormData();
-        formdata.append('photo', $(this).prop("files")[0]);
-
-        $.ajax({
-            type: 'POST',
-            url: '/user/profile/getfile',
-            contentType: false,
-            processData: false,
-            data: formdata,
-            cache: false,
-            success: function (data) {
-                $('#image_uploaded').attr('src', data);
-                $('#image_uploaded').cropper();
+    $('#photo').on( 'change', function(){
+        if (this.files && this.files[0]) {
+            if ( this.files[0].type.match(/^image\//) ) {
+                var reader = new FileReader();
+                reader.onload = function(evt) {
+                    var img = new Image();
+                    img.onload = function() {
+                        context.canvas.height = img.height;
+                        context.canvas.width  = img.width;
+                        context.drawImage(img, 0, 0);
+                        var cropper = canvas.cropper({
+                            aspectRatio: 16 / 9
+                        });
+                        $('#btnCrop').css('margin', '30px');
+                        $('#btnCrop').show();
+                        $('#photo').hide();
+                        $('#btnCrop').click(function() {
+                            // Get a string base 64 data url
+                            var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png");
+                            $('#image_uploaded').attr('src', croppedImageDataURL);
+                            canvas.cropper('getCroppedCanvas').toBlob(function (blob) {
+                                var formData = new FormData();
+                                formData.append('photo', blob);
+                                $.ajax('/user/profile/getfile', {
+                                    method: "POST",
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function () {
+                                        console.log('Upload success');
+                                    },
+                                    error: function () {
+                                        console.log('Upload error');
+                                    }
+                                });
+                            });
+                            $('.cropper-container').hide();
+                        });
+                        $('#btnRestore').click(function() {
+                            canvas.cropper('reset');
+                            $result.unwrap();
+                        });
+                    };
+                    img.src = evt.target.result;
+                };
+                reader.readAsDataURL(this.files[0]);
             }
-        });
+            else {
+                alert("Invalid file type! Please select an image file.");
+            }
+        }
+        else {
+            alert('No file(s) selected.');
+        }
     });
-
 });

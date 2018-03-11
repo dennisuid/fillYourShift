@@ -12,13 +12,18 @@
             <input type="file" id="resume" name="resume" class="form-control btn-info" placeholder='Choose file..' />
         </div>
         <!-- COMPONENT START -->
-        <div>
-            <img id="image_uploaded" name="image_uploaded" src="#">
+        <div style="width: 600px; height: 600px; margin: auto">
+            <img id="image_uploaded" name="image_uploaded" src="">
+            <canvas id="canvas">
+                Your browser does not support the HTML5 canvas element.
+            </canvas>
         </div>
+
         <div class="form-group">
-            Photo <i class="fa fa-cloud-upload"></i>
             <input type="file" id="photo" name="photo" class="form-control btn-info" placeholder='Choose file..'/>
+            <input type="button" id="btnCrop" value="Crop And Save" class="form-control btn-success"/>
         </div>
+
         <!-- COMPONENT END -->
 
         <label for="middle-name" class="control-label col-md-3 col-sm-3">Previous Experience</label>
