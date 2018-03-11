@@ -5082,6 +5082,8 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     background-color: #ffffff;
     cursor: default;
     border: 1px solid black;
+    background: url('../img/smilie.jpg') no-repeat ;
+    background-position: center;
 }
 #result{
   float: left;
