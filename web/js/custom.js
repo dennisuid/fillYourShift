@@ -1625,6 +1625,21 @@ function ajaxCall(ajaxUrl, formData) {
     });
 }
 
+function ajaxCallForUpload(ajaxUrl, formData){
+    $.ajax(ajaxUrl, {
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+            console.log('Upload success');
+        },
+        error: function () {
+            console.log('Upload error');
+        }
+    });
+}
+
 /* SMART WIZARD */
 
 function init_SmartWizard() {
@@ -1638,7 +1653,7 @@ function init_SmartWizard() {
         transitionEffect: 'slide',
         enableFinishButton: true,
         onLeaveStep: leaveAStepCallbackProfile,
-        onFinish: finishStepCallBackProfile,
+        onFinish: finishStepCallBackProfile
     });
 
     $('#wizard_verticle').smartWizard({
@@ -2028,6 +2043,17 @@ function activateCountry() {
         $('#shift_shiftbundle_user_fysuser_country').val($(this).text());
     })
 }
+function setupImageCropping(context, canvas, img){
+    context.canvas.height = img.height;
+    context.canvas.width = img.width;
+    context.drawImage(img, 0, 0);
+    var cropper = canvas.cropper({
+        aspectRatio: 16 / 9
+    });
+    $('#btnCrop').css('margin', '30px');
+    $('#btnCrop').show();
+    $('#photo').hide();
+}
 function cropAndUploadProfilePic() {
     var canvas = $("#canvas"),
         $result = $('#result'),
@@ -2036,6 +2062,14 @@ function cropAndUploadProfilePic() {
     {
         context = canvas.get(0).getContext("2d");
     }
+    $('#resume').on('change', function () {
+        if (this.files[0].type.match(/^application\//)) {
+            var reader = new FileReader();
+            var formData = new FormData();
+            formData.append('resume', this.files[0]);
+            ajaxCallForUpload('/user/profile/resume',formData);
+        }
+    })
     $('#photo').on('change', function () {
         if (this.files && this.files[0]) {
             if (this.files[0].type.match(/^image\//)) {
@@ -2043,15 +2077,7 @@ function cropAndUploadProfilePic() {
                 reader.onload = function (evt) {
                     var img = new Image();
                     img.onload = function () {
-                        context.canvas.height = img.height;
-                        context.canvas.width = img.width;
-                        context.drawImage(img, 0, 0);
-                        var cropper = canvas.cropper({
-                            aspectRatio: 16 / 9
-                        });
-                        $('#btnCrop').css('margin', '30px');
-                        $('#btnCrop').show();
-                        $('#photo').hide();
+                        setupImageCropping(context, canvas, img);
                         $('#btnCrop').click(function () {
                             // Get a string base 64 data url
                             var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png");
@@ -2059,18 +2085,7 @@ function cropAndUploadProfilePic() {
                             canvas.cropper('getCroppedCanvas').toBlob(function (blob) {
                                 var formData = new FormData();
                                 formData.append('photo', blob);
-                                $.ajax('/user/profile/getfile', {
-                                    method: "POST",
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false,
-                                    success: function () {
-                                        console.log('Upload success');
-                                    },
-                                    error: function () {
-                                        console.log('Upload error');
-                                    }
-                                });
+                                ajaxCallForUpload('/user/profile/getfile',formData);
                             });
                             $('.cropper-container').hide();
                         });

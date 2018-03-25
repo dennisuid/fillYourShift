@@ -83,12 +83,6 @@ class ShiftUserController extends Controller
 
     public function savePersonalAction(Request $request)
     {
-        /**
-         * @var $user FysUser
-         */
-        $user = $this->getDoctrine()
-            ->getRepository(FysUser::class)
-            ->findOneBy(['id' => $this->getUser()->getId()]);
 
         $dob = date_create_from_format('Y-m-d', $request->request->get('birthday'));
         /**
@@ -149,17 +143,10 @@ class ShiftUserController extends Controller
 
         /** @var $resumeFile UploadedFile */
         $resumeFile = $request->files->get('resume');
-        /** @var $profilePhoto UploadedFile */
-        $profilePhoto = $request->files->get('photo');
-        if ($profilePhoto) {
-            $profileFilePath = $employeeResume->UploadProfilePhoto($profilePhoto);
-            $employeeResume->setEmployeeProfilePhoto($profileFilePath);
-        }
         if ($resumeFile) {
             $resumeFilePath = $employeeResume->UploadResumeDoc($resumeFile);
             $employeeResume->setEmployeeResumeDoc($resumeFilePath);
         }
-
         $em->merge($employeeResume);
         $em->flush();
 //        return new Response("success");
