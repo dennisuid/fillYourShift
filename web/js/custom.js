@@ -1603,9 +1603,12 @@ function leaveAStepCallbackProfile(obj, context) {
             ajaxCall('/user/profile/more', $("#more_info").serializeArray());
             return true;
         case 4 :
+            resetImage();
+            return true;
         /**
          * @TODO need to save previous experience
          */
+
         default:
             // ajaxCall('//user/profile/resume', $("#personal").serializeArray());
             return true;
@@ -2025,7 +2028,87 @@ function activateCountry() {
         $('#shift_shiftbundle_user_fysuser_country').val($(this).text());
     })
 }
+function cropAndUploadProfilePic() {
+    var canvas = $("#canvas"),
+        $result = $('#result'),
+        context = "";
+    if (typeof canvas.get(0) != "undefined")
+    {
+        context = canvas.get(0).getContext("2d");
+    }
+    $('#photo').on('change', function () {
+        if (this.files && this.files[0]) {
+            if (this.files[0].type.match(/^image\//)) {
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    var img = new Image();
+                    img.onload = function () {
+                        context.canvas.height = img.height;
+                        context.canvas.width = img.width;
+                        context.drawImage(img, 0, 0);
+                        var cropper = canvas.cropper({
+                            aspectRatio: 16 / 9
+                        });
+                        $('#btnCrop').css('margin', '30px');
+                        $('#btnCrop').show();
+                        $('#photo').hide();
+                        $('#btnCrop').click(function () {
+                            // Get a string base 64 data url
+                            var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png");
+                            $('#image_uploaded').attr('src', croppedImageDataURL);
+                            canvas.cropper('getCroppedCanvas').toBlob(function (blob) {
+                                var formData = new FormData();
+                                formData.append('photo', blob);
+                                $.ajax('/user/profile/getfile', {
+                                    method: "POST",
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function () {
+                                        console.log('Upload success');
+                                    },
+                                    error: function () {
+                                        console.log('Upload error');
+                                    }
+                                });
+                            });
+                            $('.cropper-container').hide();
+                        });
+                        $('#btnRestore').click(function () {
+                            canvas.cropper('reset');
+                            $result.unwrap();
+                        });
+                    };
+                    img.src = evt.target.result;
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+            else {
+                alert("Invalid file type! Please select an image file.");
+            }
+        }
+        else {
+            alert('No file(s) selected.');
+        }
+    });
+}
+function resetImage(){
+    $('#canvas canvas').each(function(idx, item) {
+        if (typeof item != "undefined") {
+            var context = item.getContext("2d");
+            context.clearRect(0, 0, item.width, item.height);
+            context.beginPath();
+        }
 
+    });
+    $('#canvas').css('background-image', 'url(\'../img/smilie.jpg\')');
+    $('#canvas').css('background-position', 'center');
+    $('.cropper-container').remove();
+    $('.cropper-wrap-box').html("");
+    $('#image_uploaded').attr('src', '');
+    $('#btnCrop').hide();
+    $('#photo').show();
+}
 $(document).ready(function () {
     init_sparklines();
     init_sidebar();
@@ -2057,63 +2140,5 @@ $(document).ready(function () {
     init_autocomplete();
     bs_input_file();
     activateCountry();
-    var canvas  = $("#canvas"),
-        context = canvas.get(0).getContext("2d"),
-        $result = $('#result');
-
-    $('#photo').on( 'change', function(){
-        if (this.files && this.files[0]) {
-            if ( this.files[0].type.match(/^image\//) ) {
-                var reader = new FileReader();
-                reader.onload = function(evt) {
-                    var img = new Image();
-                    img.onload = function() {
-                        context.canvas.height = img.height;
-                        context.canvas.width  = img.width;
-                        context.drawImage(img, 0, 0);
-                        var cropper = canvas.cropper({
-                            aspectRatio: 16 / 9
-                        });
-                        $('#btnCrop').css('margin', '30px');
-                        $('#btnCrop').show();
-                        $('#photo').hide();
-                        $('#btnCrop').click(function() {
-                            // Get a string base 64 data url
-                            var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png");
-                            $('#image_uploaded').attr('src', croppedImageDataURL);
-                            canvas.cropper('getCroppedCanvas').toBlob(function (blob) {
-                                var formData = new FormData();
-                                formData.append('photo', blob);
-                                $.ajax('/user/profile/getfile', {
-                                    method: "POST",
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false,
-                                    success: function () {
-                                        console.log('Upload success');
-                                    },
-                                    error: function () {
-                                        console.log('Upload error');
-                                    }
-                                });
-                            });
-                            $('.cropper-container').hide();
-                        });
-                        $('#btnRestore').click(function() {
-                            canvas.cropper('reset');
-                            $result.unwrap();
-                        });
-                    };
-                    img.src = evt.target.result;
-                };
-                reader.readAsDataURL(this.files[0]);
-            }
-            else {
-                alert("Invalid file type! Please select an image file.");
-            }
-        }
-        else {
-            alert('No file(s) selected.');
-        }
-    });
+    cropAndUploadProfilePic();
 });
