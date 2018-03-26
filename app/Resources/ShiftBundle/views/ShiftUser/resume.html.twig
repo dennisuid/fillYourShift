@@ -9,7 +9,9 @@
         <!-- COMPONENT START -->
         <div class="form-group">
             Resume <i class="fa fa-cloud-upload"></i>
-            <input type="file" id="resume" name="resume" class="form-control btn-info" placeholder='Choose file..' />
+            <input type="file" id="resume" name="resume" class="form-control btn-info"
+                   accept="application/vnd.ms-word,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf"
+                   placeholder='Choose file..' />
         </div>
         <!-- COMPONENT START -->
         <div style="width: 600px; height: 600px; margin: auto">
@@ -20,7 +22,8 @@
         </div>
 
         <div class="form-group">
-            <input type="file" id="photo" name="photo" class="form-control btn-info" placeholder='Choose file..'/>
+            <input type="file" id="photo" name="photo" class="form-control btn-info"
+                   accept="image/gif, image/jpeg, image/png"  placeholder='Choose file..'/>
             <input type="button" id="btnCrop" value="Crop And Save" class="form-control btn-success"/>
         </div>
 
