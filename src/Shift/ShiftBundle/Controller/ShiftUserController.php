@@ -19,7 +19,7 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 class ShiftUserController extends Controller
 {
@@ -50,6 +50,9 @@ class ShiftUserController extends Controller
 
     public function profileAction(Request $request)
     {
+        /**
+         * @var $employeeResume FysEmployeeResume
+         */
         $employeeResume = $this->getDoctrine()
             ->getRepository(FysEmployeeResume::class)
             ->findByEmployeeId($this->getUser()->getId());
@@ -130,50 +133,6 @@ class ShiftUserController extends Controller
         return new Response("success");
     }
 
-    public function saveEmployeeResumeAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $employeeId = $this->getUser()->getId();
-        /**
-         * @var $employeeResume FysEmployeeResume
-         */
-        $employeeResume = $this->getDoctrine()
-            ->getRepository(FysEmployeeResume::class)
-            ->findByEmployeeId($employeeId);
-
-        /** @var $resumeFile UploadedFile */
-        $resumeFile = $request->files->get('resume');
-        if ($resumeFile) {
-            $resumeFilePath = $employeeResume->UploadResumeDoc($resumeFile);
-            $employeeResume->setEmployeeResumeDoc($resumeFilePath);
-        }
-        $em->merge($employeeResume);
-        $em->flush();
-//        return new Response("success");
-        $url = $this->generateUrl('profile');
-        return new RedirectResponse($url);
-    }
-    public function getProfilePicturePathAction(Request $request){
-        $em = $this->getDoctrine()->getManager();
-        $path = "";
-        /**
-         * @var $employeeResume FysEmployeeResume
-         */
-        $employeeResume = $this->getDoctrine()
-            ->getRepository(FysEmployeeResume::class)
-            ->findByEmployeeId($this->getUser()->getId());
-
-        /** @var $profilePhoto UploadedFile */
-        $profilePhoto = $request->files->get('photo');
-        if ($profilePhoto) {
-            $profileFilePath = $employeeResume->UploadProfilePhoto($profilePhoto);
-            $employeeResume->setEmployeeProfilePhoto($profileFilePath);
-            $path = $employeeResume->getWebProfilePath();
-        }
-        $em->merge($employeeResume);
-        $em->flush();
-       return new Response($path);
-    }
 
     private function setSectorIds($employeeId, $sectorIds)
     {
@@ -218,6 +177,9 @@ class ShiftUserController extends Controller
     public function finishProfileAction(Request $request)
     {
         $employeeId = $this->getUser()->getId();
+        /**
+         * @var $employeeResume FysEmployeeResume
+         */
         $employeeResume = $this->getDoctrine()
             ->getRepository('ShiftBundle:User\FysEmployeeResume')
             ->findByEmployeeId($employeeId);

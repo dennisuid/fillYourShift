@@ -18,7 +18,7 @@ ajax_personal_profile:
   defaults: { _controller: ShiftBundle:ShiftUser:savePersonal }
 ajax_personal_profile_pic:
   path:     /user/profile/getfile
-  defaults: { _controller: ShiftBundle:ShiftUser:getProfilePicturePath }
+  defaults: { _controller: ShiftBundle:UserProfile:getProfilePicturePath }
 ajax_address_details:
   path:     /user/profile/address
   defaults: { _controller: ShiftBundle:ShiftUser:saveAddressDetails }
@@ -27,7 +27,13 @@ ajax_more_info:
   defaults: { _controller: ShiftBundle:ShiftUser:saveEmployeeMore }
 ajax_resume:
   path:     /user/profile/resume
-  defaults: { _controller: ShiftBundle:ShiftUser:saveEmployeeResume }
+  defaults: { _controller: ShiftBundle:UserProfile:saveEmployeeResume }
+ajax_previous_experience_org:
+  path:     /user/profile/org
+  defaults: { _controller: ShiftBundle:UserProfile:savePreviousExperiencesOrganisation }
+ajax_previous_experience_role:
+  path:     /user/profile/role
+  defaults: { _controller: ShiftBundle:UserProfile:savePreviousExperiencesRole }
 update:
     path:     /user/update
     defaults: { _controller: ShiftBundle:ShiftUser:update }

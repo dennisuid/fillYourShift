@@ -177,7 +177,10 @@ class FysEmployeeResume
      */
     public function getUserExperience1()
     {
-        return $this->userExperience1;
+        if ($this->userExperience1){
+            return $this->userExperience1;
+        }
+        return "";
     }
 
     /**
@@ -201,7 +204,10 @@ class FysEmployeeResume
      */
     public function getUserExperience2()
     {
-        return $this->userExperience2;
+        if ($this->userExperience2){
+            return $this->userExperience2;
+        }
+        return "";
     }
 
     /**
@@ -390,7 +396,10 @@ class FysEmployeeResume
      */
     public function getUserOrganisation1(): string
     {
-        return $this->userOrganisation1;
+        if ($this->userOrganisation1){
+            return $this->userOrganisation1;
+        }
+       return "";
     }
 
     /**
@@ -406,7 +415,10 @@ class FysEmployeeResume
      */
     public function getUserOrganisation2(): string
     {
-        return $this->userOrganisation2;
+        if ($this->userOrganisation2){
+            return $this->userOrganisation2;
+        }
+        return "";
     }
 
     /**
@@ -422,7 +434,10 @@ class FysEmployeeResume
      */
     public function getUserOrganisation3(): string
     {
-        return $this->userOrganisation3;
+        if ($this->userOrganisation3){
+            return $this->userOrganisation3;
+        }
+        return "";
     }
 
     /**
