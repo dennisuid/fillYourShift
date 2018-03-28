@@ -63,15 +63,11 @@ function cropAndUploadProfilePic() {
     });
 }
 $('#previous-exp1-role, #previous-exp2-role, #previous-exp3-role').on('change', function () {
+    ajaxCall('/user/profile/role', $("#resumeForm").serializeArray());
+});
 
-    var data = new Array();
-    data[$(this).attr('id')] = $(this).val();
-    $.ajax({
-        type: 'POST',
-        url: '/user/profile/role',
-        dataType: 'json',
-        data: data
-    });
+$('#previous-exp1-org, #previous-exp2-org, #previous-exp3-org').on('change', function () {
+    ajaxCall('/user/profile/org', $("#resumeForm").serializeArray());
 });
 function ajaxCallForUpload(ajaxUrl, formData){
     $.ajax(ajaxUrl, {

@@ -57,41 +57,44 @@ class UserProfileController extends Controller
          * @var $employeeResume FysEmployeeResume
          */
         $employeeResume = $this->getLoggedInUserResume();
-        $previousExperienceFirst = $request->get('previous-exp1-org');
-        if ($previousExperienceFirst) {
-            $employeeResume->setUserOrganisation1($previousExperienceFirst);
+        $previousExperienceOrgFirst = $request->get('previous-exp1-org');
+        if ($previousExperienceOrgFirst) {
+            $employeeResume->setUserOrganisation1($previousExperienceOrgFirst);
         }
-        $previousExperienceSecond = $request->get('previous-exp2-org');
-        if ($previousExperienceSecond) {
-            $employeeResume->setUserOrganisation2($previousExperienceSecond);
+        $previousExperienceOrgSecond = $request->get('previous-exp2-org');
+        if ($previousExperienceOrgSecond) {
+            $employeeResume->setUserOrganisation2($previousExperienceOrgSecond);
         }
-        $previousExperienceThird = $request->get('previous-exp3-org');
-        if ($previousExperienceThird) {
-            $employeeResume->setUserOrganisation3($previousExperienceThird);
+        $previousExperienceOrgThird = $request->get('previous-exp3-org');
+        if ($previousExperienceOrgThird) {
+            $employeeResume->setUserOrganisation3($previousExperienceOrgThird);
         }
+        $this->entityManager->merge($employeeResume);
+        $this->entityManager->flush();
         return new Response("success");
     }
 
     public function savePreviousExperiencesRoleAction(Request $request)
     {
+        $this->entityManager = $this->getDoctrine()->getManager();
         /**
          * @var $employeeResume FysEmployeeResume
          */
         $employeeResume = $this->getLoggedInUserResume();
-
         $previousExperienceFirst = $request->get('previous-exp1-role');
-        var_dump($previousExperienceFirst);
         if ($previousExperienceFirst) {
             $employeeResume->setUserExperience1($previousExperienceFirst);
         }
         $previousExperienceSecond = $request->get('previous-exp2-role');
         if ($previousExperienceSecond) {
-            $employeeResume->setUserExperience1($previousExperienceSecond);
+            $employeeResume->setUserExperience2($previousExperienceSecond);
         }
         $previousExperienceThird = $request->get('previous-exp3-role');
         if ($previousExperienceThird) {
-            $employeeResume->setUserExperience1($previousExperienceThird);
+            $employeeResume->setUserExperience3($previousExperienceThird);
         }
+        $this->entityManager->merge($employeeResume);
+        $this->entityManager->flush();
         return new Response("success");
     }
 
