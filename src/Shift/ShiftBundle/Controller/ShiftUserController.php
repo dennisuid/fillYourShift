@@ -97,6 +97,7 @@ class ShiftUserController extends Controller
         $user->setGender($request->request->get('gender'));
         $user->setDob($dob);
         $em = $this->getDoctrine()->getManager();
+        $this->get('user.resume.completeness')->manageResumeCompleteness($em, $user->getId(), 1);
         $em->merge($user);
         $em->flush();
         return new Response("success");
@@ -114,6 +115,7 @@ class ShiftUserController extends Controller
         $user->setPostcode($request->request->get('post_code'));
         $user->setCountry($request->request->get('country'));
         $em = $this->getDoctrine()->getManager();
+        $this->get('user.resume.completeness')->manageResumeCompleteness($em, $user->getId(), 2);
         $em->merge($user);
         $em->flush();
         return new Response("success");
@@ -164,6 +166,7 @@ class ShiftUserController extends Controller
             $employeeResume->setEmployeeId($employeeId);
         }
         $employeeResume->setEmployeeResumeDesc(trim($resumeDesc));
+        $this->get('user.resume.completeness')->manageResumeCompleteness($em, $employeeId, 3);
         $em->merge($employeeResume);
         $em->flush();
     }
@@ -225,6 +228,7 @@ class ShiftUserController extends Controller
                     $url = $this->generateUrl('dashboard');
                     return new RedirectResponse($url);
                 } catch (\Exception $e) {
+                    print_r($e);
                     $this->addFlash('error', "Unable to add the user");
                 }
 

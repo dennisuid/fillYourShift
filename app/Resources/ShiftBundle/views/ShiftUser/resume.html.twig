@@ -33,33 +33,33 @@
         <div class="form-group">
             <div class="col-md-3 col-sm-3">
                 <input id="previous-exp1-role" class="form-control col-md-7 col-xs-12" type="text"
-                       name="previous-exp1-role" value="{{ resume_details.userExperience1 }}" placeholder="Role Name">
+                       name="previous-exp1-role" value="{{ resume_details.userExperience1 | default("")}}" placeholder="Role Name">
             </div>
             <div class="col-md-3 col-sm-3">
                 <input id="previous-exp1-org" class="form-control col-md-7 col-xs-12" type="text"
-                       name="previous-exp1-org" value="{{ resume_details.userOrganisation1 }}" placeholder="Organisation">
+                       name="previous-exp1-org" value="{{ resume_details.userOrganisation1| default("") }}" placeholder="Organisation">
             </div>
         </div>
         <label for="middle-name" class="control-label col-md-3 col-sm-3"></label>
         <div class="form-group">
             <div class="col-md-3 col-sm-3">
                 <input id="previous-exp2-role" class="form-control col-md-7 col-xs-12" type="text"
-                       name="previous-exp2-role" value="{{ resume_details.userExperience2 }}" placeholder="Role Name">
+                       name="previous-exp2-role" value="{{ resume_details.userExperience2 | default("")}}" placeholder="Role Name">
             </div>
             <div class="col-md-3 col-sm-3">
                 <input id="previous-exp2-org" class="form-control col-md-7 col-xs-12" type="text"
-                       name="previous-exp2-org" value="{{ resume_details.userOrganisation2 }}" placeholder="Organisation">
+                       name="previous-exp2-org" value="{{ resume_details.userOrganisation2 | default("") }}" placeholder="Organisation">
             </div>
         </div>
         <label for="middle-name" class="control-label col-md-3 col-sm-3"></label>
         <div class="form-group">
             <div class="col-md-3 col-sm-3">
                 <input id="previous-exp3-role" class="form-control col-md-7 col-xs-12" type="text"
-                       name="previous-exp3-role" value="{{ resume_details.userExperience3 }}" placeholder="Role Name">
+                       name="previous-exp3-role" value="{{ resume_details.userExperience3| default("") }}" placeholder="Role Name">
             </div>
             <div class="col-md-3 col-sm-3">
                 <input id="previous-exp3-org" class="form-control col-md-7 col-xs-12" type="text"
-                       name="previous-exp3-org"  value="{{ resume_details.userOrganisation3 }}" placeholder="Organisation">
+                       name="previous-exp3-org"  value="{{ resume_details.userOrganisation3 | default("")}}" placeholder="Organisation">
             </div>
         </div>
     </form>

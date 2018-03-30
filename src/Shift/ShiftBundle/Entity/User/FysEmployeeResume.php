@@ -99,6 +99,12 @@ class FysEmployeeResume
     private $employeeProfilePhoto;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_resume_completeness", type="integer", nullable=true)
+     */
+    private $userResumeCompleteness;
+    /**
      * Get id
      *
      * @return int
@@ -177,6 +183,7 @@ class FysEmployeeResume
      */
     public function getUserExperience1()
     {
+        var_dump($this->userExperience1);
         if ($this->userExperience1){
             return $this->userExperience1;
         }
@@ -446,5 +453,18 @@ class FysEmployeeResume
     public function setUserOrganisation3(string $userOrganisation3)
     {
         $this->userOrganisation3 = $userOrganisation3;
+    }
+
+    public function getUserResumeCompleteness(): int
+    {
+        if ($this->userResumeCompleteness){
+            return $this->userResumeCompleteness;
+        }
+        return 0;
+    }
+
+    public function setUserResumeCompleteness(int $userResumeCompleteness)
+    {
+        $this->userResumeCompleteness = $userResumeCompleteness;
     }
 }

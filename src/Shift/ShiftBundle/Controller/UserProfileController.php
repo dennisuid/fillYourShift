@@ -25,6 +25,7 @@ class UserProfileController extends Controller
             $resumeFilePath = $employeeResume->UploadResumeDoc($resumeFile);
             $employeeResume->setEmployeeResumeDoc($resumeFilePath);
         }
+        $this->get('user.resume.completeness')->manageResumeCompleteness($this->entityManager, $this->getUser()->getId(), 4);
         $this->entityManager->merge($employeeResume);
         $this->entityManager->flush();
         $url = $this->generateUrl('profile');
@@ -45,6 +46,7 @@ class UserProfileController extends Controller
             $employeeResume->setEmployeeProfilePhoto($profileFilePath);
             $path = $employeeResume->getWebProfilePath();
         }
+        $this->get('user.resume.completeness')->manageResumeCompleteness($this->entityManager, $this->getUser()->getId(), 5);
         $this->entityManager->merge($employeeResume);
         $this->entityManager->flush();
         return new Response($path);
@@ -69,6 +71,7 @@ class UserProfileController extends Controller
         if ($previousExperienceOrgThird) {
             $employeeResume->setUserOrganisation3($previousExperienceOrgThird);
         }
+        $this->get('user.resume.completeness')->manageResumeCompleteness($this->entityManager, $this->getUser()->getId(), 6);
         $this->entityManager->merge($employeeResume);
         $this->entityManager->flush();
         return new Response("success");
@@ -93,6 +96,7 @@ class UserProfileController extends Controller
         if ($previousExperienceThird) {
             $employeeResume->setUserExperience3($previousExperienceThird);
         }
+        $this->get('user.resume.completeness')->manageResumeCompleteness($this->entityManager, $this->getUser()->getId(), 7);
         $this->entityManager->merge($employeeResume);
         $this->entityManager->flush();
         return new Response("success");
