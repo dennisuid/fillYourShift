@@ -16,7 +16,10 @@ class UserResumeCompletenessManager
         $employeeResume = $this->getDoctrine()
             ->getRepository(FysEmployeeResume::class)
             ->findByEmployeeId($employeeId);
-
+        if (empty($employeeResume)){
+            $employeeResume = new FysEmployeeResume();
+            $employeeResume->setEmployeeId($employeeId);
+        }
         $currentResumeCompleteness = $employeeResume->getUserResumeCompleteness();
         $newResumeCompleteness = $currentResumeCompleteness + $step;
         $employeeResume->setUserResumeCompleteness($newResumeCompleteness);

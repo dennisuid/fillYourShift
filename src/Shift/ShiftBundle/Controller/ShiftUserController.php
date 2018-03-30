@@ -161,10 +161,7 @@ class ShiftUserController extends Controller
         $employeeResume = $this->getDoctrine()
             ->getRepository(FysEmployeeResume::class)
             ->findByEmployeeId($employeeId);
-        if (empty($employeeResume)) {
-            $employeeResume = new FysEmployeeResume();
-            $employeeResume->setEmployeeId($employeeId);
-        }
+
         $employeeResume->setEmployeeResumeDesc(trim($resumeDesc));
         $this->get('user.resume.completeness')->manageResumeCompleteness($em, $employeeId, 3);
         $em->merge($employeeResume);
