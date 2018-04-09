@@ -6,6 +6,8 @@
         <testsuite name="unit">
             <file>tests/Shift/ShiftBundle/Controller/DefaultControllerTest.php</file>
             <file>tests/Shift/ShiftBundle/Controller/ShiftUserControllerTest.php</file>
+            <file>tests/Shift/ShiftBundle/Entity/User/FysUserTest.php</file>
+            <file>tests/Shift/ShiftBundle/Services/UserResumeCompletenessManagerTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

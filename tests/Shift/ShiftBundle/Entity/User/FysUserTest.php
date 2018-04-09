@@ -48,7 +48,6 @@ class FysUserTest extends WebTestCase
         $fysUser = new FysUser();
         $role = "employee";
         $fysUser->setRoles([$role]);
-        $fysUser->setUserId(1);
         $fysUser->setEmail("testemail@test.com");
         $fysUser->setFirstName("Richard");
         $fysUser->setLastName("Knopp");
