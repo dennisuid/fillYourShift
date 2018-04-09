@@ -94,7 +94,9 @@ class ShiftUserController extends Controller
         $user = $this->getUserFromSession();
         $user->setFirstName($request->request->get('first-name'));
         $user->setLastName($request->request->get('last-name'));
-        $user->setGender($request->request->get('gender'));
+        if ($request->request->get('gender')){
+            $user->setGender($request->request->get('gender'));
+        }
         $user->setDob($dob);
         $em = $this->getDoctrine()->getManager();
         $this->get('user.resume.completeness')->manageResumeCompleteness($em, $user->getId(), 1);

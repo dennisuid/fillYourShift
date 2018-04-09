@@ -35,7 +35,7 @@ class FysEmployeeResume
     /**
      * @var string
      *
-     * @ORM\Column(name="employee_resume_desc", type="string", length=255)
+     * @ORM\Column(name="employee_resume_desc", type="string", length=255, nullable=true)
      */
     private $employeeResumeDesc;
 
