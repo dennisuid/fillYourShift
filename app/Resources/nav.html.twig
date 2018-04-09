@@ -49,7 +49,7 @@
                         <ul class="dropdown-menu dropdown-usermenu pull-right">
                             <li><a href="/user/profile">
                                     Profile
-                                    <span class="badge bg-red pull-right">50%</span>
+                                    <span class="badge bg-red pull-right">{{ resume_details.userResumeCompleteness | default("10")  }}%</span>
                                 </a>
                             </li>
                             <li><a href="/dashboard">Dashboard</a></li>
