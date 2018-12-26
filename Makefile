@@ -4,7 +4,7 @@ clear-cache:
 	php bin/console cache:clear --env=dev
 	php bin/console cache:clear --env=prod
 	php bin/console cache:clear --env=test
-server-run:
+run:
 	php bin/console server:run
 
 composer.phar:
